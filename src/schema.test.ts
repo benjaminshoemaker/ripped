@@ -74,4 +74,85 @@ describe('Zod schemas', () => {
       expect(full.success).toBe(true);
     });
   });
+
+  describe('core-level fail-loud invariants', () => {
+    // Regression tests for the two gaps surfaced by the final codex-review:
+    // denominator-key completeness and roster-tier completeness must both
+    // be enforced at CoreDataSchema, not only at FullDataSchema. Otherwise
+    // the probability_only fallback silently accepts data that later
+    // crashes at runtime (worker throw) or renders undefined tier labels.
+
+    function withDeepPatch<T>(source: T, patch: (clone: unknown) => void): unknown {
+      const clone = structuredClone(source);
+      patch(clone as unknown);
+      return clone;
+    }
+
+    it('CoreDataSchema rejects data missing a denominator_key in checklist_totals', () => {
+      const fixture = loadFixture('core-only.json');
+      const mutated = withDeepPatch(fixture, (clone) => {
+        const c = clone as {
+          card_categories: Record<string, { denominator_key: string; slots_per_case: number }>;
+        };
+        // Force every numbered-parallel category to reference a denominator
+        // key that is NOT present in checklist_totals.
+        c.card_categories.gold_refractor_50 = {
+          slots_per_case: 0.2,
+          denominator_key: 'base_plus_rookies',
+        };
+        // Drop checklist_totals.base_plus_rookies via delete.
+        const root = clone as { checklist_totals: Record<string, unknown> };
+        delete root.checklist_totals.base_plus_rookies;
+      });
+
+      const result = CoreDataSchema.safeParse(mutated);
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        const hasDenominatorIssue = result.error.issues.some((issue) =>
+          issue.message.includes('missing checklist_totals[base_plus_rookies]'),
+        );
+        expect(hasDenominatorIssue).toBe(true);
+      }
+    });
+
+    it('CoreDataSchema rejects data missing a tiers[player] entry for a roster player', () => {
+      const fixture = loadFixture('core-only.json');
+      const mutated = withDeepPatch(fixture, (clone) => {
+        const root = clone as {
+          teams: Record<string, { base_veterans: string[]; tiers: Record<string, string> }>;
+        };
+        const firstTeamName = Object.keys(root.teams)[0];
+        const team = root.teams[firstTeamName];
+        const firstPlayer = team.base_veterans[0];
+        delete team.tiers[firstPlayer];
+      });
+
+      const result = CoreDataSchema.safeParse(mutated);
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        const hasTierIssue = result.error.issues.some((issue) =>
+          issue.message.includes('missing tiers['),
+        );
+        expect(hasTierIssue).toBe(true);
+      }
+    });
+
+    it('FullDataSchema also catches the Core-level denominator gap', () => {
+      const fixture = loadFixture('valid-full.json');
+      const mutated = withDeepPatch(fixture, (clone) => {
+        const c = clone as {
+          card_categories: Record<string, { denominator_key: string; slots_per_case: number }>;
+        };
+        c.card_categories.gold_refractor_50 = {
+          slots_per_case: 0.2,
+          denominator_key: 'base_plus_rookies',
+        };
+        const root = clone as { checklist_totals: Record<string, unknown> };
+        delete root.checklist_totals.base_plus_rookies;
+      });
+
+      const result = FullDataSchema.safeParse(mutated);
+      expect(result.success).toBe(false);
+    });
+  });
 });

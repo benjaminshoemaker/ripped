@@ -150,19 +150,43 @@ function missingTierValueMessage(tier: string, category: string): string {
   return `missing tier_values_usd[${tier}][${category}] — required because at least one team has a ${tier} ${playerRoleForCategory(category)}`;
 }
 
-type FullCompletenessData = {
+type CoreCompletenessData = {
+  checklist_totals: z.infer<typeof checklistTotalsSchema>;
   card_categories: Record<string, z.infer<typeof cardCategorySchema>>;
   teams: Record<string, z.infer<typeof teamSchema>>;
+};
+
+type FullCompletenessData = CoreCompletenessData & {
   tier_values_usd: z.infer<typeof tierValuesSchema>;
 };
 
-function addFullDataCompletenessIssues(
-  data: FullCompletenessData,
+// Core-level invariants — enforced in BOTH launch modes (full and
+// probability_only). Missing data here is REQ-028 fail-loud regardless of
+// whether DJ has delivered the dollar-value table yet.
+function addCoreCompletenessIssues(
+  data: CoreCompletenessData,
   ctx: z.RefinementCtx,
 ): void {
-  const reportedMissingPlayers = new Set<string>();
-  const reportedMissingValues = new Set<string>();
+  // 1. Every card_categories[*].denominator_key must resolve to a positive
+  //    finite number in checklist_totals. `base_plus_rookies` is optional in
+  //    the base schema (for teams/products that don't need it), so the actual
+  //    "is this field present?" check lives here, cross-field.
+  for (const [category, cat] of Object.entries(data.card_categories)) {
+    const denom = (data.checklist_totals as Record<string, number | undefined>)[cat.denominator_key];
+    if (typeof denom !== 'number' || !Number.isFinite(denom) || denom <= 0) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['checklist_totals', cat.denominator_key],
+        message: `missing checklist_totals[${cat.denominator_key}] — required because card_categories[${category}] references it as its denominator_key`,
+      });
+    }
+  }
 
+  // 2. Every player listed in a team's five roster fields must have a
+  //    tiers[player] entry. Missing tiers were previously only caught in
+  //    full mode, which meant the probability_only fallback silently
+  //    rendered `undefined` tier labels in team-detail.ts (REQ-028 bypass).
+  const reportedMissingPlayers = new Set<string>();
   for (const [teamName, team] of Object.entries(data.teams)) {
     for (const rosterKey of rosterKeys) {
       for (const player of team[rosterKey]) {
@@ -179,7 +203,18 @@ function addFullDataCompletenessIssues(
         });
       }
     }
+  }
+}
 
+// Full-mode only invariants — enforced when dollar values are expected.
+// Each (tier, category) cell that any team will actually use must be present.
+function addFullDataCompletenessIssues(
+  data: FullCompletenessData,
+  ctx: z.RefinementCtx,
+): void {
+  const reportedMissingValues = new Set<string>();
+
+  for (const team of Object.values(data.teams)) {
     for (const category of Object.keys(data.card_categories)) {
       const eligible = eligiblePlayers(category, team);
       for (const player of eligible) {
@@ -209,8 +244,13 @@ function addFullDataCompletenessIssues(
 // Probability-fatal fields only. Must pass in BOTH `full` and `probability_only`
 // launch modes. When FullDataSchema fails, validate.ts falls back here so the
 // app can ship in probability-only mode (REQ-041).
+//
+// Defined in two layers so FullDataSchema can still `.extend()` the shape:
+// - CoreDataObjectSchema is the plain ZodObject (extendable)
+// - CoreDataSchema wraps it in superRefine so runtime parses get the
+//   cross-field completeness checks.
 
-export const CoreDataSchema = z.object({
+const CoreDataObjectSchema = z.object({
   checklist_as_of: timestampSchema,
   odds_as_of: timestampSchema,
   values_as_of: timestampSchema,
@@ -232,15 +272,22 @@ export const CoreDataSchema = z.object({
   ),
 });
 
+export const CoreDataSchema = CoreDataObjectSchema.superRefine(addCoreCompletenessIssues);
+
 // ─── FullDataSchema ────────────────────────────────────────────────────────
 // Extends Core with tier values and OPTIONAL confidence inputs. Missing
 // `confidence_inputs` is WARNING-LEVEL per TECH_SPEC §7: the app still runs
 // in `full` mode, but `computeConfidence` will return 'low' for affected teams.
+// Runs both Core and Full completeness refinements so any Core-level gap
+// (missing denominator key, missing roster tier) is reported even in full mode.
 
-export const FullDataSchema = CoreDataSchema.extend({
+export const FullDataSchema = CoreDataObjectSchema.extend({
   tier_values_usd: tierValuesSchema,
   confidence_inputs: confidenceInputsSchema.optional(),
-}).superRefine(addFullDataCompletenessIssues);
+}).superRefine((data, ctx) => {
+  addCoreCompletenessIssues(data, ctx);
+  addFullDataCompletenessIssues(data, ctx);
+});
 
 // ─── Internal schema re-exports (for src/types.ts to consume) ──────────────
 
