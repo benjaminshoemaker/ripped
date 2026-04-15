@@ -121,13 +121,13 @@ Enable `strict: true` + `target: "es2020"` in `tsconfig.json`. Use Vite's recomm
 **Requirement:** REQ-034
 
 **Acceptance Criteria:**
-- [ ] (CODE) `tsconfig.json` has `"strict": true` and `"target": "es2020"`
+- [x] (CODE) `tsconfig.json` has `"strict": true` and `"target": "es2020"`
   - Verify: `node -e "const t=require('./tsconfig.json'); process.exit((t.compilerOptions.strict && t.compilerOptions.target==='es2020') ? 0 : 1)"`
-- [ ] (CODE) Worker is instantiated via `new Worker(new URL(...), { type: 'module' })`
+- [x] (CODE) Worker is instantiated via `new Worker(new URL(...), { type: 'module' })`
   - Verify: `grep -q "new Worker(new URL" src/main.ts || grep -q "new Worker(new URL" src/worker-client.ts`
-- [ ] (BUILD) Production build succeeds with worker module
+- [x] (BUILD) Production build succeeds with worker module
   - Verify: `npm run build && grep -q "assetFileNames\|worker" dist/ -r || test -d dist/assets`
-- [ ] (TEST) Worker round-trip test posts a message and receives a reply
+- [x] (TEST) Worker round-trip test posts a message and receives a reply
   - Verify: `npx vitest run src/worker/hello.worker.test.ts`
 
 **Files to Create:**
