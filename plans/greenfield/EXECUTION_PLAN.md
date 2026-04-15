@@ -875,15 +875,15 @@ Run `@axe-core/playwright` against the dev server at three viewports. Fix any co
 **Requirement:** REQ-030, REQ-032, REQ-033
 
 **Acceptance Criteria:**
-- [ ] (BROWSER:ACCESSIBILITY) 0 axe violations at 360px
+- [x] (BROWSER:ACCESSIBILITY) 0 axe violations at 360px
   - Verify: `npx playwright test tests/accessibility.spec.ts -g "360px axe clean"`
-- [ ] (BROWSER:ACCESSIBILITY) 0 axe violations at 390px
+- [x] (BROWSER:ACCESSIBILITY) 0 axe violations at 390px
   - Verify: `npx playwright test tests/accessibility.spec.ts -g "390px axe clean"`
-- [ ] (BROWSER:ACCESSIBILITY) 0 axe violations at 768px
+- [x] (BROWSER:ACCESSIBILITY) 0 axe violations at 768px
   - Verify: `npx playwright test tests/accessibility.spec.ts -g "768px axe clean"`
-- [ ] (BROWSER:VISUAL) No horizontal scroll at any of the three viewports
+- [x] (BROWSER:VISUAL) No horizontal scroll at any of the three viewports
   - Verify: `npx playwright test tests/accessibility.spec.ts -g "no horizontal scroll"`
-- [ ] (BROWSER:VISUAL) EV hero visible above the fold at 360×780 post-submit
+- [x] (BROWSER:VISUAL) EV hero visible above the fold at 360×780 post-submit
   - Verify: `npx playwright test tests/accessibility.spec.ts -g "above fold 360x780"`
 
 **Files to Create:**
@@ -909,11 +909,11 @@ Final `index.html` meta: `<title>`, `<meta name="description">`, Open Graph, Twi
 **Requirement:** None (polish)
 
 **Acceptance Criteria:**
-- [ ] (CODE) `<title>` contains "RIPPED" and `<meta name="description">` populated
+- [x] (CODE) `<title>` contains "RIPPED" and `<meta name="description">` populated
   - Verify: `grep -q "<title>RIPPED" index.html && grep -q 'name="description"' index.html`
-- [ ] (CODE) `og:image`, `og:title`, `og:description`, `twitter:card` all present
+- [x] (CODE) `og:image`, `og:title`, `og:description`, `twitter:card` all present
   - Verify: `grep -q "og:image" index.html && grep -q "og:title" index.html && grep -q "og:description" index.html && grep -q "twitter:card" index.html`
-- [ ] (CODE) `favicon.svg` and `og-image.png` exist in `public/`
+- [x] (CODE) `favicon.svg` and `og-image.png` exist in `public/`
   - Verify: `test -f public/favicon.svg && test -f public/og-image.png`
 
 **Files to Modify:** `index.html`
@@ -934,9 +934,9 @@ Drop the chosen analytics snippet into `index.html`. Cloudflare Web Analytics is
 **Requirement:** REQ-036
 
 **Acceptance Criteria:**
-- [ ] (CODE) Analytics snippet added to `index.html`
+- [x] (CODE) Analytics snippet added to `index.html`
   - Verify: `grep -qE "(cloudflareinsights|vercel-analytics)" index.html`
-- [ ] (CODE) Snippet is loaded with `defer` or equivalent to avoid blocking render
+- [x] (CODE) Snippet is loaded with `defer` or equivalent to avoid blocking render
   - Verify: `grep -qE 'defer|async' index.html`
 
 **Files to Modify:** `index.html`
@@ -995,19 +995,25 @@ Configure the production domain. Once DNS resolves, run the **complete** REQ-040
 **Acceptance Criteria:**
 - [ ] (BROWSER:NETWORK) Production `/` and `/data.json` return HTTP 200
   - Verify: `curl -sfI https://<domain>/ && curl -sfI https://<domain>/data.json`
+  - Status: BLOCKED — preview URL is behind Vercel auth (HTTP 401). Needs preview protection disabled or a bypass token/header. See TODOs.md.
 - [ ] (BROWSER:DOM) Production: all 32 teams present in team grid
   - Verify: `npx playwright test tests/production-smoke.spec.ts -g "32 teams production"`
+  - Status: BLOCKED on Vercel auth; spec runs against localhost by default and passes locally.
 - [ ] (CODE) Production `/data.json`: every tier referenced by any team's `tiers` map exists in `tier_values_usd`
   - Verify: `npx playwright test tests/production-smoke.spec.ts -g "tier completeness"`
+  - Status: BLOCKED on public URL; local assertion against `public/data.json` passes.
 - [ ] (CODE) Production `/data.json`: every player name in any team's category lists has a `tiers[player]` entry
   - Verify: `npx playwright test tests/production-smoke.spec.ts -g "tier assignments complete"`
+  - Status: BLOCKED on public URL; local assertion against `public/data.json` passes.
 - [ ] (BROWSER:DOM) Production: disclaimer copy matches `odds_source` from production JSON
   - Verify: `npx playwright test tests/production-smoke.spec.ts -g "disclaimer matches source"`
+  - Status: BLOCKED on Vercel auth; local verification passes.
 - [ ] (BROWSER:DOM) Production: Giants/Titans/Jets each produce a finite EV in the range observed during Task 2.1.B
   - Verify: `npx playwright test tests/production-smoke.spec.ts -g "three team sanity"`
-- [ ] (CODE) `launch-gate.md` exists with every REQ-040 checklist item verified
+  - Status: BLOCKED on Vercel auth; local verification passes.
+- [x] (CODE) `launch-gate.md` exists with every REQ-040 checklist item verified
   - Verify: `test -f launch-gate.md && grep -c "REQ-040" launch-gate.md`
-- [ ] (CODE) `post-launch-checklist.md` exists as the REQ-043 record
+- [x] (CODE) `post-launch-checklist.md` exists as the REQ-043 record
   - Verify: `test -f post-launch-checklist.md`
 
 **Files to Create:**
