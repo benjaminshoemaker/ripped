@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">RIPPED</title>
+  <rect width="64" height="64" rx="10" fill="#0b0d12" />
+  <path fill="#22c55e" d="M17 51V13h20.5c8 0 13.5 4.7 13.5 12.1 0 5.5-3.2 9.7-8.8 11.4L52 51H40.4l-8.8-13.2H28V51H17Zm11-22.3h8.7c2.7 0 4.4-1.4 4.4-3.7s-1.7-3.7-4.4-3.7H28v7.4Z" />
+  <path fill="#dc2626" d="M15 54 50 10l5 4-35 44-5-4Z" opacity=".9" />
+</svg>
