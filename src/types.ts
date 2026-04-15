@@ -33,6 +33,18 @@ export interface Contributor {
   isChase: boolean;
 }
 
+export interface ConfidenceConditionStatus {
+  id: 'odds_source' | 'values_freshness' | 'comp_count' | 'comp_window';
+  label: string;
+  passed: boolean;
+  detail: string;
+}
+
+export interface ConfidenceBreakdown {
+  label: ConfidenceLabel;
+  conditions: ConfidenceConditionStatus[];
+}
+
 export interface ComputedResult {
   team: string;
   spotPrice: number;
@@ -47,6 +59,7 @@ export interface ComputedResult {
   verdict: Verdict | null;
   verdictIsHard: boolean;
   confidence: ConfidenceLabel;
+  confidenceBreakdown: ConfidenceBreakdown;
   contributors: Contributor[];
   probabilityTable: Record<string, number>;
   staleSignals: string[];

@@ -1,5 +1,5 @@
 import './styles.css';
-import { computeConfidence } from './math/confidence';
+import { computeConfidence, computeConfidenceBreakdown } from './math/confidence';
 import { computeEV } from './math/ev';
 import {
   probAnyChase,
@@ -121,6 +121,7 @@ function createProbabilityOnlyResult(
     verdict: null,
     verdictIsHard: false,
     confidence: 'low',
+    confidenceBreakdown: computeConfidenceBreakdown(data, teamName),
     contributors: [],
     probabilityTable: buildProbabilityTable(team, data),
     staleSignals: computeStaleSignals(data),
@@ -218,6 +219,8 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   let queuedSimulationKey: string | null = null;
   let lastRenderedResult: ComputedResult | null = null;
   let lastScrolledResult: ComputedResult | null = null;
+  let hasAnimatedHero = false;
+  let activeHeroAnimation: number | null = null;
 
   const clearResults = (state: ReturnType<typeof getState>): void => {
     lastSimulationKey = null;
@@ -250,6 +253,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
 
     const { ev, contributors } = computeEV(team, fullData);
     const confidence = computeConfidence(fullData, teamName);
+    const confidenceBreakdown = computeConfidenceBreakdown(fullData, teamName);
     const verdictResult = computeVerdict(ev, spotPrice, confidence);
     const gap = ev - spotPrice;
 
@@ -267,6 +271,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
       verdict: verdictResult.verdict,
       verdictIsHard: verdictResult.isHard,
       confidence,
+      confidenceBreakdown,
       contributors,
       probabilityTable: buildProbabilityTable(team, fullData),
       staleSignals: computeStaleSignals(fullData),
@@ -285,6 +290,55 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
     }
 
     renderResultPanel(resultPanel, state.result);
+    maybeAnimateHero(state.result);
+  };
+
+  // Slot-machine reveal on the first time a result appears in this session.
+  // Subsequent price edits update the EV instantly. Respects prefers-reduced-motion.
+  // Flag is set up-front so a mid-animation re-render (user changes teams
+  // before the first animation finishes) falls through to the instant path.
+  const maybeAnimateHero = (result: ComputedResult): void => {
+    if (activeHeroAnimation !== null) {
+      window.clearInterval(activeHeroAnimation);
+      activeHeroAnimation = null;
+    }
+
+    const target = result.ev;
+    if (target === null || !Number.isFinite(target)) return;
+    if (hasAnimatedHero) return;
+
+    const reduceMotion =
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    hasAnimatedHero = true;
+    if (reduceMotion) return;
+
+    const hero = resultPanel.querySelector<HTMLElement>('[data-testid="ev-hero"]');
+    if (!hero) return;
+
+    const finalText = hero.textContent ?? '';
+    const order = Math.max(10, Math.floor(target));
+    const totalMs = 600;
+    const tickMs = 50;
+    const ticks = Math.floor(totalMs / tickMs);
+    let tick = 0;
+    hero.dataset.animating = 'true';
+
+    activeHeroAnimation = window.setInterval(() => {
+      tick += 1;
+      if (tick >= ticks) {
+        if (activeHeroAnimation !== null) {
+          window.clearInterval(activeHeroAnimation);
+          activeHeroAnimation = null;
+        }
+        hero.textContent = finalText;
+        delete hero.dataset.animating;
+        return;
+      }
+      // Bias the random range toward the target as we approach the end.
+      const progress = tick / ticks;
+      const jitter = Math.floor(order * (1 - progress) + (Math.random() * order));
+      hero.textContent = `$${jitter}`;
+    }, tickMs);
   };
 
   const scrollResultIntoView = (state: ReturnType<typeof getState>): void => {
@@ -386,6 +440,57 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   subscribe(renderResultState);
   subscribe(updateResultPanelVisibility);
   subscribe(scrollResultIntoView);
+  subscribe(syncUrlHash);
+}
+
+// ─── URL hash <-> state sync (deep-link team + price) ────────────────────
+// Format: #/<TeamName>/<price>  (team name is URI-encoded)
+// Example: #/New%20York%20Giants/480
+// Read at bootstrap, written via history.replaceState on state changes so the
+// back button doesn't fill with intermediate prices.
+
+let lastWrittenHash = '';
+
+function parseHashLink(
+  hash: string,
+  data: FullData | CoreData,
+): { team: string; price: number } | null {
+  if (!hash.startsWith('#/')) return null;
+  const rest = hash.slice(2);
+  const slash = rest.indexOf('/');
+  if (slash <= 0) return null;
+  const rawTeam = rest.slice(0, slash);
+  const rawPrice = rest.slice(slash + 1);
+  let team: string;
+  try {
+    team = decodeURIComponent(rawTeam);
+  } catch {
+    return null;
+  }
+  if (!(team in data.teams)) return null;
+  const price = Number.parseFloat(rawPrice);
+  if (!Number.isFinite(price) || price <= 0) return null;
+  return { team, price };
+}
+
+function syncUrlHash(state: ReturnType<typeof getState>): void {
+  const { selectedTeam, spotPrice } = state;
+  const nextHash =
+    selectedTeam && spotPrice && spotPrice > 0
+      ? `#/${encodeURIComponent(selectedTeam)}/${spotPrice}`
+      : '';
+
+  if (nextHash === lastWrittenHash) return;
+  lastWrittenHash = nextHash;
+
+  // Use replaceState so price keystrokes don't flood the history stack.
+  const targetUrl =
+    window.location.pathname + window.location.search + (nextHash || '');
+  try {
+    window.history.replaceState(null, '', targetUrl);
+  } catch {
+    // Ignore — non-browser test environments.
+  }
 }
 
 async function bootstrap(): Promise<void> {
@@ -411,6 +516,35 @@ async function bootstrap(): Promise<void> {
 
     setState({ data: result.data, mode: result.mode });
     mountApp(app, result.data);
+
+    // Deep-link hydration: if the user landed with #/<Team>/<price>, apply
+    // it after mountApp has subscribed its render hooks so the result panel
+    // populates on page load.
+    const hashLink = parseHashLink(window.location.hash, result.data);
+    if (hashLink) {
+      lastWrittenHash = window.location.hash; // don't rewrite to itself
+      setState({
+        selectedTeam: hashLink.team,
+        spotPrice: hashLink.price,
+      });
+      // Also press the matching team button so aria-pressed state syncs.
+      const button = document.querySelector<HTMLButtonElement>(
+        `button[data-team="${CSS.escape(hashLink.team)}"]`,
+      );
+      if (button) {
+        for (const b of document.querySelectorAll<HTMLButtonElement>(
+          '[data-testid="team-grid"] button[data-team]',
+        )) {
+          b.setAttribute('aria-pressed', 'false');
+        }
+        button.setAttribute('aria-pressed', 'true');
+      }
+      // Populate the input control visibly.
+      const input = document.querySelector<HTMLInputElement>(
+        '[data-testid="spot-price"]',
+      );
+      if (input) input.value = String(hashLink.price);
+    }
   } catch {
     renderFullPageError(app);
   }

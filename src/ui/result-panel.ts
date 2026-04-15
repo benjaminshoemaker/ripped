@@ -385,6 +385,90 @@ function renderStaleBadge(result: ComputedResult): HTMLElement | null {
   return badge;
 }
 
+function renderConfidenceDetails(result: ComputedResult): HTMLElement {
+  const details = document.createElement('details');
+  details.dataset.testid = 'confidence-details';
+  details.className = 'mt-2';
+
+  const summary = document.createElement('summary');
+  summary.className = [
+    'cursor-pointer',
+    'text-xs',
+    'font-semibold',
+    'text-text-lo',
+    'hover:text-text-mid',
+    'focus-visible:outline-none',
+    'focus-visible:ring-2',
+    'focus-visible:ring-accent',
+    'rounded',
+    'px-1',
+    'py-0.5',
+  ].join(' ');
+  summary.textContent = `Why is this ${result.confidence} confidence?`;
+
+  const list = document.createElement('ul');
+  list.className = [
+    'mt-2',
+    'space-y-1.5',
+    'rounded-lg',
+    'border',
+    'border-bg-elev',
+    'bg-bg-card',
+    'px-3',
+    'py-3',
+    'text-xs',
+    'leading-snug',
+  ].join(' ');
+
+  for (const condition of result.confidenceBreakdown.conditions) {
+    const item = document.createElement('li');
+    item.dataset.testid = 'confidence-condition';
+    item.dataset.condition = condition.id;
+    item.dataset.passed = condition.passed ? 'true' : 'false';
+    item.className = 'flex items-start gap-2';
+
+    const icon = document.createElement('span');
+    icon.className = [
+      'mt-0.5',
+      'inline-flex',
+      'h-4',
+      'w-4',
+      'shrink-0',
+      'items-center',
+      'justify-center',
+      'rounded-full',
+      'text-[10px]',
+      'font-black',
+      condition.passed ? 'bg-accent text-bg-base' : 'bg-danger text-text-hi',
+    ].join(' ');
+    icon.textContent = condition.passed ? '✓' : '✗';
+    icon.setAttribute('aria-hidden', 'true');
+
+    const body = document.createElement('span');
+    body.className = 'min-w-0 flex-1';
+
+    const label = document.createElement('span');
+    label.className = 'font-semibold text-text-hi';
+    label.textContent = condition.label;
+
+    const detail = document.createElement('span');
+    detail.className = 'ml-2 font-medium text-text-lo';
+    detail.textContent = condition.detail;
+
+    body.append(label, detail);
+    item.append(icon, body);
+    list.append(item);
+  }
+
+  const footnote = document.createElement('p');
+  footnote.className = 'mt-3 text-[11px] leading-snug text-text-lo';
+  footnote.textContent =
+    'High confidence requires all four conditions. Medium = at least 2 of 4 for every chase record. Low = the weakest chase record fails more than half.';
+
+  details.append(summary, list, footnote);
+  return details;
+}
+
 function renderLowConfidenceWarning(): HTMLElement {
   const warning = document.createElement('div');
   warning.dataset.testid = 'low-confidence-warning';
@@ -607,7 +691,7 @@ export function renderResultPanel(
   // Assemble in the order above.
   wrapper.append(label);
   if (lowConfidenceWarning) wrapper.append(lowConfidenceWarning);
-  wrapper.append(verdictBand, verdictDisclaimer);
+  wrapper.append(verdictBand, verdictDisclaimer, renderConfidenceDetails(result));
   if (staleBadge) wrapper.append(staleBadge);
   wrapper.append(
     hero,
