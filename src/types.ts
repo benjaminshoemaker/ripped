@@ -49,4 +49,5 @@ export interface ComputedResult {
   confidence: ConfidenceLabel;
   contributors: Contributor[];
   probabilityTable: Record<string, number>;
+  staleSignals: string[];
 }

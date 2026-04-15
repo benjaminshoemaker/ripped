@@ -21,6 +21,27 @@ import type { SimulateResponse } from './worker/simulate.worker';
 
 const ERROR_MESSAGE = 'Data unavailable. Try again in a minute, or DM @djhandle.';
 
+const DAY_MS = 24 * 60 * 60 * 1000;
+const STALE_DAYS = 14;
+
+function computeStaleSignals(data: CoreData | FullData): string[] {
+  const now = Date.now();
+  const entries: Array<[string, string]> = [
+    ['Checklist', data.checklist_as_of],
+    ['Odds', data.odds_as_of],
+    ['Values', data.values_as_of],
+    ['Comps', data.comps_as_of],
+  ];
+  const stale: string[] = [];
+  for (const [label, timestamp] of entries) {
+    const parsed = new Date(timestamp).getTime();
+    if (!Number.isFinite(parsed)) continue;
+    const days = Math.max(0, Math.floor((now - parsed) / DAY_MS));
+    if (days >= STALE_DAYS) stale.push(label);
+  }
+  return stale;
+}
+
 function renderFullPageError(container: HTMLElement): void {
   const error = document.createElement('div');
   error.dataset.testid = 'full-page-error';
@@ -214,6 +235,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
       confidence,
       contributors,
       probabilityTable: buildProbabilityTable(team, fullData),
+      staleSignals: computeStaleSignals(fullData),
     };
 
     renderResultPanel(resultPanel, computedResult);

@@ -140,6 +140,7 @@ function createProbabilityOnlyResult(
     confidence: 'low',
     contributors: [],
     probabilityTable: buildProbabilityTable(team, data),
+    staleSignals: [],
   };
 }
 
@@ -320,14 +321,147 @@ function renderContributors(result: ComputedResult): HTMLElement {
       'No dollar contributors available for this team.',
     );
     list.append(empty);
-  } else {
-    for (const contributor of contributors) {
-      list.append(renderContributorRow(contributor));
-    }
+    section.append(heading, list);
+    return section;
+  }
+
+  for (const contributor of contributors) {
+    list.append(renderContributorRow(contributor));
   }
 
   section.append(heading, list);
+
+  const totalEv = result.ev;
+  if (totalEv !== null && Number.isFinite(totalEv) && totalEv > 0) {
+    const top5Sum = contributors.reduce(
+      (sum, c) => sum + c.expectedValue,
+      0,
+    );
+    const everythingElse = Math.max(0, totalEv - top5Sum);
+    const top5Share = top5Sum / totalEv;
+
+    const aggregate = createTextElement(
+      'p',
+      'mt-3 text-xs font-medium leading-relaxed text-text-lo',
+      `Top 5 total: ${formatUsd(top5Sum)} (${formatPercent(top5Share)} of EV) · Everything else: ${formatUsd(everythingElse)}`,
+    );
+    aggregate.dataset.testid = 'contributors-aggregate';
+    section.append(aggregate);
+  }
+
   return section;
+}
+
+function renderProbabilitySummary(result: ComputedResult): HTMLElement {
+  const section = document.createElement('section');
+  section.dataset.testid = 'prob-summary';
+  section.className = [
+    'mt-4',
+    'grid',
+    'grid-cols-2',
+    'gap-2',
+    'rounded-lg',
+    'border',
+    'border-bg-elev',
+    'bg-bg-card',
+    'px-3',
+    'py-3',
+    'text-xs',
+    'font-semibold',
+  ].join(' ');
+
+  const entries: Array<{ label: string; value: string }> = [];
+  const pBase = result.probabilityTable.base;
+  if (typeof pBase === 'number') {
+    entries.push({ label: 'Any base hit', value: formatProbability(pBase) });
+  }
+  const pAnyChase = result.probabilityTable.any_chase_card;
+  if (typeof pAnyChase === 'number') {
+    entries.push({ label: 'Any chase card', value: formatProbability(pAnyChase) });
+  }
+  const pNumbered = result.probabilityTable.any_numbered_parallel;
+  if (typeof pNumbered === 'number') {
+    entries.push({
+      label: 'Any numbered parallel',
+      value: formatProbability(pNumbered),
+    });
+  }
+  if (result.pZero !== null && Number.isFinite(result.pZero)) {
+    entries.push({
+      label: 'Chance of effectively $0',
+      value: formatProbability(result.pZero),
+    });
+  }
+
+  for (const entry of entries) {
+    const row = document.createElement('div');
+    row.className = 'flex items-center justify-between gap-2';
+    const label = createTextElement(
+      'span',
+      'text-text-mid',
+      entry.label,
+    );
+    const value = createTextElement(
+      'span',
+      'text-text-hi',
+      entry.value,
+    );
+    row.append(label, value);
+    section.append(row);
+  }
+
+  return section;
+}
+
+function renderStaleBadge(result: ComputedResult): HTMLElement | null {
+  if (!result.staleSignals || result.staleSignals.length === 0) return null;
+  const badge = createTextElement(
+    'p',
+    [
+      'mt-3',
+      'rounded-lg',
+      'border',
+      'border-danger',
+      'bg-bg-card',
+      'px-3',
+      'py-2',
+      'text-xs',
+      'font-semibold',
+      'text-text-hi',
+    ].join(' '),
+    `Stale data — ${result.staleSignals.join(', ')} ${result.staleSignals.length > 1 ? 'are' : 'is'} at least 14 days old. Verdict quality reduced.`,
+  );
+  badge.dataset.testid = 'result-stale-badge';
+  return badge;
+}
+
+function renderLowConfidenceWarning(): HTMLElement {
+  const warning = document.createElement('div');
+  warning.dataset.testid = 'low-confidence-warning';
+  warning.setAttribute('role', 'status');
+  warning.className = [
+    'mt-3',
+    'rounded-lg',
+    'border-2',
+    'border-danger',
+    'bg-bg-card',
+    'px-4',
+    'py-3',
+  ].join(' ');
+
+  const heading = createTextElement(
+    'p',
+    'text-xs font-black uppercase tracking-wide text-danger',
+    'Low confidence',
+  );
+  const body = createTextElement(
+    'p',
+    'mt-1 text-sm font-semibold leading-snug text-text-hi',
+    "We don't have enough recent comp data to stand behind this verdict. Verify pricing manually before buying.",
+  );
+
+  warning.append(heading, body);
+  return warning;
 }
 
 function renderVarianceCallout(result: ComputedResult): HTMLElement {
@@ -424,10 +558,7 @@ export function renderResultPanel(
     'pb-8',
     'bg-bg-base',
     'text-text-hi',
-    result.mode === 'full' && result.confidence === 'low' ? 'opacity-60' : '',
-  ]
-    .filter(Boolean)
-    .join(' ');
+  ].join(' ');
 
   const wrapper = document.createElement('div');
   wrapper.className = [
@@ -449,10 +580,64 @@ export function renderResultPanel(
     return;
   }
 
+  const isLowConfidence = result.confidence === 'low';
+
+  // 1. Low-confidence warning strip (only when confidence is low — replaces
+  //    the old whole-panel opacity-60 mute which hid the very warnings users
+  //    need to read per codex-consult and codex-review feedback).
+  const lowConfidenceWarning = isLowConfidence ? renderLowConfidenceWarning() : null;
+
+  // 2. Verdict band. On low confidence we de-saturate just the celebratory
+  //    styling, keeping numbers and warnings at full contrast.
+  const verdict = result.verdict ?? 'NEAR_MARKET';
+  const verdictBand = document.createElement('div');
+  verdictBand.dataset.testid = 'verdict-band';
+  verdictBand.dataset.verdict = verdict;
+  verdictBand.dataset.muted = isLowConfidence ? 'true' : 'false';
+  verdictBand.className = [
+    'mt-3',
+    'rounded-lg',
+    'px-4',
+    'py-3',
+    'text-sm',
+    'font-black',
+    'uppercase',
+    'tracking-normal',
+    'lg:text-base',
+    'lg:px-5',
+    'lg:py-4',
+    VERDICT_CLASSES[verdict],
+    isLowConfidence ? 'saturate-50 opacity-80' : '',
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const verdictText = document.createElement('span');
+  verdictText.textContent = VERDICT_LABELS[verdict];
+
+  const confidenceText = document.createElement('span');
+  confidenceText.dataset.testid = 'confidence-label';
+  confidenceText.className = 'ml-2 font-semibold normal-case';
+  confidenceText.textContent = `(${result.confidence} confidence${result.verdictIsHard ? ', hard verdict' : ''})`;
+
+  verdictBand.append(verdictText, confidenceText);
+
+  // 3. Compact "not financial advice / variance" strip under the verdict band.
+  const verdictDisclaimer = createTextElement(
+    'p',
+    'mt-2 text-xs font-medium leading-snug text-text-lo',
+    'Not financial advice. Single-break outcomes are dominated by variance.',
+  );
+  verdictDisclaimer.dataset.testid = 'verdict-disclaimer';
+
+  // 4. Stale-data badge (only if any data source is ≥14 days old).
+  const staleBadge = renderStaleBadge(result);
+
+  // 5. Hero: EV figure, unchanged primary visual.
   const hero = createTextElement(
     'p',
     [
-      'mt-2',
+      'mt-4',
       'text-5xl',
       'font-black',
       'leading-none',
@@ -463,13 +648,26 @@ export function renderResultPanel(
   );
   hero.dataset.testid = 'ev-hero';
 
+  // 6. "vs your $X · Gap ±$Y / ±Z%" — combines paid + gap directly with the
+  //    hero so a 5-second buyer sees the comparison in one glance. Replaces
+  //    the old small-print gap-detail below the verdict.
+  const heroVsPaid = createTextElement(
+    'p',
+    'mt-2 text-lg font-semibold leading-snug text-text-mid sm:text-xl',
+    `vs your ${formatUsd(result.spotPrice)} · Gap ${formatSignedUsd(result.gap)} / ${formatSignedPercent(result.gapPct)}`,
+  );
+  heroVsPaid.dataset.testid = 'hero-vs-paid';
+
+  // 7. Subhero — median + 80% range. Smaller than hero-vs-paid so the 1.5x
+  //    hero:subhero test still passes.
   const subhero = createTextElement(
     'p',
-    'mt-3 text-base font-semibold leading-snug text-text-mid sm:text-lg',
-    `Median: ${formatUsd(result.median)} | 80% of cases: ${formatUsd(result.p10)}-${formatUsd(result.p90)}`,
+    'mt-2 text-sm font-semibold leading-snug text-text-mid sm:text-base',
+    `Median: ${formatUsd(result.median)} · 80% of cases: ${formatUsd(result.p10)}-${formatUsd(result.p90)}`,
   );
   subhero.dataset.testid = 'subhero';
 
+  // 8. P($0) box — retained from original layout (REQ-013).
   const pZero = createTextElement(
     'p',
     [
@@ -488,46 +686,22 @@ export function renderResultPanel(
   );
   pZero.dataset.testid = 'p-zero';
 
-  const verdict = result.verdict ?? 'NEAR_MARKET';
-  const verdictBand = document.createElement('div');
-  verdictBand.dataset.testid = 'verdict-band';
-  verdictBand.dataset.verdict = verdict;
-  verdictBand.className = [
-    'mt-3',
-    'rounded-lg',
-    'px-4',
-    'py-3',
-    'text-sm',
-    'font-black',
-    'uppercase',
-    'tracking-normal',
-    VERDICT_CLASSES[verdict],
-  ].join(' ');
+  // 9. Compact probability summary strip — surfaces the four numbers that
+  //    matter for a 5-second decision instead of burying them in the 14-row
+  //    detail table below.
+  const probSummary = renderProbabilitySummary(result);
 
-  const verdictText = document.createElement('span');
-  verdictText.textContent = VERDICT_LABELS[verdict];
-
-  const confidenceText = document.createElement('span');
-  confidenceText.dataset.testid = 'confidence-label';
-  confidenceText.className = 'ml-2 font-semibold normal-case';
-  confidenceText.textContent = `(${result.confidence} confidence${result.verdictIsHard ? ', hard verdict' : ''})`;
-
-  verdictBand.append(verdictText, confidenceText);
-
-  const gap = createTextElement(
-    'p',
-    'mt-3 text-sm font-medium leading-relaxed text-text-mid',
-    `You paid ${formatUsd(result.spotPrice)}, EV is ${formatUsd(result.ev)}. Gap: ${formatSignedUsd(result.gap)} / ${formatSignedPercent(result.gapPct)}`,
-  );
-  gap.dataset.testid = 'gap-detail';
-
+  // Assemble in the order above.
+  wrapper.append(label);
+  if (lowConfidenceWarning) wrapper.append(lowConfidenceWarning);
+  wrapper.append(verdictBand, verdictDisclaimer);
+  if (staleBadge) wrapper.append(staleBadge);
   wrapper.append(
-    label,
     hero,
+    heroVsPaid,
     subhero,
     pZero,
-    verdictBand,
-    gap,
+    probSummary,
     renderVarianceCallout(result),
     renderProbabilityTable(result),
     renderContributors(result),

@@ -61,7 +61,15 @@ test.describe('result panel (Task 2.3.A)', () => {
 
     const resultPanel = page.locator('[data-testid="result-panel"]');
     await expect(resultPanel).toHaveAttribute('data-confidence', 'low');
-    await expect(resultPanel).toHaveClass(/(?:^|\s)opacity-60(?:\s|$)/);
+
+    // Explicit "Low confidence" warning strip is visible (replaces the
+    // prior whole-panel opacity-60 mute which hid the very warnings users
+    // need to read).
+    await expect(page.locator('[data-testid="low-confidence-warning"]')).toBeVisible();
+
+    // Verdict band is targeted-muted via data attribute + desaturate classes.
+    const verdictBand = page.locator('[data-testid="verdict-band"]');
+    await expect(verdictBand).toHaveAttribute('data-muted', 'true');
   });
 
   test('ev above fold 360x780', async ({ page }) => {
