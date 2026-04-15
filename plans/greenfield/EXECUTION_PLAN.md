@@ -190,15 +190,15 @@ Write `src/validate.ts` exporting `validate(rawJson): { mode, data, errors }`. T
 **Requirement:** REQ-028, REQ-041
 
 **Acceptance Criteria:**
-- [ ] (TEST) Valid full fixture → `mode = 'full'`
+- [x] (TEST) Valid full fixture → `mode = 'full'`
   - Verify: `npx vitest run src/validate.test.ts -t "full mode"`
-- [ ] (TEST) Core-only fixture → `mode = 'probability_only'`
+- [x] (TEST) Core-only fixture → `mode = 'probability_only'`
   - Verify: `npx vitest run src/validate.test.ts -t "probability_only mode"`
-- [ ] (TEST) Broken fixture → `mode = 'error'` with non-empty `errors` array
+- [x] (TEST) Broken fixture → `mode = 'error'` with non-empty `errors` array
   - Verify: `npx vitest run src/validate.test.ts -t "error mode"`
-- [ ] (CODE) `validate()` is pure — no `document.*` or `fetch(...)` references
+- [x] (CODE) `validate()` is pure — no `document.*` or `fetch(...)` references
   - Verify: `! grep -qE "document\.|fetch\(" src/validate.ts`
-- [ ] (TEST) **Browser smoke**: when `/data.json` returns a malformed payload, the page renders `[data-testid="full-page-error"]` and NO `[data-testid="team-grid"]`
+- [ ] (TEST) **Browser smoke**: when `/data.json` returns a malformed payload, the page renders `[data-testid="full-page-error"]` and NO `[data-testid="team-grid"]` *(scaffolded at `tests/fail-loud.spec.ts`; runs after Task 2.0.A installs Playwright)*
   - Verify: `npx playwright test tests/fail-loud.spec.ts` (test file created in Task 2.0.A, run after)
 
 **Files to Create:**
