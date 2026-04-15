@@ -315,17 +315,17 @@ Create `src/math/confidence.ts` implementing the four-condition scoring from TEC
 **Requirement:** REQ-016
 
 **Acceptance Criteria:**
-- [ ] (CODE) `computeConfidence` exported with explicit 4-condition array
+- [x] (CODE) `computeConfidence` exported with explicit 4-condition array
   - Verify: `grep -q "export function computeConfidence" src/math/confidence.ts && grep -q "CONFIDENCE_CONDITIONS" src/math/confidence.ts`
-- [ ] (TEST) All 4 conditions pass → `'high'`
+- [x] (TEST) All 4 conditions pass → `'high'`
   - Verify: `npx vitest run src/math/confidence.test.ts -t "all four pass"`
-- [ ] (TEST) 2 of 4 conditions pass → `'medium'`
+- [x] (TEST) 2 of 4 conditions pass → `'medium'`
   - Verify: `npx vitest run src/math/confidence.test.ts -t "two of four"`
-- [ ] (TEST) 1 of 4 conditions passes → `'low'`
+- [x] (TEST) 1 of 4 conditions passes → `'low'`
   - Verify: `npx vitest run src/math/confidence.test.ts -t "one of four"`
-- [ ] (TEST) Min aggregation: a multi-chase team with one weak record drops to lower label
+- [x] (TEST) Min aggregation: a multi-chase team with one weak record drops to lower label
   - Verify: `npx vitest run src/math/confidence.test.ts -t "min aggregation"`
-- [ ] (TEST) Missing `confidence_inputs` entirely → `'low'`
+- [x] (TEST) Missing `confidence_inputs` entirely → `'low'`
   - Verify: `npx vitest run src/math/confidence.test.ts -t "no inputs"`
 
 **Files to Create:**
