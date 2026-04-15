@@ -1,8 +1,10 @@
-Yo — big update. Pulled an all-nighter and the app is live:
+Yo - worked on ripped last night - intro version of the app is live:
 
 https://ripped-ten.vercel.app
 
-Go play with it right now. Pick a team, type a price, see what it says. Works on your phone.
+Check it out and see what you think
+
+Claude's summary:
 
 Important: a lot of the numbers on screen are my GUESSES, not real data. Here's the breakdown.
 
@@ -36,9 +38,9 @@ NEW ASKS THAT CAME UP WHILE BUILDING:
 - 2025 ODDS — you said these drop today. Send me the file the moment it hits and I'll swap it in.
 
 - GUT CHECK ON GIANTS / TITANS / JETS. Those are the only 3 teams where I have BOTH real 2025 rosters AND a hot rookie I'm claiming is "chase tier." Right now the tool says:
-    Giants @ $150 → EV $435 (Below Market)
-    Titans @ $250 → EV $504 (Below Market)
-    Jets @ $200 → (check the site)
+    Giants @ $150 → EV $433 (Below Market)
+    Titans @ $250 → EV $503 (Below Market)
+    Jets @ $200 → EV $279 (Below Market)
   Open the site, try those three, and tell me if the numbers sound roughly right compared to what you've been seeing breakers charge. If my "Giants @ $150 is a steal" sounds crazy to you, my dollar values are wrong and I need to fix them before we launch.
 
 - ROOKIE COMP DATA (optional but big polish). For the top 2025 rookies — Maye, Dart, Ward, Travis Hunter, Jeanty, Shedeur, TreVeyon — recent eBay sold data: how many have sold, median price, how many days of history. Here's why it matters: the tool shows a confidence label next to the verdict ("high / medium / low confidence"). Right now, without comp data, it defaults to medium and visually greys out the result. With real comp data for the big names, it shows "high confidence" and the verdict feels authoritative. Not required for launch — it's the difference between looking like a polished tool vs a back-of-napkin calculator.
