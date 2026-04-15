@@ -610,15 +610,15 @@ Render 32 NFL teams as tappable cards in a Tailwind grid. Single column on 360px
 **Requirement:** REQ-003, REQ-030, REQ-031
 
 **Acceptance Criteria:**
-- [ ] (CODE) `renderTeamGrid(container, data)` exported
+- [x] (CODE) `renderTeamGrid(container, data)` exported
   - Verify: `grep -q "export function renderTeamGrid" src/ui/team-grid.ts`
-- [ ] (BROWSER:DOM) On load with valid fixture, 32 team buttons render in `[data-testid="team-grid"]`
+- [x] (BROWSER:DOM) On load with valid fixture, 32 team buttons render in `[data-testid="team-grid"]`
   - Verify: `npx playwright test tests/team-grid.spec.ts -g "renders 32 teams"`
-- [ ] (BROWSER:DOM) Tapping a team adds `aria-pressed="true"` to that team only
+- [x] (BROWSER:DOM) Tapping a team adds `aria-pressed="true"` to that team only
   - Verify: `npx playwright test tests/team-grid.spec.ts -g "aria pressed on click"`
-- [ ] (BROWSER:VISUAL) No horizontal scroll at 360px viewport
+- [x] (BROWSER:VISUAL) No horizontal scroll at 360px viewport
   - Verify: `npx playwright test tests/team-grid.spec.ts -g "no horizontal scroll 360"`
-- [ ] (BROWSER:DOM) Every team button has clientHeight >= 44 and clientWidth >= 44
+- [x] (BROWSER:DOM) Every team button has clientHeight >= 44 and clientWidth >= 44
   - Verify: `npx playwright test tests/team-grid.spec.ts -g "tap target 44px"`
 
 **Files to Create:**
