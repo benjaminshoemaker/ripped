@@ -381,19 +381,19 @@ Create `src/worker/simulate.worker.ts` + `src/worker/rng.ts` + `src/worker/simul
 **Requirement:** REQ-011, REQ-012, REQ-014, REQ-034
 
 **Acceptance Criteria:**
-- [ ] (CODE) `simulate.worker.ts`, `rng.ts`, `simulate.worker.test.ts`, `rng.test.ts` all exist
+- [x] (CODE) `simulate.worker.ts`, `rng.ts`, `simulate.worker.test.ts`, `rng.test.ts` all exist
   - Verify: `for f in src/worker/simulate.worker.ts src/worker/rng.ts src/worker/simulate.worker.test.ts src/worker/rng.test.ts; do test -f "$f" || exit 1; done`
-- [ ] (TEST) `rng.ts`: same seed → identical sequence of 100 draws
+- [x] (TEST) `rng.ts`: same seed → identical sequence of 100 draws
   - Verify: `npx vitest run src/worker/rng.test.ts -t "deterministic"`
-- [ ] (TEST) Same seed → identical `median`, `p10`, `p90`, `pZero` across 2 runs
+- [x] (TEST) Same seed → identical `median`, `p10`, `p90`, `pZero` across 2 runs
   - Verify: `npx vitest run src/worker/simulate.worker.test.ts -t "deterministic with seed"`
-- [ ] (TEST) `p10 <= median <= p90` always
+- [x] (TEST) `p10 <= median <= p90` always
   - Verify: `npx vitest run src/worker/simulate.worker.test.ts -t "quantile ordering"`
-- [ ] (TEST) **pZero monotonic non-decreasing** in spotPrice (corrected direction): `pZero(team, data, $50) <= pZero(team, data, $500) <= pZero(team, data, $5000)`
+- [x] (TEST) **pZero monotonic non-decreasing** in spotPrice (corrected direction): `pZero(team, data, $50) <= pZero(team, data, $500) <= pZero(team, data, $5000)`
   - Verify: `npx vitest run src/worker/simulate.worker.test.ts -t "pZero monotonic non-decreasing"`
-- [ ] (TEST) MC mean for Jets (cold, low-variance) is within 25% of closed-form EV
+- [x] (TEST) MC mean for Jets (cold, low-variance) is within 25% of closed-form EV
   - Verify: `npx vitest run src/worker/simulate.worker.test.ts -t "mc vs closed-form jets"`
-- [ ] (TEST) Quantile index uses `Math.floor((n-1) * q)` (sanity-check: `q(0)` = smallest, `q(1)` = largest)
+- [x] (TEST) Quantile index uses `Math.floor((n-1) * q)` (sanity-check: `q(0)` = smallest, `q(1)` = largest)
   - Verify: `npx vitest run src/worker/simulate.worker.test.ts -t "quantile indexing"`
 
 **Files to Create:**
@@ -417,11 +417,11 @@ Write `src/worker-client.ts` exporting `simulate(team, spotPrice, data, onResult
 **Requirement:** REQ-034
 
 **Acceptance Criteria:**
-- [ ] (CODE) `simulate()` exported, uses `state.nextRequestId()` on each call
+- [x] (CODE) `simulate()` exported, uses `state.nextRequestId()` on each call
   - Verify: `grep -q "export function simulate" src/worker-client.ts && grep -q "nextRequestId" src/worker-client.ts`
-- [ ] (TEST) Rapid calls: only the latest-requestId callback fires
+- [x] (TEST) Rapid calls: only the latest-requestId callback fires
   - Verify: `npx vitest run src/worker-client.test.ts -t "supersession"`
-- [ ] (TEST) `typeof Worker === 'undefined'` path: falls back to synchronous and still returns a result
+- [x] (TEST) `typeof Worker === 'undefined'` path: falls back to synchronous and still returns a result
   - Verify: `npx vitest run src/worker-client.test.ts -t "no-worker fallback"`
 
 **Files to Create:**
