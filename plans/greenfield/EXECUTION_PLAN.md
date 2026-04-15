@@ -1027,11 +1027,11 @@ Add `tests/performance.spec.ts` that repeatedly submits a price + team combinati
 **Requirement:** REQ-034
 
 **Acceptance Criteria:**
-- [ ] (CODE) `tests/performance.spec.ts` exists
+- [x] (CODE) `tests/performance.spec.ts` exists
   - Verify: `test -f tests/performance.spec.ts`
-- [ ] (BROWSER:PERFORMANCE) 20-run p95 latency < 500ms in CI (Playwright-driven)
+- [x] (BROWSER:PERFORMANCE) 20-run p95 latency < 500ms in CI (Playwright-driven)
   - Verify: `npx playwright test tests/performance.spec.ts -g "p95 under 500"`
-- [ ] (CODE) Test uses `performance.now()` bracketing around the worker-client simulate call
+- [x] (CODE) Test uses `performance.now()` bracketing around the worker-client simulate call
   - Verify: `grep -q "performance.now" tests/performance.spec.ts`
 - [ ] (MANUAL:DEFER) Mid-tier 2023 phone smoke test (iPhone 13 / Pixel 7 class) with real data
   - Reason: Real-device perf measurement requires physical hardware + Lighthouse mobile emulation; CI synthetic timing catches obvious regressions but not true mobile perf
