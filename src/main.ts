@@ -1,9 +1,15 @@
 import './styles.css';
 import { computeConfidence } from './math/confidence';
 import { computeEV } from './math/ev';
+import {
+  probAnyChase,
+  probAnyNumberedParallel,
+  probAtLeastOne,
+} from './math/probability';
 import { computeVerdict } from './math/verdict';
 import { getState, setState, subscribe } from './state';
-import type { ComputedResult, CoreData, FullData } from './types';
+import type { ComputedResult, CoreData, FullData, Team } from './types';
+import { renderDisclaimer } from './ui/disclaimer';
 import { renderPriceInput } from './ui/price-input';
 import { renderProductCard } from './ui/product-card';
 import { clearResultPanel, renderResultPanel } from './ui/result-panel';
@@ -58,6 +64,19 @@ function isFullData(data: CoreData | FullData | null): data is FullData {
   return data !== null && 'tier_values_usd' in data;
 }
 
+function buildProbabilityTable(team: Team, data: FullData | CoreData): Record<string, number> {
+  const probabilityTable: Record<string, number> = {};
+
+  for (const category of Object.keys(data.card_categories)) {
+    probabilityTable[category] = probAtLeastOne(category, team, data);
+  }
+
+  probabilityTable.any_numbered_parallel = probAnyNumberedParallel(team, data);
+  probabilityTable.any_chase_card = probAnyChase(team, data);
+
+  return probabilityTable;
+}
+
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   const productCardHost = document.createElement('div');
   const gridHost = document.createElement('div');
@@ -66,16 +85,19 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   const resultPanel = document.createElement('section');
   resultPanel.dataset.testid = 'result-panel';
   resultPanel.hidden = true;
+  const disclaimerHost = document.createElement('div');
 
   renderProductCard(productCardHost, data);
   renderTeamGrid(gridHost, data);
   renderPriceInput(priceInputContainer);
+  renderDisclaimer(disclaimerHost, data);
   container.replaceChildren(
     ...Array.from(productCardHost.childNodes),
     ...Array.from(gridHost.childNodes),
     detailContainer,
     priceInputContainer,
     resultPanel,
+    disclaimerHost,
   );
 
   let lastSelectedTeam: string | null = null;
@@ -156,7 +178,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
       verdictIsHard: verdictResult.isHard,
       confidence,
       contributors,
-      probabilityTable: {},
+      probabilityTable: buildProbabilityTable(team, fullData),
     };
 
     renderResultPanel(resultPanel, computedResult);

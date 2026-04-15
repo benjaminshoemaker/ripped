@@ -766,19 +766,19 @@ Complete the rest of the results panel. Probability table with one row per categ
 **Requirement:** REQ-008, REQ-018, REQ-019, REQ-020, REQ-021, REQ-022, REQ-023
 
 **Acceptance Criteria:**
-- [ ] (BROWSER:DOM) Probability table has one row per `card_categories` entry PLUS rows for `any_numbered_parallel` and `any_chase_card`
+- [x] (BROWSER:DOM) Probability table has one row per `card_categories` entry PLUS rows for `any_numbered_parallel` and `any_chase_card`
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "probability rows include aggregates"`
-- [ ] (BROWSER:DOM) Contributors section renders ≤ 5 rows
+- [x] (BROWSER:DOM) Contributors section renders ≤ 5 rows
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "max 5 contributors"`
-- [ ] (BROWSER:DOM) `[data-testid="variance-callout"]` exists and includes the top chase contributor's player name
+- [x] (BROWSER:DOM) `[data-testid="variance-callout"]` exists and includes the top chase contributor's player name
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "variance callout present"`
-- [ ] (BROWSER:DOM) Methodology is a `<details>` starting closed
+- [x] (BROWSER:DOM) Methodology is a `<details>` starting closed
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "methodology closed details"`
-- [ ] (BROWSER:DOM) Disclaimer contains "variance" AND "Not financial advice" AND "not affiliated"
+- [x] (BROWSER:DOM) Disclaimer contains "variance" AND "Not financial advice" AND "not affiliated"
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "disclaimer text"`
-- [ ] (BROWSER:DOM) Freshness panel has 4 elements with `data-category` attributes (checklist / odds / values / comps)
+- [x] (BROWSER:DOM) Freshness panel has 4 elements with `data-category` attributes (checklist / odds / values / comps)
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "four freshness timestamps"`
-- [ ] (BROWSER:DOM) Stale fixture (timestamp 15+ days old) triggers `[data-testid="stale-warning"]`
+- [x] (BROWSER:DOM) Stale fixture (timestamp 15+ days old) triggers `[data-testid="stale-warning"]`
   - Verify: `npx playwright test tests/results-detail.spec.ts -g "stale warning renders"`
 
 **Files to Create:**
