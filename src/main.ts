@@ -1,6 +1,7 @@
 import './styles.css';
 import { getState, setState, subscribe } from './state';
 import type { CoreData, FullData } from './types';
+import { renderPriceInput } from './ui/price-input';
 import { renderTeamDetail } from './ui/team-detail';
 import { renderTeamGrid } from './ui/team-grid';
 import { validate } from './validate';
@@ -49,9 +50,19 @@ function clearTeamDetail(container: HTMLElement): void {
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   const gridHost = document.createElement('div');
   const detailContainer = createTeamDetailContainer();
+  const priceInputContainer = document.createElement('div');
+  const resultPanel = document.createElement('section');
+  resultPanel.dataset.testid = 'result-panel';
+  resultPanel.hidden = true;
 
   renderTeamGrid(gridHost, data);
-  container.replaceChildren(...Array.from(gridHost.childNodes), detailContainer);
+  renderPriceInput(priceInputContainer);
+  container.replaceChildren(
+    ...Array.from(gridHost.childNodes),
+    detailContainer,
+    priceInputContainer,
+    resultPanel,
+  );
 
   let lastSelectedTeam: string | null = null;
 
@@ -72,12 +83,22 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
     renderTeamDetail(detailContainer, team, data);
   };
 
+  const updateResultPanelVisibility = (state: ReturnType<typeof getState>): void => {
+    const shouldShow = Boolean(
+      state.selectedTeam && state.spotPrice && state.spotPrice > 0,
+    );
+    resultPanel.hidden = !shouldShow;
+  };
+
   renderSelectedTeam(getState().selectedTeam);
+  updateResultPanelVisibility(getState());
 
   subscribe((state) => {
     if (state.selectedTeam === lastSelectedTeam) return;
     renderSelectedTeam(state.selectedTeam);
   });
+
+  subscribe(updateResultPanelVisibility);
 }
 
 async function bootstrap(): Promise<void> {

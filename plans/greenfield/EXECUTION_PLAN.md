@@ -669,15 +669,15 @@ Render a numeric input with `$` prefix and 44×44 minimum tap area. Debounce cha
 **Requirement:** REQ-006, REQ-007, REQ-031
 
 **Acceptance Criteria:**
-- [ ] (CODE) `renderPriceInput(container)` exported
+- [x] (CODE) `renderPriceInput(container)` exported
   - Verify: `grep -q "export function renderPriceInput" src/ui/price-input.ts`
-- [ ] (BROWSER:DOM) Input has `type="number"`, `inputmode="numeric"`, `min="0"`
+- [x] (BROWSER:DOM) Input has `type="number"`, `inputmode="numeric"`, `min="0"`
   - Verify: `npx playwright test tests/price-input.spec.ts -g "input attributes"`
-- [ ] (BROWSER:DOM) Input wrapper `clientHeight >= 44` and `clientWidth >= 44`
+- [x] (BROWSER:DOM) Input wrapper `clientHeight >= 44` and `clientWidth >= 44`
   - Verify: `npx playwright test tests/price-input.spec.ts -g "tap target 44px"`
-- [ ] (TEST) Debounce: rapid input changes → single call to simulate (mocked worker client)
+- [x] (TEST) Debounce: rapid input changes → single call to simulate (mocked worker client)
   - Verify: `npx vitest run src/ui/price-input.test.ts -t "debounces"`
-- [ ] (BROWSER:DOM) Result panel hidden when spot price is empty or 0
+- [x] (BROWSER:DOM) Result panel hidden when spot price is empty or 0
   - Verify: `npx playwright test tests/price-input.spec.ts -g "results hidden on zero"`
 
 **Files to Create:**
