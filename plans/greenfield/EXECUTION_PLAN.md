@@ -521,17 +521,17 @@ Drop DJ's `data.json` into `/public/data.json`. Run `FullDataSchema.safeParse` (
 **Requirement:** REQ-024, REQ-041
 
 **Acceptance Criteria:**
-- [ ] (CODE) `public/data.json` is syntactically valid JSON
+- [x] (CODE) `public/data.json` is syntactically valid JSON
   - Verify: `jq empty public/data.json`
-- [ ] (TEST) Full data path: `FullDataSchema.safeParse(data).success === true`, OR core-only path: `CoreDataSchema.safeParse(data).success === true && data.values_ready === false`
+- [x] (TEST) Full data path: `FullDataSchema.safeParse(data).success === true`, OR core-only path: `CoreDataSchema.safeParse(data).success === true && data.values_ready === false`
   - Verify: `npx vitest run src/validate.real-data.test.ts -t "real data parses"`
-- [ ] (CODE) All 32 NFL teams present
+- [x] (CODE) All 32 NFL teams present
   - Verify: `jq '.teams | keys | length == 32' public/data.json`
-- [ ] (CODE) Every team has non-empty `base_veterans`, `rookies`, `base_auto_signers`, `rookie_auto_signers` (array may be empty but key must exist), `chase_players`, `tiers`
+- [x] (CODE) Every team has non-empty `base_veterans`, `rookies`, `base_auto_signers`, `rookie_auto_signers` (array may be empty but key must exist), `chase_players`, `tiers`
   - Verify: `jq -e '[.teams[] | (has("base_veterans") and has("rookies") and has("base_auto_signers") and has("rookie_auto_signers") and has("chase_players") and has("tiers"))] | all' public/data.json`
-- [ ] (CODE) Every player name referenced in any team category list has a `tiers[player]` entry
+- [x] (CODE) Every player name referenced in any team category list has a `tiers[player]` entry
   - Verify: `npx vitest run src/validate.real-data.test.ts -t "every player has tier"`
-- [ ] (CODE) Every tier referenced is one of the 4 enum values
+- [x] (CODE) Every tier referenced is one of the 4 enum values
   - Verify: `jq -e '[.teams[].tiers | to_entries[].value] | all(. == "tier_1_chase" or . == "tier_2_strong" or . == "tier_3_fair" or . == "tier_4_cold")' public/data.json`
 
 **Files to Create:**
@@ -552,15 +552,15 @@ Run `computeEV` and `probAtLeastOne` against real data for Giants (chase-heavy),
 **Requirement:** REQ-008, REQ-010, REQ-040
 
 **Acceptance Criteria:**
-- [ ] (TEST) Giants `computeEV` is between $50 and $5,000 (broad sanity range — narrowed after real-data inspection)
+- [x] (TEST) Giants `computeEV` is between $50 and $5,000 (broad sanity range — narrowed after real-data inspection)
   - Verify: `npx vitest run src/math/real-data.test.ts -t "giants plausible ev"`
-- [ ] (TEST) Jets EV is less than Giants EV
+- [x] (TEST) Jets EV is less than Giants EV
   - Verify: `npx vitest run src/math/real-data.test.ts -t "jets lt giants"`
-- [ ] (TEST) Titans: rookie auto contribution > base auto contribution (Titans have 0 base_auto_signers in the JSON)
+- [x] (TEST) Titans: rookie auto contribution > base auto contribution (Titans have 0 base_auto_signers in the JSON)
   - Verify: `npx vitest run src/math/real-data.test.ts -t "titans rookie auto dominated"`
-- [ ] (TEST) `probAtLeastOne('rookie', Giants, data) > 0.95` (rookies have many slots per case → very likely to hit at least one rookie for a team with >=1 rookie)
+- [x] (TEST) `probAtLeastOne('rookie', Giants, data) > 0.95` (rookies have many slots per case → very likely to hit at least one rookie for a team with >=1 rookie)
   - Verify: `npx vitest run src/math/real-data.test.ts -t "giants rookie likely"`
-- [ ] (TEST) `probAtLeastOne('rookie_auto', Giants, data)` is between 0 and 0.5 (realistic range given ~0.5 slots per case × ~4/94 denominator)
+- [x] (TEST) `probAtLeastOne('rookie_auto', Giants, data)` is between 0 and 0.5 (realistic range given ~0.5 slots per case × ~4/94 denominator)
   - Verify: `npx vitest run src/math/real-data.test.ts -t "giants rookie auto realistic"`
 
 **Files to Create:**
