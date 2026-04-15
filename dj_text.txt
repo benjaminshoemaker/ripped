@@ -1,0 +1,49 @@
+Yo — big update. Pulled an all-nighter and the app is live:
+
+https://ripped-ten.vercel.app
+
+Go play with it right now. Pick a team, type a price, see what it says. Works on your phone.
+
+Important: a lot of the numbers on screen are my GUESSES, not real data. Here's the breakdown.
+
+WHAT'S REAL:
+- Your pack odds JSON (the 2024 file you sent me). Wired in as-is. The UI says "placeholder — 2024 odds until 2025 drops" so users see the disclaimer.
+- Your 2025 checklist PDF for 8 teams: Giants, Titans, Jaguars, Jets, Raiders, Patriots, Bears, Browns. Real 2025 player names pulled straight from your PDF — vets, rookies, auto signers, everything.
+
+WHAT'S FAKE (I invented it so the app would actually run today):
+- The other 24 teams have placeholder names. "AZC Vet 1", "AZC Rookie 1", etc. Not launchable for those teams until you send real names.
+- DOLLAR VALUES — I made up a table like "tier 1 rookie auto = $650, tier 2 = $180, tier 3 = $70." Ballpark guesses based on 2024 Chrome comps I eyeballed. Not real comp data.
+- TIER ASSIGNMENTS (who is tier 1 chase vs tier 3 fair) — I guessed. I made Jaxson Dart / Cam Ward / Travis Hunter / Ashton Jeanty / Shedeur Sanders / TreVeyon Henderson tier 1. For everyone else I used a dumb rule: if they sign autos → tier 2, else → tier 3.
+
+
+ONE FORMAT DECISION I MADE — PUSH BACK IF I GOT IT WRONG:
+
+A team spot can be sold by the box (one box, one team, ~$350) or by the case (the full 12 boxes, one team, ~$4,200). I went with CASE because the eBay screenshot you sent me looked like a case, and most of the 32-team splits I see on Whatnot ads look like cases too. The math is completely different between the two. If you actually want box-level math, tell me now and I'll refactor it.
+
+
+WHERE WE ARE ON THE SUNDAY LIST FROM THE DEV BRIEF
+(today is Wednesday, launch window is tight)
+
+1. PLAYER TIER ASSIGNMENTS — blocks launch. Every player on every team → tier 1 chase / tier 2 strong / tier 3 fair / tier 4 cold. Cooper Flagg guy is tier 1, third-string DB is tier 4. I've guessed at 8 teams and faked it for the other 24. I literally can't do math without this.
+
+2. DOLLAR VALUES per card type per tier — blocks the full experience. E.g. "tier 1 rookie auto = $X, tier 2 base refractor = $Y." If you can't get this to me today, I can ship in "probability only" mode where the tool shows hit percentages and a verdict but hides the dollar EV figure. Less punchy, but still a real product. Your call whether we do the full version today or ship probability-only and swap real values in tomorrow.
+
+3. DOMAIN NAME — you still want a real one? I'm live at ripped-ten.vercel.app right now. 5 min to point a real domain at it if you have one lined up.
+
+
+NEW ASKS THAT CAME UP WHILE BUILDING:
+
+- 2025 ODDS — you said these drop today. Send me the file the moment it hits and I'll swap it in.
+
+- GUT CHECK ON GIANTS / TITANS / JETS. Those are the only 3 teams where I have BOTH real 2025 rosters AND a hot rookie I'm claiming is "chase tier." Right now the tool says:
+    Giants @ $150 → EV $435 (Below Market)
+    Titans @ $250 → EV $504 (Below Market)
+    Jets @ $200 → (check the site)
+  Open the site, try those three, and tell me if the numbers sound roughly right compared to what you've been seeing breakers charge. If my "Giants @ $150 is a steal" sounds crazy to you, my dollar values are wrong and I need to fix them before we launch.
+
+- ROOKIE COMP DATA (optional but big polish). For the top 2025 rookies — Maye, Dart, Ward, Travis Hunter, Jeanty, Shedeur, TreVeyon — recent eBay sold data: how many have sold, median price, how many days of history. Here's why it matters: the tool shows a confidence label next to the verdict ("high / medium / low confidence"). Right now, without comp data, it defaults to medium and visually greys out the result. With real comp data for the big names, it shows "high confidence" and the verdict feels authoritative. Not required for launch — it's the difference between looking like a polished tool vs a back-of-napkin calculator.
+
+
+Send whatever you have in whatever format — JSON, CSV, Google Sheet, whatever's easiest. I can write you a blank template in 5 min if that helps.
+
+Look at the site first, then let me know where you're at.

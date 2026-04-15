@@ -50,6 +50,9 @@ function createTeamDetailContainer(): HTMLElement {
     'bg-bg-base',
     'text-text-hi',
   ].join(' ');
+  // Survives className overwrites in renderTeamDetail; leaves 1rem of breathing
+  // room above the roster heading when scrollIntoView lands.
+  section.style.scrollMarginTop = '1rem';
 
   return section;
 }
@@ -139,6 +142,16 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
     }
 
     renderTeamDetail(detailContainer, team, data);
+
+    const reduceMotion = window.matchMedia?.(
+      '(prefers-reduced-motion: reduce)',
+    ).matches ?? false;
+    requestAnimationFrame(() => {
+      detailContainer.scrollIntoView({
+        behavior: reduceMotion ? 'auto' : 'smooth',
+        block: 'start',
+      });
+    });
   };
 
   const updateResultPanelVisibility = (state: ReturnType<typeof getState>): void => {
