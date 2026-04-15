@@ -810,11 +810,11 @@ When `state.mode === 'probability_only'`, hide EV hero / subhero / P($0) / verdi
 **Requirement:** REQ-041
 
 **Acceptance Criteria:**
-- [ ] (CODE) Result panel branches on `state.mode === 'probability_only'`
+- [x] (CODE) Result panel branches on `state.mode === 'probability_only'`
   - Verify: `grep -q "probability_only" src/ui/result-panel.ts`
-- [ ] (BROWSER:DOM) With `values_ready: false` fixture, `[data-testid="ev-hero"]` is hidden AND `[data-testid="fallback-banner"]` is visible
+- [x] (BROWSER:DOM) With `values_ready: false` fixture, `[data-testid="ev-hero"]` is hidden AND `[data-testid="fallback-banner"]` is visible
   - Verify: `npx playwright test tests/fallback.spec.ts -g "ev hidden fallback visible"`
-- [ ] (BROWSER:DOM) Probability rows still render in fallback mode
+- [x] (BROWSER:DOM) Probability rows still render in fallback mode
   - Verify: `npx playwright test tests/fallback.spec.ts -g "probability rows in fallback"`
 
 **Files to Create:**
