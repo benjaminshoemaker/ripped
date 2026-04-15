@@ -586,11 +586,11 @@ Create `src/state.ts` with the full `State` type including `pendingRequestId`. E
 **Requirement:** None (infrastructure)
 
 **Acceptance Criteria:**
-- [ ] (CODE) All four functions exported
+- [x] (CODE) All four functions exported *(satisfied by Task 1.4.B — state.ts created with full TECH_SPEC §9 shape)*
   - Verify: `grep -qE "export function (setState|subscribe|getState|nextRequestId)" src/state.ts`
-- [ ] (TEST) `setState({ selectedTeam: 'X' })` triggers all subscribers
+- [x] (TEST) `setState({ selectedTeam: 'X' })` triggers all subscribers
   - Verify: `npx vitest run src/state.test.ts -t "subscribers fire"`
-- [ ] (TEST) `nextRequestId` returns monotonically increasing integers
+- [x] (TEST) `nextRequestId` returns monotonically increasing integers
   - Verify: `npx vitest run src/state.test.ts -t "request id monotonic"`
 
 **Files to Create:**
