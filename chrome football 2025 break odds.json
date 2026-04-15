@@ -1,0 +1,350 @@
+{
+  "product": "2025 Topps Chrome Football",
+  "status": "Checklist is FINAL (2025). Odds are PLACEHOLDER from 2024 \u2014 update when 2025 odds publish Wednesday.",
+  "box_formats": {
+    "hobby": {
+      "packs_per_box": 20,
+      "cards_per_pack": 4,
+      "total_cards": 80,
+      "guaranteed": {
+        "autographs": 1,
+        "rookie_cards": 20,
+        "base_refractors": 6,
+        "numbered_parallels": 2
+      }
+    },
+    "jumbo": {
+      "packs_per_box": 12,
+      "cards_per_pack": 11,
+      "total_cards": 132,
+      "guaranteed": {
+        "autographs": 2
+      }
+    }
+  },
+  "case": {
+    "boxes_per_case": 12,
+    "presale_cost": 4200,
+    "per_box_cost": 350
+  },
+  "checklist_totals": {
+    "base_veterans": 300,
+    "rookies": 100,
+    "total_base_checklist": 400,
+    "base_auto_signers": 71,
+    "rookie_auto_signers": 94,
+    "total_auto_pool": 165
+  },
+  "key_hobby_odds_2024": {
+    "_note": "These are 2024 odds for HOBBY format. Replace with 2025 when published.",
+    "base_refractor": "1:2",
+    "chrome_rookies": "1:1",
+    "chrome_rookies_refractor": "1:3",
+    "numbered_parallels": {
+      "gold_refractor_50": "1:481",
+      "orange_refractor_25": "1:962",
+      "red_refractor_5": "1:4807",
+      "superfractor_1": "1:8444"
+    },
+    "inserts": {
+      "youthquake": "1:11",
+      "future_stars": "1:11",
+      "1974_topps": "1:11",
+      "finesse": "1:11",
+      "legends_of_gridiron": "1:11",
+      "sunday_swag": "1:11",
+      "chrome_all_etch": "1:11",
+      "all_chrome_team": "1:11"
+    },
+    "autos": {
+      "base_auto_refractor": "1:145",
+      "rookie_auto_refractor": "1:24",
+      "future_stars_auto": "1:201",
+      "chrome_legends_auto": "1:1685 (gold)",
+      "rookie_patch_auto_gold": "1:826",
+      "rookie_patch_auto_orange": "1:1653"
+    }
+  },
+  "how_it_works": {
+    "step_1": "User selects: Hobby or Jumbo",
+    "step_2": "User selects: Team",
+    "step_3": "Calculator shows expected cards for that team",
+    "formulas": {
+      "expected_base_cards": "(team.base_cards / 300) \u00d7 base_slots_per_box",
+      "expected_rookies": "(team.rookies / 100) \u00d7 rookie_slots_per_box",
+      "auto_hit_pct": "(team.total_auto_signers / 165) \u00d7 guaranteed_autos",
+      "hobby_base_slots": "~60 (80 total - 20 rookies)",
+      "hobby_rookie_slots": 20,
+      "jumbo_base_slots": "~100 (estimated)",
+      "jumbo_rookie_slots": "~32 (estimated)"
+    }
+  },
+  "teams": {
+    "Arizona Cardinals": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 3,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Atlanta Falcons": {
+      "base": 9,
+      "rookies": 4,
+      "base_autos": 2,
+      "rookie_autos": 2,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "Baltimore Ravens": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 1,
+      "rookie_autos": 3,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "Buffalo Bills": {
+      "base": 10,
+      "rookies": 4,
+      "base_autos": 3,
+      "rookie_autos": 4,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "Carolina Panthers": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 3,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Chicago Bears": {
+      "base": 10,
+      "rookies": 4,
+      "base_autos": 4,
+      "rookie_autos": 3,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "Cincinnati Bengals": {
+      "base": 9,
+      "rookies": 1,
+      "base_autos": 2,
+      "rookie_autos": 1,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    },
+    "Cleveland Browns": {
+      "base": 8,
+      "rookies": 7,
+      "base_autos": 3,
+      "rookie_autos": 7,
+      "total_autos": 10,
+      "auto_pct_hobby": 6.1
+    },
+    "Dallas Cowboys": {
+      "base": 12,
+      "rookies": 3,
+      "base_autos": 4,
+      "rookie_autos": 3,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "Denver Broncos": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 3,
+      "rookie_autos": 2,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Detroit Lions": {
+      "base": 9,
+      "rookies": 3,
+      "base_autos": 3,
+      "rookie_autos": 3,
+      "total_autos": 6,
+      "auto_pct_hobby": 3.6
+    },
+    "Green Bay Packers": {
+      "base": 10,
+      "rookies": 2,
+      "base_autos": 1,
+      "rookie_autos": 2,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    },
+    "Houston Texans": {
+      "base": 9,
+      "rookies": 3,
+      "base_autos": 3,
+      "rookie_autos": 3,
+      "total_autos": 6,
+      "auto_pct_hobby": 3.6
+    },
+    "Indianapolis Colts": {
+      "base": 11,
+      "rookies": 4,
+      "base_autos": 2,
+      "rookie_autos": 4,
+      "total_autos": 6,
+      "auto_pct_hobby": 3.6
+    },
+    "Jacksonville Jaguars": {
+      "base": 9,
+      "rookies": 4,
+      "base_autos": 2,
+      "rookie_autos": 5,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "Kansas City Chiefs": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 1,
+      "rookie_autos": 2,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    },
+    "Las Vegas Raiders": {
+      "base": 8,
+      "rookies": 4,
+      "base_autos": 3,
+      "rookie_autos": 4,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "Los Angeles Chargers": {
+      "base": 10,
+      "rookies": 2,
+      "base_autos": 1,
+      "rookie_autos": 2,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    },
+    "Los Angeles Rams": {
+      "base": 10,
+      "rookies": 1,
+      "base_autos": 3,
+      "rookie_autos": 1,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "Miami Dolphins": {
+      "base": 8,
+      "rookies": 4,
+      "base_autos": 3,
+      "rookie_autos": 2,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Minnesota Vikings": {
+      "base": 10,
+      "rookies": 1,
+      "base_autos": 3,
+      "rookie_autos": 1,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "New England Patriots": {
+      "base": 9,
+      "rookies": 2,
+      "base_autos": 1,
+      "rookie_autos": 2,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    },
+    "New Orleans Saints": {
+      "base": 8,
+      "rookies": 5,
+      "base_autos": 2,
+      "rookie_autos": 5,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "New York Giants": {
+      "base": 10,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 4,
+      "total_autos": 6,
+      "auto_pct_hobby": 3.6
+    },
+    "New York Jets": {
+      "base": 8,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 3,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Philadelphia Eagles": {
+      "base": 12,
+      "rookies": 1,
+      "base_autos": 3,
+      "rookie_autos": 1,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "Pittsburgh Steelers": {
+      "base": 10,
+      "rookies": 5,
+      "base_autos": 2,
+      "rookie_autos": 5,
+      "total_autos": 7,
+      "auto_pct_hobby": 4.2
+    },
+    "San Francisco 49ers": {
+      "base": 11,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 2,
+      "total_autos": 4,
+      "auto_pct_hobby": 2.4
+    },
+    "Seattle Seahawks": {
+      "base": 10,
+      "rookies": 2,
+      "base_autos": 3,
+      "rookie_autos": 2,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Tampa Bay Buccaneers": {
+      "base": 8,
+      "rookies": 3,
+      "base_autos": 2,
+      "rookie_autos": 3,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Tennessee Titans": {
+      "base": 4,
+      "rookies": 5,
+      "base_autos": 0,
+      "rookie_autos": 5,
+      "total_autos": 5,
+      "auto_pct_hobby": 3.0
+    },
+    "Washington Commanders": {
+      "base": 8,
+      "rookies": 2,
+      "base_autos": 1,
+      "rookie_autos": 2,
+      "total_autos": 3,
+      "auto_pct_hobby": 1.8
+    }
+  },
+  "notes_for_ben": [
+    "auto_pct_hobby = (total_autos / 165) \u00d7 100. This is the % chance the 1 guaranteed hobby auto is from that team.",
+    "For jumbo, double the auto chance (2 guaranteed autos).",
+    "Travis Hunter appears TWICE in JAX rookie autos (RA-THU and RA-TRHU) \u2014 5 slots but 4 unique players. This is correct per checklist.",
+    "Micah Parsons is listed under Green Bay Packers in the 2025 checklist (traded). Base count reflects this.",
+    "Cleveland Browns have the most auto signers (10) driven by 7 rookies (Sanders, Gabriel, Sampson, Judkins, Fannin, Bond, Graham).",
+    "Tennessee Titans have 0 base auto signers but 5 rookie autos (Cam Ward, Ayomanor, Helm, Mullings, Winston). All their auto value is rookies.",
+    "2025 odds will publish Wednesday \u2014 swap the odds section when available. Structure should be identical to 2024.",
+    "Break pricing from the X screenshot is for a FULL CASE random team break. Giants/Pats/Titans are premium because of Dart/Henderson/Ward rookie class."
+  ]
+}

@@ -1,0 +1,26 @@
+# Node / build
+node_modules/
+dist/
+.vite/
+*.log
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Test output
+coverage/
+.playwright-mcp/
+tool-results/
+
+# gstack / toolkit
+.claude/phase-state.json
+.claude/phase-prep-result.json
+.claude/deferred-reviews.json
