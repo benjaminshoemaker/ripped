@@ -24,5 +24,9 @@
   <body>
     <div id="app" data-testid="page-loaded"></div>
     <script type="module" src="/src/main.ts"></script>
+    <!-- TODO: replace beacon token with real Cloudflare Analytics token after creating the CF site -->
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_REAL_BEACON_ID"}'></script>
+    <!-- End Cloudflare Web Analytics -->
   </body>
 </html>
