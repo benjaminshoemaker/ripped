@@ -697,17 +697,17 @@ Renders the header band + product card at the top of the page. Includes: hero ta
 **Requirement:** REQ-001, REQ-002
 
 **Acceptance Criteria:**
-- [ ] (CODE) `renderProductCard(container, data)` exported from `src/ui/product-card.ts`
+- [x] (CODE) `renderProductCard(container, data)` exported from `src/ui/product-card.ts`
   - Verify: `grep -q "export function renderProductCard" src/ui/product-card.ts`
-- [ ] (BROWSER:DOM) Hero tagline contains "slot machine"
+- [x] (BROWSER:DOM) Hero tagline contains "slot machine"
   - Verify: `npx playwright test tests/product-card.spec.ts -g "hero tagline"`
-- [ ] (BROWSER:DOM) Product name label contains "2025 Topps Chrome Football" and "Pick Your Team"
+- [x] (BROWSER:DOM) Product name label contains "2025 Topps Chrome Football" and "Pick Your Team"
   - Verify: `npx playwright test tests/product-card.spec.ts -g "product name label"`
-- [ ] (BROWSER:DOM) **Benchmark case cost** label element exists and contains the word "Benchmark" (not "the" cost)
+- [x] (BROWSER:DOM) **Benchmark case cost** label element exists and contains the word "Benchmark" (not "the" cost)
   - Verify: `npx playwright test tests/product-card.spec.ts -g "benchmark label"`
-- [ ] (BROWSER:DOM) `[data-testid="ship-all-cards-note"]` is visible and contains the word "assumes"
+- [x] (BROWSER:DOM) `[data-testid="ship-all-cards-note"]` is visible and contains the word "assumes"
   - Verify: `npx playwright test tests/product-card.spec.ts -g "ship all cards note"`
-- [ ] (BROWSER:DOM) Dollar amount rendered matches `data.product.benchmark_case_cost_usd`
+- [x] (BROWSER:DOM) Dollar amount rendered matches `data.product.benchmark_case_cost_usd`
   - Verify: `npx playwright test tests/product-card.spec.ts -g "benchmark cost from data"`
 
 **Files to Create:**

@@ -2,6 +2,7 @@ import './styles.css';
 import { getState, setState, subscribe } from './state';
 import type { CoreData, FullData } from './types';
 import { renderPriceInput } from './ui/price-input';
+import { renderProductCard } from './ui/product-card';
 import { renderTeamDetail } from './ui/team-detail';
 import { renderTeamGrid } from './ui/team-grid';
 import { validate } from './validate';
@@ -48,6 +49,7 @@ function clearTeamDetail(container: HTMLElement): void {
 }
 
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
+  const productCardHost = document.createElement('div');
   const gridHost = document.createElement('div');
   const detailContainer = createTeamDetailContainer();
   const priceInputContainer = document.createElement('div');
@@ -55,9 +57,11 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   resultPanel.dataset.testid = 'result-panel';
   resultPanel.hidden = true;
 
+  renderProductCard(productCardHost, data);
   renderTeamGrid(gridHost, data);
   renderPriceInput(priceInputContainer);
   container.replaceChildren(
+    ...Array.from(productCardHost.childNodes),
     ...Array.from(gridHost.childNodes),
     detailContainer,
     priceInputContainer,
