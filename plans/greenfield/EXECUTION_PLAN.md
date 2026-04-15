@@ -255,17 +255,17 @@ Create `src/math/probability.ts` exporting `probAtLeastOne(category, team, data)
 **Requirement:** REQ-008, REQ-009
 
 **Acceptance Criteria:**
-- [ ] (CODE) `probAtLeastOne`, `probAnyNumberedParallel`, `probAnyChase` all exported
+- [x] (CODE) `probAtLeastOne`, `probAnyNumberedParallel`, `probAnyChase` all exported
   - Verify: `grep -qE "export function (probAtLeastOne|probAnyNumberedParallel|probAnyChase)" src/math/probability.ts`
-- [ ] (TEST) Binomial branch: `base` category with 10/300 players × 720 slots matches `1 - (1-10/300)^720` within 1e-9
+- [x] (TEST) Binomial branch: `base` category with 10/300 players × 720 slots matches `1 - (1-10/300)^720` within 1e-9
   - Verify: `npx vitest run src/math/probability.test.ts -t "binomial base"`
-- [ ] (TEST) Poisson branch: `superfractor_1` with 0.012 slots × 1/300 matches `1 - exp(-0.012/300)` within 1e-9
+- [x] (TEST) Poisson branch: `superfractor_1` with 0.012 slots × 1/300 matches `1 - exp(-0.012/300)` within 1e-9
   - Verify: `npx vitest run src/math/probability.test.ts -t "poisson superfractor"`
-- [ ] (TEST) `probAnyNumberedParallel` is monotonic non-decreasing in team size
+- [x] (TEST) `probAnyNumberedParallel` is monotonic non-decreasing in team size
   - Verify: `npx vitest run src/math/probability.test.ts -t "parallel monotonic"`
-- [ ] (TEST) `probAnyChase` returns 0 for a team with zero tier-1 players
+- [x] (TEST) `probAnyChase` returns 0 for a team with zero tier-1 players
   - Verify: `npx vitest run src/math/probability.test.ts -t "no chase zero prob"`
-- [ ] (TEST) All probabilities stay in [0, 1] for every category × team from fixture
+- [x] (TEST) All probabilities stay in [0, 1] for every category × team from fixture
   - Verify: `npx vitest run src/math/probability.test.ts -t "probability bounds"`
 
 **Files to Create:**
