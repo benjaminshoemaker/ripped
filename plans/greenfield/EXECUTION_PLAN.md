@@ -285,17 +285,17 @@ Create `src/math/ev.ts` exporting `computeEV(team, data)` returning `{ ev, contr
 **Requirement:** REQ-010, REQ-018, REQ-019
 
 **Acceptance Criteria:**
-- [ ] (CODE) `computeEV` exported with shape `{ ev, contributors }`
+- [x] (CODE) `computeEV` exported with shape `{ ev, contributors }`
   - Verify: `grep -q "export function computeEV" src/math/ev.ts`
-- [ ] (TEST) Giants (chase-heavy) EV > Jets (cold) EV
+- [x] (TEST) Giants (chase-heavy) EV > Jets (cold) EV
   - Verify: `npx vitest run src/math/ev.test.ts -t "giants > jets"`
-- [ ] (TEST) Titans with 0 base_auto_signers: base_auto contribution is exactly 0
+- [x] (TEST) Titans with 0 base_auto_signers: base_auto contribution is exactly 0
   - Verify: `npx vitest run src/math/ev.test.ts -t "titans zero base autos"`
-- [ ] (TEST) `contributors` array has at most 5 entries sorted descending
+- [x] (TEST) `contributors` array has at most 5 entries sorted descending
   - Verify: `npx vitest run src/math/ev.test.ts -t "top 5 sorted"`
-- [ ] (TEST) Every contributor's `category` is a category where that player is in `eligiblePlayers`
+- [x] (TEST) Every contributor's `category` is a category where that player is in `eligiblePlayers`
   - Verify: `npx vitest run src/math/ev.test.ts -t "contributor eligibility"`
-- [ ] (TEST) Contributors include an `isChase` flag for tier-1 players
+- [x] (TEST) Contributors include an `isChase` flag for tier-1 players
   - Verify: `npx vitest run src/math/ev.test.ts -t "chase flag present"`
 
 **Files to Create:**
