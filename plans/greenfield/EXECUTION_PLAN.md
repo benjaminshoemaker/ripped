@@ -157,19 +157,19 @@ Define three levels: `CoreDataSchema` (probability-fatal fields), `FullDataSchem
 **Requirement:** REQ-024, REQ-025, REQ-026, REQ-027, REQ-028, REQ-041
 
 **Acceptance Criteria:**
-- [ ] (CODE) `CoreDataSchema` and `FullDataSchema` exported from `src/schema.ts`
+- [x] (CODE) `CoreDataSchema` and `FullDataSchema` exported from `src/schema.ts`
   - Verify: `grep -q "export const CoreDataSchema" src/schema.ts && grep -q "export const FullDataSchema" src/schema.ts`
-- [ ] (CODE) `confidence_inputs` is `.optional()` in `FullDataSchema`
+- [x] (CODE) `confidence_inputs` is `.optional()` in `FullDataSchema`
   - Verify: `grep -A 3 "confidence_inputs" src/schema.ts | grep -q "optional"`
-- [ ] (CODE) Types inferred via `z.infer` (no hand-written duplicate types)
+- [x] (CODE) Types inferred via `z.infer` (no hand-written duplicate types)
   - Verify: `grep -q "z.infer" src/types.ts`
-- [ ] (TEST) Valid full fixture parses against `FullDataSchema`
+- [x] (TEST) Valid full fixture parses against `FullDataSchema`
   - Verify: `npx vitest run src/schema.test.ts -t "valid fixture"`
-- [ ] (TEST) Fixture missing `tier_values_usd` fails `FullDataSchema` but passes `CoreDataSchema`
+- [x] (TEST) Fixture missing `tier_values_usd` fails `FullDataSchema` but passes `CoreDataSchema`
   - Verify: `npx vitest run src/schema.test.ts -t "core only"`
-- [ ] (TEST) Fixture missing `confidence_inputs` entirely passes `FullDataSchema` (warning-level, not fatal)
+- [x] (TEST) Fixture missing `confidence_inputs` entirely passes `FullDataSchema` (warning-level, not fatal)
   - Verify: `npx vitest run src/schema.test.ts -t "no confidence inputs"`
-- [ ] (TEST) Fixture missing a team fails both schemas
+- [x] (TEST) Fixture missing a team fails both schemas
   - Verify: `npx vitest run src/schema.test.ts -t "missing team"`
 
 **Files to Create:**
