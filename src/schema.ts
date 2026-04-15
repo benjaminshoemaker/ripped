@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { eligiblePlayers } from './math/eligibility';
 
 // ─── Enums ──────────────────────────────────────────────────────────────────
 
@@ -13,7 +14,8 @@ const oddsSourceSchema = z.enum(['2024_placeholder', '2025_official']);
 
 const timestampSchema = z
   .string()
-  .refine((s) => !Number.isNaN(Date.parse(s)), 'must be a valid ISO 8601 timestamp');
+  .refine((s) => !Number.isNaN(Date.parse(s)), 'must be a valid ISO 8601 timestamp')
+  .refine((s) => Date.parse(s) <= Date.now() + 60_000, 'timestamp is in the future');
 
 // ─── Product + categories ──────────────────────────────────────────────────
 
@@ -24,7 +26,8 @@ const productSchema = z.object({
   boxes_per_case: z.number().int().positive(),
   packs_per_box: z.number().int().positive(),
   cards_per_pack: z.number().int().positive(),
-  ship_all_cards_assumption: z.boolean(),
+  // PYT breaks always ship every card pulled for the buyer's team.
+  ship_all_cards_assumption: z.literal(true),
   guaranteed_per_box: z.object({
     autos: z.number().int().nonnegative(),
     rookies: z.number().int().nonnegative(),
@@ -36,19 +39,41 @@ const productSchema = z.object({
 const checklistTotalsSchema = z.object({
   base_veterans: z.number().int().positive(),
   rookies: z.number().int().positive(),
+  base_plus_rookies: z.number().int().positive().optional(),
   base_auto_signers: z.number().int().positive(),
   rookie_auto_signers: z.number().int().positive(),
 });
+
+const cardCategoryKeySchema = z.enum([
+  'base',
+  'base_refractor',
+  'rookie',
+  'rookie_refractor',
+  'base_auto',
+  'rookie_auto',
+  'gold_refractor_50',
+  'orange_refractor_25',
+  'red_refractor_5',
+  'superfractor_1',
+  'rpa_gold_50',
+  'rpa_orange_25',
+]);
 
 const cardCategorySchema = z.object({
   slots_per_case: z.number().nonnegative(),
   denominator_key: z.enum([
     'base_veterans',
     'rookies',
+    'base_plus_rookies',
     'base_auto_signers',
     'rookie_auto_signers',
   ]),
 });
+
+const cardCategoriesSchema = z.record(
+  cardCategoryKeySchema,
+  cardCategorySchema,
+) as z.ZodType<Record<string, z.infer<typeof cardCategorySchema>>>;
 
 // ─── Teams ─────────────────────────────────────────────────────────────────
 
@@ -63,7 +88,7 @@ const teamSchema = z.object({
 
 // ─── Tier values ───────────────────────────────────────────────────────────
 
-const tierValueRowSchema = z.record(z.string(), z.number().nonnegative());
+const tierValueRowSchema = z.record(z.string(), z.number().finite().nonnegative());
 
 const tierValuesSchema = z.object({
   tier_1_chase: tierValueRowSchema,
@@ -86,6 +111,100 @@ const confidenceInputsSchema = z.record(
   z.record(z.string(), confidenceInputSchema), // category -> inputs
 );
 
+// ─── Full-mode invariant checks ───────────────────────────────────────────
+
+const rosterKeys = [
+  'base_veterans',
+  'rookies',
+  'base_auto_signers',
+  'rookie_auto_signers',
+  'chase_players',
+] as const;
+
+function playerRoleForCategory(category: string): string {
+  switch (category) {
+    case 'base':
+    case 'base_refractor':
+      return 'base_veteran';
+    case 'rookie':
+    case 'rookie_refractor':
+      return 'rookie';
+    case 'base_auto':
+      return 'base_auto_signer';
+    case 'rookie_auto':
+      return 'rookie_auto_signer';
+    case 'gold_refractor_50':
+    case 'orange_refractor_25':
+    case 'red_refractor_5':
+    case 'superfractor_1':
+      return 'base_or_rookie_parallel_eligible_player';
+    case 'rpa_gold_50':
+    case 'rpa_orange_25':
+      return 'rookie_auto_signer';
+    default:
+      return 'eligible_player';
+  }
+}
+
+function missingTierValueMessage(tier: string, category: string): string {
+  return `missing tier_values_usd[${tier}][${category}] — required because at least one team has a ${tier} ${playerRoleForCategory(category)}`;
+}
+
+type FullCompletenessData = {
+  card_categories: Record<string, z.infer<typeof cardCategorySchema>>;
+  teams: Record<string, z.infer<typeof teamSchema>>;
+  tier_values_usd: z.infer<typeof tierValuesSchema>;
+};
+
+function addFullDataCompletenessIssues(
+  data: FullCompletenessData,
+  ctx: z.RefinementCtx,
+): void {
+  const reportedMissingPlayers = new Set<string>();
+  const reportedMissingValues = new Set<string>();
+
+  for (const [teamName, team] of Object.entries(data.teams)) {
+    for (const rosterKey of rosterKeys) {
+      for (const player of team[rosterKey]) {
+        if (team.tiers[player] !== undefined) continue;
+
+        const key = `${teamName}\0${player}`;
+        if (reportedMissingPlayers.has(key)) continue;
+        reportedMissingPlayers.add(key);
+
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['teams', teamName, 'tiers', player],
+          message: `missing tiers[${player}] — required because ${teamName} lists the player in ${rosterKey}`,
+        });
+      }
+    }
+
+    for (const category of Object.keys(data.card_categories)) {
+      const eligible = eligiblePlayers(category, team);
+      for (const player of eligible) {
+        const tier = team.tiers[player];
+        if (!tier) continue;
+
+        const tierValue = data.tier_values_usd[tier][category];
+        if (typeof tierValue === 'number' && Number.isFinite(tierValue) && tierValue >= 0) {
+          continue;
+        }
+
+        const key = `${tier}\0${category}`;
+        if (reportedMissingValues.has(key)) continue;
+        reportedMissingValues.add(key);
+
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          path: ['tier_values_usd', tier, category],
+          message: missingTierValueMessage(tier, category),
+        });
+      }
+    }
+  }
+}
+
 // ─── CoreDataSchema ────────────────────────────────────────────────────────
 // Probability-fatal fields only. Must pass in BOTH `full` and `probability_only`
 // launch modes. When FullDataSchema fails, validate.ts falls back here so the
@@ -103,13 +222,13 @@ export const CoreDataSchema = z.object({
 
   product: productSchema,
   checklist_totals: checklistTotalsSchema,
-  card_categories: z.record(z.string(), cardCategorySchema).refine(
+  card_categories: cardCategoriesSchema.refine(
     (cats) => Object.keys(cats).length > 0,
     'at least one card category required',
   ),
   teams: z.record(z.string(), teamSchema).refine(
-    (teams) => Object.keys(teams).length > 0,
-    'at least one team required',
+    (teams) => Object.keys(teams).length === 32,
+    'RIPPED requires exactly 32 NFL team entries',
   ),
 });
 
@@ -121,7 +240,7 @@ export const CoreDataSchema = z.object({
 export const FullDataSchema = CoreDataSchema.extend({
   tier_values_usd: tierValuesSchema,
   confidence_inputs: confidenceInputsSchema.optional(),
-});
+}).superRefine(addFullDataCompletenessIssues);
 
 // ─── Internal schema re-exports (for src/types.ts to consume) ──────────────
 
@@ -131,6 +250,7 @@ export const internalSchemas = {
   timestampSchema,
   productSchema,
   checklistTotalsSchema,
+  cardCategoryKeySchema,
   cardCategorySchema,
   teamSchema,
   tierValueRowSchema,

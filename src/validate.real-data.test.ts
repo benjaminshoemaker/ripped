@@ -3,9 +3,7 @@ import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 
-import { FullDataSchema, CoreDataSchema } from './schema';
 import { validate } from './validate';
-import type { FullData } from './types';
 
 // Regression test: Phase 2's `public/data.json` (synthetic for now, real once
 // DJ delivers it) MUST parse against FullDataSchema cleanly. If this test
@@ -14,6 +12,13 @@ import type { FullData } from './types';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const dataPath = resolve(__dirname, '..', 'public', 'data.json');
 const raw = JSON.parse(readFileSync(dataPath, 'utf-8'));
+const playerListFields = [
+  'base_veterans',
+  'rookies',
+  'base_auto_signers',
+  'rookie_auto_signers',
+  'chase_players',
+] as const;
 
 describe('public/data.json (Task 2.1.A)', () => {
   it('real data parses against FullDataSchema (or CoreDataSchema if values_ready=false)', () => {
@@ -25,8 +30,18 @@ describe('public/data.json (Task 2.1.A)', () => {
     if (raw.values_ready === true) {
       expect(result.mode).toBe('full');
     } else {
-      expect(['full', 'probability_only']).toContain(result.mode);
+      expect(result.mode).toBe('probability_only');
     }
+  });
+
+  it('values_ready=false forces probability_only mode even when full fields are present', () => {
+    const data = structuredClone(raw);
+    data.values_ready = false;
+
+    const result = validate(data);
+
+    expect(result.mode).toBe('probability_only');
+    expect(result.errors.some((issue) => issue.path.join('.') === 'values_ready')).toBe(true);
   });
 
   it('all 32 NFL teams present', () => {
@@ -48,10 +63,10 @@ describe('public/data.json (Task 2.1.A)', () => {
 
   it('every player named in any category list has a tier assignment', () => {
     for (const [name, team] of Object.entries<any>(raw.teams)) {
-      const allPlayers = new Set<string>([
-        ...team.base_veterans,
-        ...team.rookies,
-      ]);
+      const allPlayers = new Set<string>();
+      for (const field of playerListFields) {
+        for (const player of team[field]) allPlayers.add(player);
+      }
       for (const player of allPlayers) {
         expect(team.tiers[player], `${name}/${player} missing tier`).toBeDefined();
       }

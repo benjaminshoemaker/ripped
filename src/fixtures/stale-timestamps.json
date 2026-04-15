@@ -4,10 +4,8 @@
   "values_as_of": "2026-04-14T00:00:00Z",
   "comps_as_of": "2026-03-30T00:00:00Z",
   "data_as_of": "2026-04-14T12:00:00Z",
-
   "odds_source": "2025_official",
   "values_ready": true,
-
   "product": {
     "name": "2025 Topps Chrome Football",
     "format": "pyt_hobby_case",
@@ -23,37 +21,97 @@
       "numbered_parallels": 2
     }
   },
-
   "checklist_totals": {
     "base_veterans": 300,
     "rookies": 100,
     "base_auto_signers": 71,
     "rookie_auto_signers": 94
   },
-
   "card_categories": {
-    "base":             { "slots_per_case": 720,   "denominator_key": "base_veterans" },
-    "rookie":           { "slots_per_case": 240,   "denominator_key": "rookies" },
-    "base_refractor":   { "slots_per_case": 72,    "denominator_key": "base_veterans" },
-    "rookie_refractor": { "slots_per_case": 80,    "denominator_key": "rookies" },
-    "base_auto":        { "slots_per_case": 0.083, "denominator_key": "base_auto_signers" },
-    "rookie_auto":      { "slots_per_case": 0.5,   "denominator_key": "rookie_auto_signers" }
+    "base": {
+      "slots_per_case": 720,
+      "denominator_key": "base_veterans"
+    },
+    "rookie": {
+      "slots_per_case": 240,
+      "denominator_key": "rookies"
+    },
+    "base_refractor": {
+      "slots_per_case": 72,
+      "denominator_key": "base_veterans"
+    },
+    "rookie_refractor": {
+      "slots_per_case": 80,
+      "denominator_key": "rookies"
+    },
+    "base_auto": {
+      "slots_per_case": 0.083,
+      "denominator_key": "base_auto_signers"
+    },
+    "rookie_auto": {
+      "slots_per_case": 0.5,
+      "denominator_key": "rookie_auto_signers"
+    }
   },
-
   "tier_values_usd": {
-    "tier_1_chase":  { "base": 8,  "base_refractor": 25, "base_auto": 250, "rookie": 35, "rookie_refractor": 80, "rookie_auto": 600 },
-    "tier_2_strong": { "base": 4,  "base_refractor": 12, "base_auto": 80,  "rookie": 12, "rookie_refractor": 28, "rookie_auto": 150 },
-    "tier_3_fair":   { "base": 2,  "base_refractor": 5,  "base_auto": 30,  "rookie": 5,  "rookie_refractor": 10, "rookie_auto": 60  },
-    "tier_4_cold":   { "base": 1,  "base_refractor": 2,  "base_auto": 12,  "rookie": 2,  "rookie_refractor": 4,  "rookie_auto": 25  }
+    "tier_1_chase": {
+      "base": 8,
+      "base_refractor": 25,
+      "base_auto": 250,
+      "rookie": 35,
+      "rookie_refractor": 80,
+      "rookie_auto": 600
+    },
+    "tier_2_strong": {
+      "base": 4,
+      "base_refractor": 12,
+      "base_auto": 80,
+      "rookie": 12,
+      "rookie_refractor": 28,
+      "rookie_auto": 150
+    },
+    "tier_3_fair": {
+      "base": 2,
+      "base_refractor": 5,
+      "base_auto": 30,
+      "rookie": 5,
+      "rookie_refractor": 10,
+      "rookie_auto": 60
+    },
+    "tier_4_cold": {
+      "base": 1,
+      "base_refractor": 2,
+      "base_auto": 12,
+      "rookie": 2,
+      "rookie_refractor": 4,
+      "rookie_auto": 25
+    }
   },
-
   "teams": {
     "New York Giants": {
-      "base_veterans": ["Malik Nabers", "Russell Wilson", "Dexter Lawrence II"],
-      "rookies": ["Jaxson Dart", "Cam Skattebo", "Abdul Carter"],
-      "base_auto_signers": ["Malik Nabers", "Russell Wilson"],
-      "rookie_auto_signers": ["Jaxson Dart", "Cam Skattebo", "Abdul Carter"],
-      "chase_players": ["Jaxson Dart", "Malik Nabers"],
+      "base_veterans": [
+        "Malik Nabers",
+        "Russell Wilson",
+        "Dexter Lawrence II"
+      ],
+      "rookies": [
+        "Jaxson Dart",
+        "Cam Skattebo",
+        "Abdul Carter"
+      ],
+      "base_auto_signers": [
+        "Malik Nabers",
+        "Russell Wilson"
+      ],
+      "rookie_auto_signers": [
+        "Jaxson Dart",
+        "Cam Skattebo",
+        "Abdul Carter"
+      ],
+      "chase_players": [
+        "Jaxson Dart",
+        "Malik Nabers"
+      ],
       "tiers": {
         "Malik Nabers": "tier_1_chase",
         "Russell Wilson": "tier_2_strong",
@@ -62,9 +120,659 @@
         "Cam Skattebo": "tier_2_strong",
         "Abdul Carter": "tier_2_strong"
       }
+    },
+    "Arizona Cardinals": {
+      "base_veterans": [
+        "AC Vet 1"
+      ],
+      "rookies": [
+        "AC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "AC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "AC Rookie 1"
+      ],
+      "chase_players": [
+        "AC Rookie 1"
+      ],
+      "tiers": {
+        "AC Vet 1": "tier_3_fair",
+        "AC Rookie 1": "tier_2_strong"
+      }
+    },
+    "Atlanta Falcons": {
+      "base_veterans": [
+        "AF Vet 1"
+      ],
+      "rookies": [
+        "AF Rookie 1"
+      ],
+      "base_auto_signers": [
+        "AF Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "AF Rookie 1"
+      ],
+      "chase_players": [
+        "AF Rookie 1"
+      ],
+      "tiers": {
+        "AF Vet 1": "tier_3_fair",
+        "AF Rookie 1": "tier_2_strong"
+      }
+    },
+    "Baltimore Ravens": {
+      "base_veterans": [
+        "BR Vet 1"
+      ],
+      "rookies": [
+        "BR Rookie 1"
+      ],
+      "base_auto_signers": [
+        "BR Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "BR Rookie 1"
+      ],
+      "chase_players": [
+        "BR Rookie 1"
+      ],
+      "tiers": {
+        "BR Vet 1": "tier_3_fair",
+        "BR Rookie 1": "tier_2_strong"
+      }
+    },
+    "Buffalo Bills": {
+      "base_veterans": [
+        "BB Vet 1"
+      ],
+      "rookies": [
+        "BB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "BB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "BB Rookie 1"
+      ],
+      "chase_players": [
+        "BB Rookie 1"
+      ],
+      "tiers": {
+        "BB Vet 1": "tier_3_fair",
+        "BB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Carolina Panthers": {
+      "base_veterans": [
+        "CP Vet 1"
+      ],
+      "rookies": [
+        "CP Rookie 1"
+      ],
+      "base_auto_signers": [
+        "CP Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "CP Rookie 1"
+      ],
+      "chase_players": [
+        "CP Rookie 1"
+      ],
+      "tiers": {
+        "CP Vet 1": "tier_3_fair",
+        "CP Rookie 1": "tier_2_strong"
+      }
+    },
+    "Chicago Bears": {
+      "base_veterans": [
+        "CB Vet 1"
+      ],
+      "rookies": [
+        "CB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "CB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "CB Rookie 1"
+      ],
+      "chase_players": [
+        "CB Rookie 1"
+      ],
+      "tiers": {
+        "CB Vet 1": "tier_3_fair",
+        "CB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Cincinnati Bengals": {
+      "base_veterans": [
+        "CB Vet 1"
+      ],
+      "rookies": [
+        "CB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "CB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "CB Rookie 1"
+      ],
+      "chase_players": [
+        "CB Rookie 1"
+      ],
+      "tiers": {
+        "CB Vet 1": "tier_3_fair",
+        "CB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Cleveland Browns": {
+      "base_veterans": [
+        "CB Vet 1"
+      ],
+      "rookies": [
+        "CB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "CB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "CB Rookie 1"
+      ],
+      "chase_players": [
+        "CB Rookie 1"
+      ],
+      "tiers": {
+        "CB Vet 1": "tier_3_fair",
+        "CB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Dallas Cowboys": {
+      "base_veterans": [
+        "DC Vet 1"
+      ],
+      "rookies": [
+        "DC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "DC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "DC Rookie 1"
+      ],
+      "chase_players": [
+        "DC Rookie 1"
+      ],
+      "tiers": {
+        "DC Vet 1": "tier_3_fair",
+        "DC Rookie 1": "tier_2_strong"
+      }
+    },
+    "Denver Broncos": {
+      "base_veterans": [
+        "DB Vet 1"
+      ],
+      "rookies": [
+        "DB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "DB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "DB Rookie 1"
+      ],
+      "chase_players": [
+        "DB Rookie 1"
+      ],
+      "tiers": {
+        "DB Vet 1": "tier_3_fair",
+        "DB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Detroit Lions": {
+      "base_veterans": [
+        "DL Vet 1"
+      ],
+      "rookies": [
+        "DL Rookie 1"
+      ],
+      "base_auto_signers": [
+        "DL Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "DL Rookie 1"
+      ],
+      "chase_players": [
+        "DL Rookie 1"
+      ],
+      "tiers": {
+        "DL Vet 1": "tier_3_fair",
+        "DL Rookie 1": "tier_2_strong"
+      }
+    },
+    "Green Bay Packers": {
+      "base_veterans": [
+        "GBP Vet 1"
+      ],
+      "rookies": [
+        "GBP Rookie 1"
+      ],
+      "base_auto_signers": [
+        "GBP Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "GBP Rookie 1"
+      ],
+      "chase_players": [
+        "GBP Rookie 1"
+      ],
+      "tiers": {
+        "GBP Vet 1": "tier_3_fair",
+        "GBP Rookie 1": "tier_2_strong"
+      }
+    },
+    "Houston Texans": {
+      "base_veterans": [
+        "HT Vet 1"
+      ],
+      "rookies": [
+        "HT Rookie 1"
+      ],
+      "base_auto_signers": [
+        "HT Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "HT Rookie 1"
+      ],
+      "chase_players": [
+        "HT Rookie 1"
+      ],
+      "tiers": {
+        "HT Vet 1": "tier_3_fair",
+        "HT Rookie 1": "tier_2_strong"
+      }
+    },
+    "Indianapolis Colts": {
+      "base_veterans": [
+        "IC Vet 1"
+      ],
+      "rookies": [
+        "IC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "IC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "IC Rookie 1"
+      ],
+      "chase_players": [
+        "IC Rookie 1"
+      ],
+      "tiers": {
+        "IC Vet 1": "tier_3_fair",
+        "IC Rookie 1": "tier_2_strong"
+      }
+    },
+    "Jacksonville Jaguars": {
+      "base_veterans": [
+        "JJ Vet 1"
+      ],
+      "rookies": [
+        "JJ Rookie 1"
+      ],
+      "base_auto_signers": [
+        "JJ Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "JJ Rookie 1"
+      ],
+      "chase_players": [
+        "JJ Rookie 1"
+      ],
+      "tiers": {
+        "JJ Vet 1": "tier_3_fair",
+        "JJ Rookie 1": "tier_2_strong"
+      }
+    },
+    "Kansas City Chiefs": {
+      "base_veterans": [
+        "KCC Vet 1"
+      ],
+      "rookies": [
+        "KCC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "KCC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "KCC Rookie 1"
+      ],
+      "chase_players": [
+        "KCC Rookie 1"
+      ],
+      "tiers": {
+        "KCC Vet 1": "tier_3_fair",
+        "KCC Rookie 1": "tier_2_strong"
+      }
+    },
+    "Las Vegas Raiders": {
+      "base_veterans": [
+        "LVR Vet 1"
+      ],
+      "rookies": [
+        "LVR Rookie 1"
+      ],
+      "base_auto_signers": [
+        "LVR Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "LVR Rookie 1"
+      ],
+      "chase_players": [
+        "LVR Rookie 1"
+      ],
+      "tiers": {
+        "LVR Vet 1": "tier_3_fair",
+        "LVR Rookie 1": "tier_2_strong"
+      }
+    },
+    "Los Angeles Chargers": {
+      "base_veterans": [
+        "LAC Vet 1"
+      ],
+      "rookies": [
+        "LAC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "LAC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "LAC Rookie 1"
+      ],
+      "chase_players": [
+        "LAC Rookie 1"
+      ],
+      "tiers": {
+        "LAC Vet 1": "tier_3_fair",
+        "LAC Rookie 1": "tier_2_strong"
+      }
+    },
+    "Los Angeles Rams": {
+      "base_veterans": [
+        "LAR Vet 1"
+      ],
+      "rookies": [
+        "LAR Rookie 1"
+      ],
+      "base_auto_signers": [
+        "LAR Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "LAR Rookie 1"
+      ],
+      "chase_players": [
+        "LAR Rookie 1"
+      ],
+      "tiers": {
+        "LAR Vet 1": "tier_3_fair",
+        "LAR Rookie 1": "tier_2_strong"
+      }
+    },
+    "Miami Dolphins": {
+      "base_veterans": [
+        "MD Vet 1"
+      ],
+      "rookies": [
+        "MD Rookie 1"
+      ],
+      "base_auto_signers": [
+        "MD Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "MD Rookie 1"
+      ],
+      "chase_players": [
+        "MD Rookie 1"
+      ],
+      "tiers": {
+        "MD Vet 1": "tier_3_fair",
+        "MD Rookie 1": "tier_2_strong"
+      }
+    },
+    "Minnesota Vikings": {
+      "base_veterans": [
+        "MV Vet 1"
+      ],
+      "rookies": [
+        "MV Rookie 1"
+      ],
+      "base_auto_signers": [
+        "MV Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "MV Rookie 1"
+      ],
+      "chase_players": [
+        "MV Rookie 1"
+      ],
+      "tiers": {
+        "MV Vet 1": "tier_3_fair",
+        "MV Rookie 1": "tier_2_strong"
+      }
+    },
+    "New England Patriots": {
+      "base_veterans": [
+        "NEP Vet 1"
+      ],
+      "rookies": [
+        "NEP Rookie 1"
+      ],
+      "base_auto_signers": [
+        "NEP Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "NEP Rookie 1"
+      ],
+      "chase_players": [
+        "NEP Rookie 1"
+      ],
+      "tiers": {
+        "NEP Vet 1": "tier_3_fair",
+        "NEP Rookie 1": "tier_2_strong"
+      }
+    },
+    "New Orleans Saints": {
+      "base_veterans": [
+        "NOS Vet 1"
+      ],
+      "rookies": [
+        "NOS Rookie 1"
+      ],
+      "base_auto_signers": [
+        "NOS Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "NOS Rookie 1"
+      ],
+      "chase_players": [
+        "NOS Rookie 1"
+      ],
+      "tiers": {
+        "NOS Vet 1": "tier_3_fair",
+        "NOS Rookie 1": "tier_2_strong"
+      }
+    },
+    "New York Jets": {
+      "base_veterans": [
+        "NYJ Vet 1"
+      ],
+      "rookies": [
+        "NYJ Rookie 1"
+      ],
+      "base_auto_signers": [
+        "NYJ Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "NYJ Rookie 1"
+      ],
+      "chase_players": [
+        "NYJ Rookie 1"
+      ],
+      "tiers": {
+        "NYJ Vet 1": "tier_3_fair",
+        "NYJ Rookie 1": "tier_2_strong"
+      }
+    },
+    "Philadelphia Eagles": {
+      "base_veterans": [
+        "PE Vet 1"
+      ],
+      "rookies": [
+        "PE Rookie 1"
+      ],
+      "base_auto_signers": [
+        "PE Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "PE Rookie 1"
+      ],
+      "chase_players": [
+        "PE Rookie 1"
+      ],
+      "tiers": {
+        "PE Vet 1": "tier_3_fair",
+        "PE Rookie 1": "tier_2_strong"
+      }
+    },
+    "Pittsburgh Steelers": {
+      "base_veterans": [
+        "PS Vet 1"
+      ],
+      "rookies": [
+        "PS Rookie 1"
+      ],
+      "base_auto_signers": [
+        "PS Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "PS Rookie 1"
+      ],
+      "chase_players": [
+        "PS Rookie 1"
+      ],
+      "tiers": {
+        "PS Vet 1": "tier_3_fair",
+        "PS Rookie 1": "tier_2_strong"
+      }
+    },
+    "San Francisco 49ers": {
+      "base_veterans": [
+        "SF4 Vet 1"
+      ],
+      "rookies": [
+        "SF4 Rookie 1"
+      ],
+      "base_auto_signers": [
+        "SF4 Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "SF4 Rookie 1"
+      ],
+      "chase_players": [
+        "SF4 Rookie 1"
+      ],
+      "tiers": {
+        "SF4 Vet 1": "tier_3_fair",
+        "SF4 Rookie 1": "tier_2_strong"
+      }
+    },
+    "Seattle Seahawks": {
+      "base_veterans": [
+        "SS Vet 1"
+      ],
+      "rookies": [
+        "SS Rookie 1"
+      ],
+      "base_auto_signers": [
+        "SS Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "SS Rookie 1"
+      ],
+      "chase_players": [
+        "SS Rookie 1"
+      ],
+      "tiers": {
+        "SS Vet 1": "tier_3_fair",
+        "SS Rookie 1": "tier_2_strong"
+      }
+    },
+    "Tampa Bay Buccaneers": {
+      "base_veterans": [
+        "TBB Vet 1"
+      ],
+      "rookies": [
+        "TBB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "TBB Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "TBB Rookie 1"
+      ],
+      "chase_players": [
+        "TBB Rookie 1"
+      ],
+      "tiers": {
+        "TBB Vet 1": "tier_3_fair",
+        "TBB Rookie 1": "tier_2_strong"
+      }
+    },
+    "Tennessee Titans": {
+      "base_veterans": [
+        "TT Vet 1"
+      ],
+      "rookies": [
+        "TT Rookie 1"
+      ],
+      "base_auto_signers": [
+        "TT Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "TT Rookie 1"
+      ],
+      "chase_players": [
+        "TT Rookie 1"
+      ],
+      "tiers": {
+        "TT Vet 1": "tier_3_fair",
+        "TT Rookie 1": "tier_2_strong"
+      }
+    },
+    "Washington Commanders": {
+      "base_veterans": [
+        "WC Vet 1"
+      ],
+      "rookies": [
+        "WC Rookie 1"
+      ],
+      "base_auto_signers": [
+        "WC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "WC Rookie 1"
+      ],
+      "chase_players": [
+        "WC Rookie 1"
+      ],
+      "tiers": {
+        "WC Vet 1": "tier_3_fair",
+        "WC Rookie 1": "tier_2_strong"
+      }
     }
   },
-
   "confidence_inputs": {
     "Jaxson Dart": {
       "rookie_auto": {

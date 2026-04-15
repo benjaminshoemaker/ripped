@@ -234,10 +234,10 @@ const card_categories = {
   rookie_refractor: { slots_per_case: 80, denominator_key: 'rookies' },
   base_auto: { slots_per_case: 0.083, denominator_key: 'base_auto_signers' },
   rookie_auto: { slots_per_case: 0.5, denominator_key: 'rookie_auto_signers' },
-  gold_refractor_50: { slots_per_case: 0.2, denominator_key: 'base_veterans' },
-  orange_refractor_25: { slots_per_case: 0.1, denominator_key: 'base_veterans' },
-  red_refractor_5: { slots_per_case: 0.02, denominator_key: 'base_veterans' },
-  superfractor_1: { slots_per_case: 0.012, denominator_key: 'base_veterans' },
+  gold_refractor_50: { slots_per_case: 0.2, denominator_key: 'base_plus_rookies' },
+  orange_refractor_25: { slots_per_case: 0.1, denominator_key: 'base_plus_rookies' },
+  red_refractor_5: { slots_per_case: 0.02, denominator_key: 'base_plus_rookies' },
+  superfractor_1: { slots_per_case: 0.012, denominator_key: 'base_plus_rookies' },
   rpa_gold_50: { slots_per_case: 0.145, denominator_key: 'rookie_auto_signers' },
   rpa_orange_25: { slots_per_case: 0.072, denominator_key: 'rookie_auto_signers' },
 };
@@ -292,6 +292,8 @@ const data = {
   checklist_totals: {
     base_veterans: djSource.checklist_totals.base_veterans,
     rookies: djSource.checklist_totals.rookies,
+    base_plus_rookies:
+      djSource.checklist_totals.base_veterans + djSource.checklist_totals.rookies,
     base_auto_signers: djSource.checklist_totals.base_auto_signers,
     rookie_auto_signers: djSource.checklist_totals.rookie_auto_signers,
   },

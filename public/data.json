@@ -24,6 +24,7 @@
   "checklist_totals": {
     "base_veterans": 300,
     "rookies": 100,
+    "base_plus_rookies": 400,
     "base_auto_signers": 71,
     "rookie_auto_signers": 94
   },
@@ -54,19 +55,19 @@
     },
     "gold_refractor_50": {
       "slots_per_case": 0.2,
-      "denominator_key": "base_veterans"
+      "denominator_key": "base_plus_rookies"
     },
     "orange_refractor_25": {
       "slots_per_case": 0.1,
-      "denominator_key": "base_veterans"
+      "denominator_key": "base_plus_rookies"
     },
     "red_refractor_5": {
       "slots_per_case": 0.02,
-      "denominator_key": "base_veterans"
+      "denominator_key": "base_plus_rookies"
     },
     "superfractor_1": {
       "slots_per_case": 0.012,
-      "denominator_key": "base_veterans"
+      "denominator_key": "base_plus_rookies"
     },
     "rpa_gold_50": {
       "slots_per_case": 0.145,

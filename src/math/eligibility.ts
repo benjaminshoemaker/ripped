@@ -28,6 +28,6 @@ export function eligiblePlayers(category: string, team: Team): string[] {
     case 'rpa_orange_25':
       return team.rookie_auto_signers;
     default:
-      return [];
+      throw new Error(`Unknown category for eligibility: ${category}`);
   }
 }

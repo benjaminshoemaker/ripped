@@ -51,10 +51,7 @@ function findTeamName(team: Team, data: FullData | CoreData): string | null {
 }
 
 function renderPlayerRow(player: string, team: Team): HTMLLIElement {
-  const tier = team.tiers[player];
-  if (!tier) {
-    throw new Error(`Missing tier assignment for ${player}`);
-  }
+  const tier = team.tiers[player]!;
 
   const isChase = tier === 'tier_1_chase' || team.chase_players.includes(player);
 

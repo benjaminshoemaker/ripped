@@ -22,6 +22,23 @@ export interface SimulateResponse {
   mcMean: number;
 }
 
+function tierValueFor(req: SimulateRequest, player: string, category: string): number {
+  const tier = req.team.tiers[player];
+  if (!tier) {
+    throw new Error(`missing tiers[${player}]`);
+  }
+
+  const value = req.data.tier_values_usd[tier]?.[category];
+  if (value === undefined) {
+    throw new Error(`missing tier_values_usd[${tier}][${category}]`);
+  }
+  if (!Number.isFinite(value) || value < 0) {
+    throw new Error(`invalid tier_values_usd[${tier}][${category}]`);
+  }
+
+  return value;
+}
+
 // ─── Pure simulation function (exported for tests + reused in worker handler) ─
 
 export function simulateBreak(req: SimulateRequest): SimulateResponse {
@@ -37,7 +54,9 @@ export function simulateBreak(req: SimulateRequest): SimulateResponse {
       if (eligible.length === 0) continue;
 
       const denom = req.data.checklist_totals[cat.denominator_key];
-      if (!denom || denom <= 0) continue;
+      if (!denom || denom <= 0) {
+        throw new Error(`missing checklist_totals[${cat.denominator_key}] for ${category}`);
+      }
 
       const pSlot = eligible.length / denom;
       const slots = cat.slots_per_case;
@@ -49,11 +68,7 @@ export function simulateBreak(req: SimulateRequest): SimulateResponse {
         if (rng() < pSlot) {
           const playerIdx = Math.floor(rng() * eligible.length);
           const player = eligible[playerIdx]!;
-          const tier = req.team.tiers[player];
-          if (tier) {
-            const v = req.data.tier_values_usd[tier]?.[category] ?? 0;
-            teamValue += v;
-          }
+          teamValue += tierValueFor(req, player, category);
         }
       }
 
@@ -62,11 +77,7 @@ export function simulateBreak(req: SimulateRequest): SimulateResponse {
       if (remainder > 0 && rng() < remainder * pSlot) {
         const playerIdx = Math.floor(rng() * eligible.length);
         const player = eligible[playerIdx]!;
-        const tier = req.team.tiers[player];
-        if (tier) {
-          const v = req.data.tier_values_usd[tier]?.[category] ?? 0;
-          teamValue += v;
-        }
+        teamValue += tierValueFor(req, player, category);
       }
     }
 

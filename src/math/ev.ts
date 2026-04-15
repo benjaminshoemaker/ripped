@@ -1,6 +1,15 @@
 import { eligiblePlayers } from './eligibility';
 import type { Contributor, FullData, Team } from '../types';
 
+interface PlayerContributionAggregate {
+  total: number;
+  representative: Contributor;
+}
+
+function missingTierValueMessage(tier: string, category: string): string {
+  return `missing tier_values_usd[${tier}][${category}]`;
+}
+
 // Closed-form expected value for a single team spot in a PYT hobby case break.
 // Iterates card categories × eligible players and sums expected_count × tier_value.
 // The Monte Carlo simulation draws from the SAME eligibility function, so the
@@ -22,16 +31,26 @@ export function computeEV(team: Team, data: FullData): {
     if (eligible.length === 0) continue;
 
     const denom = data.checklist_totals[cat.denominator_key];
-    if (!denom || denom <= 0) continue;
+    if (!denom || denom <= 0) {
+      throw new Error(`missing checklist_totals[${cat.denominator_key}] for ${category}`);
+    }
 
     // Expected count per player per category = slots_per_case / total_eligible_population
     const expectedCountPerPlayer = cat.slots_per_case / denom;
 
     for (const playerName of eligible) {
       const tier = team.tiers[playerName];
-      if (!tier) continue;
+      if (!tier) {
+        throw new Error(`missing tiers[${playerName}]`);
+      }
+
       const tierValue = data.tier_values_usd[tier]?.[category];
-      if (tierValue === undefined) continue;
+      if (tierValue === undefined) {
+        throw new Error(missingTierValueMessage(tier, category));
+      }
+      if (!Number.isFinite(tierValue) || tierValue < 0) {
+        throw new Error(`invalid tier_values_usd[${tier}][${category}]`);
+      }
 
       const contribution = expectedCountPerPlayer * tierValue;
       totalEV += contribution;
@@ -46,9 +65,33 @@ export function computeEV(team: Team, data: FullData): {
     }
   }
 
-  // Top-5 contributors for the UI panel (REQ-018).
+  // Top-5 contributing players for the UI panel (REQ-018).
+  const playerTotals = new Map<string, PlayerContributionAggregate>();
+  for (const contributor of allContributors) {
+    const existing = playerTotals.get(contributor.player);
+    if (!existing) {
+      playerTotals.set(contributor.player, {
+        total: contributor.expectedValue,
+        representative: contributor,
+      });
+      continue;
+    }
+
+    existing.total += contributor.expectedValue;
+    if (contributor.expectedValue > existing.representative.expectedValue) {
+      existing.representative = contributor;
+    }
+  }
+
+  const contributors = [...playerTotals.values()]
+    .map(({ total, representative }) => ({
+      ...representative,
+      expectedValue: total,
+    }))
+    .sort((a, b) => b.expectedValue - a.expectedValue)
+    .slice(0, 5);
+
   const sorted = [...allContributors].sort((a, b) => b.expectedValue - a.expectedValue);
-  const contributors = sorted.slice(0, 5);
 
   return { ev: totalEV, contributors, allContributors: sorted };
 }

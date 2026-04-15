@@ -84,7 +84,9 @@ describe('eligiblePlayers', () => {
     expect(eligiblePlayers('base_auto', tennesseeLike)).toEqual([]);
   });
 
-  it('zero eligible: unknown category returns empty', () => {
-    expect(eligiblePlayers('unknown_category_123', testTeam)).toEqual([]);
+  it('unknown category throws fail-loud error', () => {
+    expect(() => eligiblePlayers('unknown_category_123', testTeam)).toThrow(
+      /Unknown category/,
+    );
   });
 });
