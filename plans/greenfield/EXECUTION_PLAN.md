@@ -345,17 +345,17 @@ Create `src/math/verdict.ts` exporting `computeVerdict(ev, spotPrice, confidence
 **Requirement:** REQ-015, REQ-017
 
 **Acceptance Criteria:**
-- [ ] (CODE) `computeVerdict` exported
+- [x] (CODE) `computeVerdict` exported
   - Verify: `grep -q "export function computeVerdict" src/math/verdict.ts`
-- [ ] (TEST) Exactly -25% gap + high confidence → `RIPPED` with `isHard = true` (inclusive)
+- [x] (TEST) Exactly -25% gap + high confidence → `RIPPED` with `isHard = true` (inclusive)
   - Verify: `npx vitest run src/math/verdict.test.ts -t "ripped at exactly -25"`
-- [ ] (TEST) Exactly +25% gap + high confidence → `STEAL` with `isHard = true` (inclusive)
+- [x] (TEST) Exactly +25% gap + high confidence → `STEAL` with `isHard = true` (inclusive)
   - Verify: `npx vitest run src/math/verdict.test.ts -t "steal at exactly 25"`
-- [ ] (TEST) -25% gap + medium confidence → `ABOVE_MARKET`, `isHard = false`
+- [x] (TEST) -25% gap + medium confidence → `ABOVE_MARKET`, `isHard = false`
   - Verify: `npx vitest run src/math/verdict.test.ts -t "above market medium"`
-- [ ] (TEST) 0% gap → `NEAR_MARKET`
+- [x] (TEST) 0% gap → `NEAR_MARKET`
   - Verify: `npx vitest run src/math/verdict.test.ts -t "near market zero"`
-- [ ] (TEST) ±10% boundary inclusive
+- [x] (TEST) ±10% boundary inclusive
   - Verify: `npx vitest run src/math/verdict.test.ts -t "soft boundaries inclusive"`
 
 **Files to Create:**
