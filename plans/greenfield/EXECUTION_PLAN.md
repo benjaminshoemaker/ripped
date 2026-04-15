@@ -93,15 +93,15 @@ Bootstrap a Vite + vanilla TypeScript project. Add Tailwind CSS v4 via the offic
 **Requirement:** REQ-037, REQ-038
 
 **Acceptance Criteria:**
-- [ ] (BUILD) Project builds cleanly
+- [x] (BUILD) Project builds cleanly
   - Verify: `npm run build && test -f dist/index.html`
-- [ ] (CODE) `@tailwindcss/vite` plugin configured
+- [x] (CODE) `@tailwindcss/vite` plugin configured
   - Verify: `grep -q "@tailwindcss/vite" vite.config.ts`
-- [ ] (CODE) `src/styles.css` uses v4 syntax (`@import "tailwindcss"`) and not v3 directives
+- [x] (CODE) `src/styles.css` uses v4 syntax (`@import "tailwindcss"`) and not v3 directives
   - Verify: `grep -q '@import "tailwindcss"' src/styles.css && ! grep -q '@tailwind base' src/styles.css`
-- [ ] (CODE) Zod + Vitest installed
+- [x] (CODE) Zod + Vitest installed
   - Verify: `node -e "const p=require('./package.json'); process.exit((p.dependencies.zod && p.devDependencies.vitest) ? 0 : 1)"`
-- [ ] (CODE) Host webhook configured — `main` push triggers a deploy
+- [ ] (CODE) Host webhook configured — `main` push triggers a deploy *(DEFERRED to manual Vercel connect — tracked in TODOs.md)*
   - Verify: Manual check of first push produces a live URL; capture in `README.md`
 
 **Files to Create:**
