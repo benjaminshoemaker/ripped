@@ -101,6 +101,32 @@ function buildProbabilityTable(team: Team, data: FullData | CoreData): Record<st
   return probabilityTable;
 }
 
+function createProbabilityOnlyResult(
+  teamName: string,
+  spotPrice: number,
+  team: Team,
+  data: CoreData | FullData,
+): ComputedResult {
+  return {
+    team: teamName,
+    spotPrice,
+    mode: 'probability_only',
+    ev: null,
+    median: null,
+    p10: null,
+    p90: null,
+    pZero: null,
+    gap: null,
+    gapPct: null,
+    verdict: null,
+    verdictIsHard: false,
+    confidence: 'low',
+    contributors: [],
+    probabilityTable: buildProbabilityTable(team, data),
+    staleSignals: computeStaleSignals(data),
+  };
+}
+
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   const layout = document.createElement('div');
   layout.className = [
@@ -184,6 +210,8 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
 
   let lastSimulationKey: string | null = null;
   let queuedSimulationKey: string | null = null;
+  let lastRenderedResult: ComputedResult | null = null;
+  let lastScrolledResult: ComputedResult | null = null;
 
   const clearResults = (state: ReturnType<typeof getState>): void => {
     lastSimulationKey = null;
@@ -238,12 +266,33 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
       staleSignals: computeStaleSignals(fullData),
     };
 
-    renderResultPanel(resultPanel, computedResult);
-    resultPanel.hidden = false;
-    if (window.innerWidth < 1024) {
+    setState({ result: computedResult });
+  };
+
+  const renderResultState = (state: ReturnType<typeof getState>): void => {
+    if (state.result === lastRenderedResult) return;
+    lastRenderedResult = state.result;
+
+    if (state.result === null) {
+      clearResultPanel(resultPanel);
+      return;
+    }
+
+    renderResultPanel(resultPanel, state.result);
+  };
+
+  const scrollResultIntoView = (state: ReturnType<typeof getState>): void => {
+    if (state.result === null) {
+      lastScrolledResult = null;
+      return;
+    }
+
+    if (state.result === lastScrolledResult) return;
+    lastScrolledResult = state.result;
+
+    if (!resultPanel.hidden && window.innerWidth < 1024) {
       resultPanel.scrollIntoView({ block: 'start' });
     }
-    setState({ result: computedResult });
   };
 
   const requestResultComputation = (state: ReturnType<typeof getState>): void => {
@@ -253,19 +302,41 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
       return;
     }
 
-    if (!isFullData(state.data)) {
+    const appData = state.data;
+    if (appData === null) {
       clearResults(state);
       return;
     }
 
-    const fullData = state.data;
-    const team = fullData.teams[selectedTeam];
+    const simulationKey = `${state.mode}:${selectedTeam}:${spotPrice}`;
+    const team = appData.teams[selectedTeam];
     if (!team) {
       clearResults(state);
       return;
     }
 
-    const simulationKey = `${selectedTeam}:${spotPrice}`;
+    if (state.mode === 'probability_only') {
+      if (simulationKey === lastSimulationKey) return;
+
+      queuedSimulationKey = null;
+      lastSimulationKey = simulationKey;
+      setState({
+        result: createProbabilityOnlyResult(
+          selectedTeam,
+          spotPrice,
+          team,
+          appData,
+        ),
+      });
+      return;
+    }
+
+    if (state.mode !== 'full' || !isFullData(appData)) {
+      clearResults(state);
+      return;
+    }
+
+    const fullData = appData;
     if (
       simulationKey === lastSimulationKey ||
       simulationKey === queuedSimulationKey
@@ -282,6 +353,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
         latest.selectedTeam !== selectedTeam ||
         latest.spotPrice !== spotPrice ||
         latest.data !== fullData ||
+        latest.mode !== 'full' ||
         !isFullData(latest.data)
       ) {
         return;
@@ -296,6 +368,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   };
 
   renderSelectedTeam(getState().selectedTeam);
+  renderResultState(getState());
   updateResultPanelVisibility(getState());
 
   subscribe((state) => {
@@ -304,7 +377,9 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   });
 
   subscribe(requestResultComputation);
+  subscribe(renderResultState);
   subscribe(updateResultPanelVisibility);
+  subscribe(scrollResultIntoView);
 }
 
 async function bootstrap(): Promise<void> {

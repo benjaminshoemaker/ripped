@@ -1,21 +1,10 @@
-import {
-  probAnyChase,
-  probAnyNumberedParallel,
-  probAtLeastOne,
-} from '../math/probability';
-import { getState } from '../state';
 import type {
   ComputedResult,
   Contributor,
-  CoreData,
-  FullData,
-  Team,
   TierLabel,
   Verdict,
 } from '../types';
 import { renderMethodology } from './methodology';
-
-type AppData = CoreData | FullData;
 
 const VERDICT_LABELS: Record<Verdict, string> = {
   STEAL: 'Steal',
@@ -103,45 +92,6 @@ function formatSignedPercent(value: number | null): string {
 function formatCategoryLabel(category: string): string {
   if (CATEGORY_LABELS[category]) return CATEGORY_LABELS[category];
   return `Any ${category.split('_').join(' ')}`;
-}
-
-function buildProbabilityTable(team: Team, data: AppData): Record<string, number> {
-  const probabilityTable: Record<string, number> = {};
-
-  for (const category of Object.keys(data.card_categories)) {
-    probabilityTable[category] = probAtLeastOne(category, team, data);
-  }
-
-  probabilityTable.any_numbered_parallel = probAnyNumberedParallel(team, data);
-  probabilityTable.any_chase_card = probAnyChase(team, data);
-
-  return probabilityTable;
-}
-
-function createProbabilityOnlyResult(
-  teamName: string,
-  spotPrice: number,
-  team: Team,
-  data: AppData,
-): ComputedResult {
-  return {
-    team: teamName,
-    spotPrice,
-    mode: 'probability_only',
-    ev: null,
-    median: null,
-    p10: null,
-    p90: null,
-    pZero: null,
-    gap: null,
-    gapPct: null,
-    verdict: null,
-    verdictIsHard: false,
-    confidence: 'low',
-    contributors: [],
-    probabilityTable: buildProbabilityTable(team, data),
-    staleSignals: [],
-  };
 }
 
 function createTextElement<K extends keyof HTMLElementTagNameMap>(
@@ -506,43 +456,6 @@ export function clearResultPanel(container: HTMLElement): void {
   container.hidden = true;
   delete container.dataset.confidence;
   container.className = '';
-
-  // Core-only data cannot run the dollar simulation, so the app reaches this
-  // clear path. The degraded result still belongs to the result panel.
-  const { data, mode, selectedTeam, spotPrice } = getState();
-  if (
-    mode !== 'probability_only' ||
-    data === null ||
-    selectedTeam === null ||
-    spotPrice === null ||
-    spotPrice <= 0
-  ) {
-    return;
-  }
-
-  const teamName = selectedTeam;
-  const paidPrice = spotPrice;
-
-  queueMicrotask(() => {
-    const latest = getState();
-    if (
-      latest.mode !== 'probability_only' ||
-      latest.data === null ||
-      latest.selectedTeam !== teamName ||
-      latest.spotPrice !== paidPrice
-    ) {
-      return;
-    }
-
-    const team = latest.data.teams[teamName];
-    if (!team) return;
-
-    renderResultPanel(
-      container,
-      createProbabilityOnlyResult(teamName, paidPrice, team, latest.data),
-    );
-    container.hidden = false;
-  });
 }
 
 export function renderResultPanel(

@@ -1,6 +1,4 @@
-import { getState, setState } from '../state';
-import type { CoreData, FullData } from '../types';
-import { simulate } from '../worker-client';
+import { setState } from '../state';
 
 const DEBOUNCE_MS = 200;
 
@@ -8,22 +6,6 @@ function parseSpotPrice(value: string): number | null {
   const parsed = Number(value.trim());
   if (!Number.isFinite(parsed) || parsed <= 0) return null;
   return parsed;
-}
-
-function isFullData(data: CoreData | FullData | null): data is FullData {
-  return data !== null && 'tier_values_usd' in data;
-}
-
-function requestSimulation(spotPrice: number): void {
-  const state = getState();
-  const { data, selectedTeam } = state;
-
-  if (!selectedTeam || !isFullData(data)) return;
-
-  const team = data.teams[selectedTeam];
-  if (!team) return;
-
-  simulate(team, spotPrice, data, () => {});
 }
 
 export function renderPriceInput(container: HTMLElement): void {
@@ -98,10 +80,6 @@ export function renderPriceInput(container: HTMLElement): void {
 
       const spotPrice = parseSpotPrice(input.value);
       setState({ spotPrice });
-
-      if (spotPrice !== null) {
-        requestSimulation(spotPrice);
-      }
     }, DEBOUNCE_MS);
   });
 

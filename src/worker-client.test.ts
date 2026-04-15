@@ -42,6 +42,10 @@ class MockWorker {
     }
   }
 
+  listenerCount(): number {
+    return this.handlers.length;
+  }
+
   postMessage(data: { requestId: number }): void {
     this.postedRequests.push(data);
   }
@@ -124,6 +128,36 @@ describe('worker-client.simulate()', () => {
     mock.dispatch({ requestId: 1, median: 0, p10: 0, p90: 0, pZero: 0, mcMean: 0 });
 
     expect(received).toEqual([]);
+  });
+
+  it('removes listeners for superseded requests after their worker replies', () => {
+    const received: number[] = [];
+    const requestIds: number[] = [];
+
+    for (let i = 0; i < 10; i++) {
+      requestIds.push(
+        simulate(giants, 100 + i, validFull, (res) => {
+          received.push(res.requestId);
+        }),
+      );
+    }
+
+    const mock = MockWorker.lastInstance!;
+    expect(mock.listenerCount()).toBe(10);
+
+    for (const requestId of requestIds) {
+      mock.dispatch({
+        requestId,
+        median: 0,
+        p10: 0,
+        p90: 0,
+        pZero: 0,
+        mcMean: 0,
+      });
+    }
+
+    expect(received).toEqual([requestIds[requestIds.length - 1]]);
+    expect(mock.listenerCount()).toBe(0);
   });
 });
 

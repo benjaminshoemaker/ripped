@@ -4,10 +4,9 @@ import type {
   FullData,
   LaunchMode,
 } from './types';
-import type { SimulateResponse } from './worker/simulate.worker';
 
 // Module-level state. Built in Task 1.4.B with just the pieces worker-client
-// needs; Task 2.2.A extends with selectedTeam, spotPrice, result, cache, etc.
+// needs; Task 2.2.A extends with selectedTeam, spotPrice, result, etc.
 
 export interface State {
   data: FullData | CoreData | null;
@@ -15,7 +14,6 @@ export interface State {
   selectedTeam: string | null;
   spotPrice: number | null;
   result: ComputedResult | null;
-  cache: Map<string, SimulateResponse>;
   pendingRequestId: number;
 }
 
@@ -25,7 +23,6 @@ const state: State = {
   selectedTeam: null,
   spotPrice: null,
   result: null,
-  cache: new Map(),
   pendingRequestId: 0,
 };
 
@@ -64,7 +61,6 @@ export function __resetStateForTests(): void {
   state.selectedTeam = null;
   state.spotPrice = null;
   state.result = null;
-  state.cache.clear();
   state.pendingRequestId = 0;
   subscribers.length = 0;
 }

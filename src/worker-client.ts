@@ -45,8 +45,8 @@ export function simulate(
 
   const handler = (e: MessageEvent<SimulateResponse>): void => {
     if (e.data.requestId !== requestId) return; // different request's echo
-    if (getState().pendingRequestId !== requestId) return; // superseded
     worker.removeEventListener('message', handler);
+    if (getState().pendingRequestId !== requestId) return; // superseded
     onResult(e.data);
   };
   worker.addEventListener('message', handler);

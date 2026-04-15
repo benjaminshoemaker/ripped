@@ -1,12 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { renderPriceInput } from './price-input';
-import { getState, setState, __resetStateForTests } from '../state';
-import type { FullData, Team } from '../types';
-import * as workerClient from '../worker-client';
-
-vi.mock('../worker-client', () => ({
-  simulate: vi.fn(() => 1),
-}));
+import { getState, subscribe, __resetStateForTests } from '../state';
 
 type Listener = (event: Event) => void;
 
@@ -71,62 +65,6 @@ class FakeDocument {
 const originalDocument = globalThis.document;
 const originalWindow = globalThis.window;
 
-const testTeam: Team = {
-  base_veterans: ['Test Veteran'],
-  rookies: [],
-  base_auto_signers: [],
-  rookie_auto_signers: [],
-  chase_players: [],
-  tiers: {
-    'Test Veteran': 'tier_3_fair',
-  },
-};
-
-const testData: FullData = {
-  checklist_as_of: '2026-04-08T00:00:00Z',
-  odds_as_of: '2026-04-15T09:00:00Z',
-  values_as_of: '2026-04-14T00:00:00Z',
-  comps_as_of: '2026-04-14T00:00:00Z',
-  odds_source: '2025_official',
-  values_ready: true,
-  product: {
-    name: 'Test Product',
-    format: 'pyt_hobby_case',
-    benchmark_case_cost_usd: 4200,
-    boxes_per_case: 12,
-    packs_per_box: 20,
-    cards_per_pack: 4,
-    ship_all_cards_assumption: true,
-    guaranteed_per_box: {
-      autos: 1,
-      rookies: 20,
-      base_refractors: 6,
-      numbered_parallels: 2,
-    },
-  },
-  checklist_totals: {
-    base_veterans: 1,
-    rookies: 1,
-    base_auto_signers: 1,
-    rookie_auto_signers: 1,
-  },
-  card_categories: {
-    base: {
-      slots_per_case: 1,
-      denominator_key: 'base_veterans',
-    },
-  },
-  teams: {
-    Test: testTeam,
-  },
-  tier_values_usd: {
-    tier_1_chase: { base: 10 },
-    tier_2_strong: { base: 5 },
-    tier_3_fair: { base: 1 },
-    tier_4_cold: { base: 0 },
-  },
-};
-
 function installFakeDom(): void {
   const fakeWindow = {
     setTimeout(handler: () => void, timeout: number): number {
@@ -189,7 +127,6 @@ beforeEach(() => {
   __resetStateForTests();
   vi.useFakeTimers();
   installFakeDom();
-  vi.mocked(workerClient.simulate).mockClear();
 });
 
 afterEach(() => {
@@ -200,9 +137,11 @@ afterEach(() => {
 });
 
 describe('price input', () => {
-  it('debounces rapid input changes into a single simulate call', () => {
-    setState({ selectedTeam: 'Test', data: testData });
-
+  it('debounces rapid input changes into a single spotPrice state update', () => {
+    const observed: Array<number | null> = [];
+    const unsubscribe = subscribe((state) => {
+      observed.push(state.spotPrice);
+    });
     const container = new FakeElement('div');
     renderPriceInput(container as unknown as HTMLElement);
     const input = findByTestId(container, 'spot-price');
@@ -213,16 +152,13 @@ describe('price input', () => {
     }
 
     vi.advanceTimersByTime(199);
-    expect(workerClient.simulate).not.toHaveBeenCalled();
+    expect(getState().spotPrice).toBeNull();
+    expect(observed).toEqual([]);
 
     vi.advanceTimersByTime(1);
-    expect(workerClient.simulate).toHaveBeenCalledTimes(1);
-    expect(workerClient.simulate).toHaveBeenCalledWith(
-      testTeam,
-      50,
-      testData,
-      expect.any(Function),
-    );
+    unsubscribe();
+
     expect(getState().spotPrice).toBe(50);
+    expect(observed).toEqual([50]);
   });
 });
