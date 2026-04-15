@@ -1,5 +1,7 @@
 import './styles.css';
-import { setState } from './state';
+import { getState, setState, subscribe } from './state';
+import type { CoreData, FullData } from './types';
+import { renderTeamDetail } from './ui/team-detail';
 import { renderTeamGrid } from './ui/team-grid';
 import { validate } from './validate';
 
@@ -19,6 +21,63 @@ function renderFullPageError(container: HTMLElement): void {
   ].join(' ');
 
   container.replaceChildren(error);
+}
+
+function createTeamDetailContainer(): HTMLElement {
+  const section = document.createElement('section');
+  section.dataset.testid = 'team-detail';
+  section.hidden = true;
+  section.className = [
+    'w-full',
+    'max-w-3xl',
+    'mx-auto',
+    'px-4',
+    'pb-8',
+    'bg-bg-base',
+    'text-text-hi',
+  ].join(' ');
+
+  return section;
+}
+
+function clearTeamDetail(container: HTMLElement): void {
+  container.hidden = true;
+  delete container.dataset.team;
+  container.replaceChildren();
+}
+
+function mountApp(container: HTMLElement, data: FullData | CoreData): void {
+  const gridHost = document.createElement('div');
+  const detailContainer = createTeamDetailContainer();
+
+  renderTeamGrid(gridHost, data);
+  container.replaceChildren(...Array.from(gridHost.childNodes), detailContainer);
+
+  let lastSelectedTeam: string | null = null;
+
+  const renderSelectedTeam = (selectedTeam: string | null): void => {
+    lastSelectedTeam = selectedTeam;
+
+    if (selectedTeam === null) {
+      clearTeamDetail(detailContainer);
+      return;
+    }
+
+    const team = data.teams[selectedTeam];
+    if (!team) {
+      clearTeamDetail(detailContainer);
+      return;
+    }
+
+    renderTeamDetail(detailContainer, team, data);
+  };
+
+  renderSelectedTeam(getState().selectedTeam);
+
+  subscribe((state) => {
+    if (state.selectedTeam === lastSelectedTeam) return;
+    renderSelectedTeam(state.selectedTeam);
+  });
 }
 
 async function bootstrap(): Promise<void> {
@@ -43,7 +102,7 @@ async function bootstrap(): Promise<void> {
     }
 
     setState({ data: result.data, mode: result.mode });
-    renderTeamGrid(app, result.data);
+    mountApp(app, result.data);
   } catch {
     renderFullPageError(app);
   }

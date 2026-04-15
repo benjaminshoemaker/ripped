@@ -641,15 +641,15 @@ When a team is selected, render a detail panel showing the roster broken into Ba
 **Requirement:** REQ-004, REQ-005
 
 **Acceptance Criteria:**
-- [ ] (CODE) `renderTeamDetail(container, team, data)` exported
+- [x] (CODE) `renderTeamDetail(container, team, data)` exported
   - Verify: `grep -q "export function renderTeamDetail" src/ui/team-detail.ts`
-- [ ] (BROWSER:DOM) Panel has 4 labeled sections with `data-testid` starting with `roster-`
+- [x] (BROWSER:DOM) Panel has 4 labeled sections with `data-testid` starting with `roster-`
   - Verify: `npx playwright test tests/team-detail.spec.ts -g "four roster sections"`
-- [ ] (BROWSER:DOM) Chase players have `data-chase="true"` marker
+- [x] (BROWSER:DOM) Chase players have `data-chase="true"` marker
   - Verify: `npx playwright test tests/team-detail.spec.ts -g "chase marker"`
-- [ ] (BROWSER:DOM) **Every rendered player row has a `data-tier` attribute matching `data.teams[team].tiers[player]`**
+- [x] (BROWSER:DOM) **Every rendered player row has a `data-tier` attribute matching `data.teams[team].tiers[player]`**
   - Verify: `npx playwright test tests/team-detail.spec.ts -g "tier labels rendered"`
-- [ ] (BROWSER:DOM) Specific: Giants detail panel renders Jaxson Dart with `data-tier="tier_1_chase"`
+- [x] (BROWSER:DOM) Specific: Giants detail panel renders Jaxson Dart with `data-tier="tier_1_chase"`
   - Verify: `npx playwright test tests/team-detail.spec.ts -g "jaxson dart tier 1"`
 
 **Files to Create:**
