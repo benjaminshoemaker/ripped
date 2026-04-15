@@ -1,9 +1,9 @@
 {
   "checklist_as_of": "2026-04-08T00:00:00Z",
   "odds_as_of": "2026-04-14T12:00:00Z",
-  "values_as_of": "2026-04-15T06:07:34.062Z",
-  "comps_as_of": "2026-04-15T06:07:34.062Z",
-  "data_as_of": "2026-04-15T06:07:34.062Z",
+  "values_as_of": "2026-04-15T21:47:00.040Z",
+  "comps_as_of": "2026-04-15T21:47:00.040Z",
+  "data_as_of": "2026-04-15T21:47:00.040Z",
   "odds_source": "2024_placeholder",
   "values_ready": true,
   "product": {
@@ -1614,83 +1614,83 @@
     }
   },
   "confidence_inputs": {
-    "Jaxson Dart": {
+    "AC Rookie 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Malik Nabers": {
+    "AC Vet 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Cam Ward": {
+    "AF Rookie 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Travis Hunter": {
+    "AF Vet 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Brian Thomas Jr.": {
+    "BR Rookie 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Garrett Wilson": {
+    "BR Vet 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Ashton Jeanty": {
+    "BB Rookie 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Brock Bowers": {
+    "BB Vet 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "Drake Maye": {
+    "CP Rookie 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
-    "TreVeyon Henderson": {
+    "CP Vet 1": {
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
@@ -1698,7 +1698,7 @@
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
@@ -1706,7 +1706,23 @@
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "CB Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "CB Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
@@ -1714,7 +1730,7 @@
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
@@ -1722,7 +1738,7 @@
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     },
@@ -1730,7 +1746,375 @@
       "rookie_auto": {
         "comp_count": 8,
         "comp_window_days": 21,
-        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DC Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DC Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DB Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DB Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DL Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "DL Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "GBP Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "GBP Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "HT Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "HT Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "IC Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "IC Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Travis Hunter": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Brian Thomas Jr.": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "KCC Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "KCC Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Ashton Jeanty": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Brock Bowers": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "LAC Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "LAC Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "LAR Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "LAR Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "MD Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "MD Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "MV Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "MV Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Drake Maye": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "TreVeyon Henderson": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "NOS Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "NOS Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Jaxson Dart": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Malik Nabers": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Garrett Wilson": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "PE Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "PE Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "PS Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "PS Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "SF4 Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "SF4 Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "SS Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "SS Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "TBB Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "TBB Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Cam Ward": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "WC Rookie 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "WC Vet 1": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T21:47:00.040Z",
         "value_source": "ebay_sold_synthetic"
       }
     }

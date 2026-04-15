@@ -242,13 +242,13 @@ const card_categories = {
   rpa_orange_25: { slots_per_case: 0.072, denominator_key: 'rookie_auto_signers' },
 };
 
-// ─── Confidence inputs — populated for tier-1 chase players in real-roster teams ──
-// Synthetic values calibrated so the real-roster teams hit `medium` confidence,
-// not `high` (since odds_source is 2024_placeholder → condition 3 fails).
+// ─── Confidence inputs — populated for every chase player in every team ────
+// Synthetic values calibrated so all teams hit `medium` confidence — never
+// `high`, because odds_source is 2024_placeholder and condition 3 always fails.
 const confidence_inputs = {};
 const nowIso = new Date().toISOString();
-for (const teamName of Object.keys(realRosters)) {
-  for (const chase of realRosters[teamName].chase_players) {
+for (const team of Object.values(teams)) {
+  for (const chase of team.chase_players) {
     if (!confidence_inputs[chase]) {
       confidence_inputs[chase] = {
         rookie_auto: {
