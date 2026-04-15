@@ -227,15 +227,15 @@ Create `src/math/eligibility.ts` exporting `eligiblePlayers(category, team)`. Im
 **Requirement:** REQ-004, REQ-010, REQ-018
 
 **Acceptance Criteria:**
-- [ ] (CODE) `eligiblePlayers` exported
+- [x] (CODE) `eligiblePlayers` exported
   - Verify: `grep -q "export function eligiblePlayers" src/math/eligibility.ts`
-- [ ] (TEST) Returns `base_veterans` for `base` category
+- [x] (TEST) Returns `base_veterans` for `base` category
   - Verify: `npx vitest run src/math/eligibility.test.ts -t "base veterans"`
-- [ ] (TEST) Returns `rookie_auto_signers` for `rookie_auto`
+- [x] (TEST) Returns `rookie_auto_signers` for `rookie_auto`
   - Verify: `npx vitest run src/math/eligibility.test.ts -t "rookie autos"`
-- [ ] (TEST) Returns combined `base_veterans + rookies` for `gold_refractor_50`
+- [x] (TEST) Returns combined `base_veterans + rookies` for `gold_refractor_50`
   - Verify: `npx vitest run src/math/eligibility.test.ts -t "numbered parallel combines"`
-- [ ] (TEST) Returns empty array when a team has 0 entries for a category (e.g., Tennessee `base_auto_signers`)
+- [x] (TEST) Returns empty array when a team has 0 entries for a category (e.g., Tennessee `base_auto_signers`)
   - Verify: `npx vitest run src/math/eligibility.test.ts -t "zero eligible"`
 
 **Files to Create:**
