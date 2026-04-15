@@ -961,17 +961,17 @@ Scripted Playwright smoke across all 32 teams + synthetic edge-case fixtures. Ve
 **Requirement:** REQ-040, REQ-043
 
 **Acceptance Criteria:**
-- [ ] (BROWSER:DOM) Script taps every team in sequence, no console errors
+- [x] (BROWSER:DOM) Script taps every team in sequence, no console errors
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "all 32 selectable"`
-- [ ] (BROWSER:DOM) Every team's EV value parses as a finite number (or null in fallback mode)
+- [x] (BROWSER:DOM) Every team's EV value parses as a finite number (or null in fallback mode)
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "ev finite per team"`
-- [ ] (BROWSER:DOM) Tennessee: rookie-auto contribution dominates base-auto in contributors
+- [x] (BROWSER:DOM) Tennessee: rookie-auto contribution dominates base-auto in contributors
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "tennessee rookie dominated"`
-- [ ] (BROWSER:DOM) Stale fixture triggers stale warning
+- [x] (BROWSER:DOM) Stale fixture triggers stale warning
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "stale warning"`
-- [ ] (BROWSER:DOM) Fallback fixture triggers fallback banner
+- [x] (BROWSER:DOM) Fallback fixture triggers fallback banner
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "fallback banner"`
-- [ ] (BROWSER:DOM) Broken fixture triggers full-page error
+- [x] (BROWSER:DOM) Broken fixture triggers full-page error
   - Verify: `npx playwright test tests/smoke-all-teams.spec.ts -g "broken fixture error"`
 - [ ] (MANUAL:DEFER) Visual sanity check Giants / Titans / Jets EV numbers against the X screenshot's breaker pricing
   - Reason: Requires human judgment on whether numbers "look right" given public break prices — no automated comp source available for v1
