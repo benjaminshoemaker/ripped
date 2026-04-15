@@ -1,0 +1,7 @@
+{
+  "commands": {},
+  "browser": {
+    "tool": "auto"
+  },
+  "_note": "Empty on first run — no package.json/Makefile/Taskfile yet. Re-run /configure-verification after Task 1.1.A creates package.json with scripts."
+}
