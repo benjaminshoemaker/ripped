@@ -1,0 +1,1737 @@
+{
+  "checklist_as_of": "2026-04-08T00:00:00Z",
+  "odds_as_of": "2026-04-14T12:00:00Z",
+  "values_as_of": "2026-04-15T06:07:34.062Z",
+  "comps_as_of": "2026-04-15T06:07:34.062Z",
+  "data_as_of": "2026-04-15T06:07:34.062Z",
+  "odds_source": "2024_placeholder",
+  "values_ready": true,
+  "product": {
+    "name": "2025 Topps Chrome Football",
+    "format": "pyt_hobby_case",
+    "benchmark_case_cost_usd": 4200,
+    "boxes_per_case": 12,
+    "packs_per_box": 20,
+    "cards_per_pack": 4,
+    "ship_all_cards_assumption": true,
+    "guaranteed_per_box": {
+      "autos": 1,
+      "rookies": 20,
+      "base_refractors": 6,
+      "numbered_parallels": 2
+    }
+  },
+  "checklist_totals": {
+    "base_veterans": 300,
+    "rookies": 100,
+    "base_auto_signers": 71,
+    "rookie_auto_signers": 94
+  },
+  "card_categories": {
+    "base": {
+      "slots_per_case": 720,
+      "denominator_key": "base_veterans"
+    },
+    "base_refractor": {
+      "slots_per_case": 72,
+      "denominator_key": "base_veterans"
+    },
+    "rookie": {
+      "slots_per_case": 240,
+      "denominator_key": "rookies"
+    },
+    "rookie_refractor": {
+      "slots_per_case": 80,
+      "denominator_key": "rookies"
+    },
+    "base_auto": {
+      "slots_per_case": 0.083,
+      "denominator_key": "base_auto_signers"
+    },
+    "rookie_auto": {
+      "slots_per_case": 0.5,
+      "denominator_key": "rookie_auto_signers"
+    },
+    "gold_refractor_50": {
+      "slots_per_case": 0.2,
+      "denominator_key": "base_veterans"
+    },
+    "orange_refractor_25": {
+      "slots_per_case": 0.1,
+      "denominator_key": "base_veterans"
+    },
+    "red_refractor_5": {
+      "slots_per_case": 0.02,
+      "denominator_key": "base_veterans"
+    },
+    "superfractor_1": {
+      "slots_per_case": 0.012,
+      "denominator_key": "base_veterans"
+    },
+    "rpa_gold_50": {
+      "slots_per_case": 0.145,
+      "denominator_key": "rookie_auto_signers"
+    },
+    "rpa_orange_25": {
+      "slots_per_case": 0.072,
+      "denominator_key": "rookie_auto_signers"
+    }
+  },
+  "tier_values_usd": {
+    "tier_1_chase": {
+      "base": 8,
+      "base_refractor": 25,
+      "base_auto": 250,
+      "rookie": 45,
+      "rookie_refractor": 110,
+      "rookie_auto": 650,
+      "gold_refractor_50": 250,
+      "orange_refractor_25": 500,
+      "red_refractor_5": 2500,
+      "superfractor_1": 30000,
+      "rpa_gold_50": 2500,
+      "rpa_orange_25": 5000
+    },
+    "tier_2_strong": {
+      "base": 4,
+      "base_refractor": 12,
+      "base_auto": 85,
+      "rookie": 15,
+      "rookie_refractor": 35,
+      "rookie_auto": 180,
+      "gold_refractor_50": 90,
+      "orange_refractor_25": 180,
+      "red_refractor_5": 900,
+      "superfractor_1": 8000,
+      "rpa_gold_50": 700,
+      "rpa_orange_25": 1400
+    },
+    "tier_3_fair": {
+      "base": 2,
+      "base_refractor": 5,
+      "base_auto": 32,
+      "rookie": 6,
+      "rookie_refractor": 12,
+      "rookie_auto": 70,
+      "gold_refractor_50": 35,
+      "orange_refractor_25": 70,
+      "red_refractor_5": 350,
+      "superfractor_1": 3000,
+      "rpa_gold_50": 280,
+      "rpa_orange_25": 560
+    },
+    "tier_4_cold": {
+      "base": 1,
+      "base_refractor": 2,
+      "base_auto": 12,
+      "rookie": 2,
+      "rookie_refractor": 4,
+      "rookie_auto": 25,
+      "gold_refractor_50": 12,
+      "orange_refractor_25": 25,
+      "red_refractor_5": 125,
+      "superfractor_1": 1500,
+      "rpa_gold_50": 100,
+      "rpa_orange_25": 200
+    }
+  },
+  "teams": {
+    "Arizona Cardinals": {
+      "base_veterans": [
+        "AC Vet 1",
+        "AC Vet 2",
+        "AC Vet 3",
+        "AC Vet 4",
+        "AC Vet 5",
+        "AC Vet 6",
+        "AC Vet 7",
+        "AC Vet 8",
+        "AC Vet 9",
+        "AC Vet 10"
+      ],
+      "rookies": [
+        "AC Rookie 1",
+        "AC Rookie 2",
+        "AC Rookie 3"
+      ],
+      "base_auto_signers": [
+        "AC Vet 1",
+        "AC Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "AC Rookie 1",
+        "AC Rookie 2",
+        "AC Rookie 3"
+      ],
+      "chase_players": [
+        "AC Rookie 1",
+        "AC Vet 1"
+      ],
+      "tiers": {
+        "AC Vet 1": "tier_1_chase",
+        "AC Vet 2": "tier_2_strong",
+        "AC Vet 3": "tier_3_fair",
+        "AC Vet 4": "tier_3_fair",
+        "AC Vet 5": "tier_3_fair",
+        "AC Vet 6": "tier_3_fair",
+        "AC Vet 7": "tier_3_fair",
+        "AC Vet 8": "tier_3_fair",
+        "AC Vet 9": "tier_3_fair",
+        "AC Vet 10": "tier_3_fair",
+        "AC Rookie 1": "tier_1_chase",
+        "AC Rookie 2": "tier_2_strong",
+        "AC Rookie 3": "tier_2_strong"
+      }
+    },
+    "Atlanta Falcons": {
+      "base_veterans": [
+        "AF Vet 1",
+        "AF Vet 2",
+        "AF Vet 3",
+        "AF Vet 4",
+        "AF Vet 5",
+        "AF Vet 6",
+        "AF Vet 7",
+        "AF Vet 8",
+        "AF Vet 9"
+      ],
+      "rookies": [
+        "AF Rookie 1",
+        "AF Rookie 2",
+        "AF Rookie 3",
+        "AF Rookie 4"
+      ],
+      "base_auto_signers": [
+        "AF Vet 1",
+        "AF Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "AF Rookie 1",
+        "AF Rookie 2"
+      ],
+      "chase_players": [
+        "AF Rookie 1",
+        "AF Vet 1"
+      ],
+      "tiers": {
+        "AF Vet 1": "tier_1_chase",
+        "AF Vet 2": "tier_2_strong",
+        "AF Vet 3": "tier_3_fair",
+        "AF Vet 4": "tier_3_fair",
+        "AF Vet 5": "tier_3_fair",
+        "AF Vet 6": "tier_3_fair",
+        "AF Vet 7": "tier_3_fair",
+        "AF Vet 8": "tier_3_fair",
+        "AF Vet 9": "tier_3_fair",
+        "AF Rookie 1": "tier_1_chase",
+        "AF Rookie 2": "tier_2_strong",
+        "AF Rookie 3": "tier_3_fair",
+        "AF Rookie 4": "tier_3_fair"
+      }
+    },
+    "Baltimore Ravens": {
+      "base_veterans": [
+        "BR Vet 1",
+        "BR Vet 2",
+        "BR Vet 3",
+        "BR Vet 4",
+        "BR Vet 5",
+        "BR Vet 6",
+        "BR Vet 7",
+        "BR Vet 8",
+        "BR Vet 9",
+        "BR Vet 10"
+      ],
+      "rookies": [
+        "BR Rookie 1",
+        "BR Rookie 2",
+        "BR Rookie 3"
+      ],
+      "base_auto_signers": [
+        "BR Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "BR Rookie 1",
+        "BR Rookie 2",
+        "BR Rookie 3"
+      ],
+      "chase_players": [
+        "BR Rookie 1",
+        "BR Vet 1"
+      ],
+      "tiers": {
+        "BR Vet 1": "tier_1_chase",
+        "BR Vet 2": "tier_3_fair",
+        "BR Vet 3": "tier_3_fair",
+        "BR Vet 4": "tier_3_fair",
+        "BR Vet 5": "tier_3_fair",
+        "BR Vet 6": "tier_3_fair",
+        "BR Vet 7": "tier_3_fair",
+        "BR Vet 8": "tier_3_fair",
+        "BR Vet 9": "tier_3_fair",
+        "BR Vet 10": "tier_3_fair",
+        "BR Rookie 1": "tier_1_chase",
+        "BR Rookie 2": "tier_2_strong",
+        "BR Rookie 3": "tier_2_strong"
+      }
+    },
+    "Buffalo Bills": {
+      "base_veterans": [
+        "BB Vet 1",
+        "BB Vet 2",
+        "BB Vet 3",
+        "BB Vet 4",
+        "BB Vet 5",
+        "BB Vet 6",
+        "BB Vet 7",
+        "BB Vet 8",
+        "BB Vet 9",
+        "BB Vet 10"
+      ],
+      "rookies": [
+        "BB Rookie 1",
+        "BB Rookie 2",
+        "BB Rookie 3",
+        "BB Rookie 4"
+      ],
+      "base_auto_signers": [
+        "BB Vet 1",
+        "BB Vet 2",
+        "BB Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "BB Rookie 1",
+        "BB Rookie 2",
+        "BB Rookie 3",
+        "BB Rookie 4"
+      ],
+      "chase_players": [
+        "BB Rookie 1",
+        "BB Vet 1"
+      ],
+      "tiers": {
+        "BB Vet 1": "tier_1_chase",
+        "BB Vet 2": "tier_2_strong",
+        "BB Vet 3": "tier_2_strong",
+        "BB Vet 4": "tier_3_fair",
+        "BB Vet 5": "tier_3_fair",
+        "BB Vet 6": "tier_3_fair",
+        "BB Vet 7": "tier_3_fair",
+        "BB Vet 8": "tier_3_fair",
+        "BB Vet 9": "tier_3_fair",
+        "BB Vet 10": "tier_3_fair",
+        "BB Rookie 1": "tier_1_chase",
+        "BB Rookie 2": "tier_2_strong",
+        "BB Rookie 3": "tier_2_strong",
+        "BB Rookie 4": "tier_2_strong"
+      }
+    },
+    "Carolina Panthers": {
+      "base_veterans": [
+        "CP Vet 1",
+        "CP Vet 2",
+        "CP Vet 3",
+        "CP Vet 4",
+        "CP Vet 5",
+        "CP Vet 6",
+        "CP Vet 7",
+        "CP Vet 8",
+        "CP Vet 9",
+        "CP Vet 10"
+      ],
+      "rookies": [
+        "CP Rookie 1",
+        "CP Rookie 2",
+        "CP Rookie 3"
+      ],
+      "base_auto_signers": [
+        "CP Vet 1",
+        "CP Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "CP Rookie 1",
+        "CP Rookie 2",
+        "CP Rookie 3"
+      ],
+      "chase_players": [
+        "CP Rookie 1",
+        "CP Vet 1"
+      ],
+      "tiers": {
+        "CP Vet 1": "tier_1_chase",
+        "CP Vet 2": "tier_2_strong",
+        "CP Vet 3": "tier_3_fair",
+        "CP Vet 4": "tier_3_fair",
+        "CP Vet 5": "tier_3_fair",
+        "CP Vet 6": "tier_3_fair",
+        "CP Vet 7": "tier_3_fair",
+        "CP Vet 8": "tier_3_fair",
+        "CP Vet 9": "tier_3_fair",
+        "CP Vet 10": "tier_3_fair",
+        "CP Rookie 1": "tier_1_chase",
+        "CP Rookie 2": "tier_2_strong",
+        "CP Rookie 3": "tier_2_strong"
+      }
+    },
+    "Chicago Bears": {
+      "base_veterans": [
+        "DJ Moore",
+        "Rome Odunze",
+        "Joe Thuney",
+        "Cole Kmet",
+        "Caleb Williams",
+        "D'Andre Swift",
+        "Tyson Bagent",
+        "Roschon Johnson",
+        "Montez Sweat",
+        "Jaylon Johnson"
+      ],
+      "rookies": [
+        "Shemar Turner",
+        "Luther Burden III",
+        "Colston Loveland",
+        "Kyle Monangai"
+      ],
+      "base_auto_signers": [
+        "Caleb Williams",
+        "DJ Moore",
+        "Rome Odunze",
+        "Cole Kmet"
+      ],
+      "rookie_auto_signers": [
+        "Luther Burden III",
+        "Colston Loveland",
+        "Shemar Turner"
+      ],
+      "chase_players": [
+        "Caleb Williams",
+        "Rome Odunze"
+      ],
+      "tiers": {
+        "DJ Moore": "tier_2_strong",
+        "Rome Odunze": "tier_1_chase",
+        "Joe Thuney": "tier_3_fair",
+        "Cole Kmet": "tier_2_strong",
+        "Caleb Williams": "tier_1_chase",
+        "D'Andre Swift": "tier_3_fair",
+        "Tyson Bagent": "tier_3_fair",
+        "Roschon Johnson": "tier_3_fair",
+        "Montez Sweat": "tier_3_fair",
+        "Jaylon Johnson": "tier_3_fair",
+        "Shemar Turner": "tier_2_strong",
+        "Luther Burden III": "tier_2_strong",
+        "Colston Loveland": "tier_2_strong",
+        "Kyle Monangai": "tier_3_fair"
+      }
+    },
+    "Cincinnati Bengals": {
+      "base_veterans": [
+        "CB Vet 1",
+        "CB Vet 2",
+        "CB Vet 3",
+        "CB Vet 4",
+        "CB Vet 5",
+        "CB Vet 6",
+        "CB Vet 7",
+        "CB Vet 8",
+        "CB Vet 9"
+      ],
+      "rookies": [
+        "CB Rookie 1"
+      ],
+      "base_auto_signers": [
+        "CB Vet 1",
+        "CB Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "CB Rookie 1"
+      ],
+      "chase_players": [
+        "CB Rookie 1",
+        "CB Vet 1"
+      ],
+      "tiers": {
+        "CB Vet 1": "tier_1_chase",
+        "CB Vet 2": "tier_2_strong",
+        "CB Vet 3": "tier_3_fair",
+        "CB Vet 4": "tier_3_fair",
+        "CB Vet 5": "tier_3_fair",
+        "CB Vet 6": "tier_3_fair",
+        "CB Vet 7": "tier_3_fair",
+        "CB Vet 8": "tier_3_fair",
+        "CB Vet 9": "tier_3_fair",
+        "CB Rookie 1": "tier_1_chase"
+      }
+    },
+    "Cleveland Browns": {
+      "base_veterans": [
+        "Grant Delpit",
+        "Cedric Tillman",
+        "Jerry Jeudy",
+        "David Njoku",
+        "Myles Garrett",
+        "Jerome Ford",
+        "Denzel Ward",
+        "Cam Robinson"
+      ],
+      "rookies": [
+        "Mason Graham",
+        "Dylan Sampson",
+        "Shedeur Sanders",
+        "Dillon Gabriel",
+        "Quinshon Judkins",
+        "Harold Fannin Jr.",
+        "Isaiah Bond"
+      ],
+      "base_auto_signers": [
+        "Myles Garrett",
+        "Jerry Jeudy",
+        "David Njoku"
+      ],
+      "rookie_auto_signers": [
+        "Mason Graham",
+        "Dylan Sampson",
+        "Shedeur Sanders",
+        "Dillon Gabriel",
+        "Quinshon Judkins",
+        "Harold Fannin Jr.",
+        "Isaiah Bond"
+      ],
+      "chase_players": [
+        "Shedeur Sanders",
+        "Dillon Gabriel",
+        "Myles Garrett"
+      ],
+      "tiers": {
+        "Grant Delpit": "tier_3_fair",
+        "Cedric Tillman": "tier_3_fair",
+        "Jerry Jeudy": "tier_2_strong",
+        "David Njoku": "tier_2_strong",
+        "Myles Garrett": "tier_1_chase",
+        "Jerome Ford": "tier_3_fair",
+        "Denzel Ward": "tier_3_fair",
+        "Cam Robinson": "tier_3_fair",
+        "Mason Graham": "tier_2_strong",
+        "Dylan Sampson": "tier_2_strong",
+        "Shedeur Sanders": "tier_1_chase",
+        "Dillon Gabriel": "tier_1_chase",
+        "Quinshon Judkins": "tier_2_strong",
+        "Harold Fannin Jr.": "tier_2_strong",
+        "Isaiah Bond": "tier_2_strong"
+      }
+    },
+    "Dallas Cowboys": {
+      "base_veterans": [
+        "DC Vet 1",
+        "DC Vet 2",
+        "DC Vet 3",
+        "DC Vet 4",
+        "DC Vet 5",
+        "DC Vet 6",
+        "DC Vet 7",
+        "DC Vet 8",
+        "DC Vet 9",
+        "DC Vet 10",
+        "DC Vet 11",
+        "DC Vet 12"
+      ],
+      "rookies": [
+        "DC Rookie 1",
+        "DC Rookie 2",
+        "DC Rookie 3"
+      ],
+      "base_auto_signers": [
+        "DC Vet 1",
+        "DC Vet 2",
+        "DC Vet 3",
+        "DC Vet 4"
+      ],
+      "rookie_auto_signers": [
+        "DC Rookie 1",
+        "DC Rookie 2",
+        "DC Rookie 3"
+      ],
+      "chase_players": [
+        "DC Rookie 1",
+        "DC Vet 1"
+      ],
+      "tiers": {
+        "DC Vet 1": "tier_1_chase",
+        "DC Vet 2": "tier_2_strong",
+        "DC Vet 3": "tier_2_strong",
+        "DC Vet 4": "tier_2_strong",
+        "DC Vet 5": "tier_3_fair",
+        "DC Vet 6": "tier_3_fair",
+        "DC Vet 7": "tier_3_fair",
+        "DC Vet 8": "tier_3_fair",
+        "DC Vet 9": "tier_3_fair",
+        "DC Vet 10": "tier_3_fair",
+        "DC Vet 11": "tier_3_fair",
+        "DC Vet 12": "tier_3_fair",
+        "DC Rookie 1": "tier_1_chase",
+        "DC Rookie 2": "tier_2_strong",
+        "DC Rookie 3": "tier_2_strong"
+      }
+    },
+    "Denver Broncos": {
+      "base_veterans": [
+        "DB Vet 1",
+        "DB Vet 2",
+        "DB Vet 3",
+        "DB Vet 4",
+        "DB Vet 5",
+        "DB Vet 6",
+        "DB Vet 7",
+        "DB Vet 8",
+        "DB Vet 9",
+        "DB Vet 10"
+      ],
+      "rookies": [
+        "DB Rookie 1",
+        "DB Rookie 2",
+        "DB Rookie 3"
+      ],
+      "base_auto_signers": [
+        "DB Vet 1",
+        "DB Vet 2",
+        "DB Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "DB Rookie 1",
+        "DB Rookie 2"
+      ],
+      "chase_players": [
+        "DB Rookie 1",
+        "DB Vet 1"
+      ],
+      "tiers": {
+        "DB Vet 1": "tier_1_chase",
+        "DB Vet 2": "tier_2_strong",
+        "DB Vet 3": "tier_2_strong",
+        "DB Vet 4": "tier_3_fair",
+        "DB Vet 5": "tier_3_fair",
+        "DB Vet 6": "tier_3_fair",
+        "DB Vet 7": "tier_3_fair",
+        "DB Vet 8": "tier_3_fair",
+        "DB Vet 9": "tier_3_fair",
+        "DB Vet 10": "tier_3_fair",
+        "DB Rookie 1": "tier_1_chase",
+        "DB Rookie 2": "tier_2_strong",
+        "DB Rookie 3": "tier_3_fair"
+      }
+    },
+    "Detroit Lions": {
+      "base_veterans": [
+        "DL Vet 1",
+        "DL Vet 2",
+        "DL Vet 3",
+        "DL Vet 4",
+        "DL Vet 5",
+        "DL Vet 6",
+        "DL Vet 7",
+        "DL Vet 8",
+        "DL Vet 9"
+      ],
+      "rookies": [
+        "DL Rookie 1",
+        "DL Rookie 2",
+        "DL Rookie 3"
+      ],
+      "base_auto_signers": [
+        "DL Vet 1",
+        "DL Vet 2",
+        "DL Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "DL Rookie 1",
+        "DL Rookie 2",
+        "DL Rookie 3"
+      ],
+      "chase_players": [
+        "DL Rookie 1",
+        "DL Vet 1"
+      ],
+      "tiers": {
+        "DL Vet 1": "tier_1_chase",
+        "DL Vet 2": "tier_2_strong",
+        "DL Vet 3": "tier_2_strong",
+        "DL Vet 4": "tier_3_fair",
+        "DL Vet 5": "tier_3_fair",
+        "DL Vet 6": "tier_3_fair",
+        "DL Vet 7": "tier_3_fair",
+        "DL Vet 8": "tier_3_fair",
+        "DL Vet 9": "tier_3_fair",
+        "DL Rookie 1": "tier_1_chase",
+        "DL Rookie 2": "tier_2_strong",
+        "DL Rookie 3": "tier_2_strong"
+      }
+    },
+    "Green Bay Packers": {
+      "base_veterans": [
+        "GBP Vet 1",
+        "GBP Vet 2",
+        "GBP Vet 3",
+        "GBP Vet 4",
+        "GBP Vet 5",
+        "GBP Vet 6",
+        "GBP Vet 7",
+        "GBP Vet 8",
+        "GBP Vet 9",
+        "GBP Vet 10"
+      ],
+      "rookies": [
+        "GBP Rookie 1",
+        "GBP Rookie 2"
+      ],
+      "base_auto_signers": [
+        "GBP Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "GBP Rookie 1",
+        "GBP Rookie 2"
+      ],
+      "chase_players": [
+        "GBP Rookie 1",
+        "GBP Vet 1"
+      ],
+      "tiers": {
+        "GBP Vet 1": "tier_1_chase",
+        "GBP Vet 2": "tier_3_fair",
+        "GBP Vet 3": "tier_3_fair",
+        "GBP Vet 4": "tier_3_fair",
+        "GBP Vet 5": "tier_3_fair",
+        "GBP Vet 6": "tier_3_fair",
+        "GBP Vet 7": "tier_3_fair",
+        "GBP Vet 8": "tier_3_fair",
+        "GBP Vet 9": "tier_3_fair",
+        "GBP Vet 10": "tier_3_fair",
+        "GBP Rookie 1": "tier_1_chase",
+        "GBP Rookie 2": "tier_2_strong"
+      }
+    },
+    "Houston Texans": {
+      "base_veterans": [
+        "HT Vet 1",
+        "HT Vet 2",
+        "HT Vet 3",
+        "HT Vet 4",
+        "HT Vet 5",
+        "HT Vet 6",
+        "HT Vet 7",
+        "HT Vet 8",
+        "HT Vet 9"
+      ],
+      "rookies": [
+        "HT Rookie 1",
+        "HT Rookie 2",
+        "HT Rookie 3"
+      ],
+      "base_auto_signers": [
+        "HT Vet 1",
+        "HT Vet 2",
+        "HT Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "HT Rookie 1",
+        "HT Rookie 2",
+        "HT Rookie 3"
+      ],
+      "chase_players": [
+        "HT Rookie 1",
+        "HT Vet 1"
+      ],
+      "tiers": {
+        "HT Vet 1": "tier_1_chase",
+        "HT Vet 2": "tier_2_strong",
+        "HT Vet 3": "tier_2_strong",
+        "HT Vet 4": "tier_3_fair",
+        "HT Vet 5": "tier_3_fair",
+        "HT Vet 6": "tier_3_fair",
+        "HT Vet 7": "tier_3_fair",
+        "HT Vet 8": "tier_3_fair",
+        "HT Vet 9": "tier_3_fair",
+        "HT Rookie 1": "tier_1_chase",
+        "HT Rookie 2": "tier_2_strong",
+        "HT Rookie 3": "tier_2_strong"
+      }
+    },
+    "Indianapolis Colts": {
+      "base_veterans": [
+        "IC Vet 1",
+        "IC Vet 2",
+        "IC Vet 3",
+        "IC Vet 4",
+        "IC Vet 5",
+        "IC Vet 6",
+        "IC Vet 7",
+        "IC Vet 8",
+        "IC Vet 9",
+        "IC Vet 10",
+        "IC Vet 11"
+      ],
+      "rookies": [
+        "IC Rookie 1",
+        "IC Rookie 2",
+        "IC Rookie 3",
+        "IC Rookie 4"
+      ],
+      "base_auto_signers": [
+        "IC Vet 1",
+        "IC Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "IC Rookie 1",
+        "IC Rookie 2",
+        "IC Rookie 3",
+        "IC Rookie 4"
+      ],
+      "chase_players": [
+        "IC Rookie 1",
+        "IC Vet 1"
+      ],
+      "tiers": {
+        "IC Vet 1": "tier_1_chase",
+        "IC Vet 2": "tier_2_strong",
+        "IC Vet 3": "tier_3_fair",
+        "IC Vet 4": "tier_3_fair",
+        "IC Vet 5": "tier_3_fair",
+        "IC Vet 6": "tier_3_fair",
+        "IC Vet 7": "tier_3_fair",
+        "IC Vet 8": "tier_3_fair",
+        "IC Vet 9": "tier_3_fair",
+        "IC Vet 10": "tier_3_fair",
+        "IC Vet 11": "tier_3_fair",
+        "IC Rookie 1": "tier_1_chase",
+        "IC Rookie 2": "tier_2_strong",
+        "IC Rookie 3": "tier_2_strong",
+        "IC Rookie 4": "tier_2_strong"
+      }
+    },
+    "Jacksonville Jaguars": {
+      "base_veterans": [
+        "Tim Patrick",
+        "Brian Thomas Jr.",
+        "Dyami Brown",
+        "Brenton Strange",
+        "Trevor Lawrence",
+        "Travis Etienne Jr.",
+        "Maason Smith",
+        "Travon Walker",
+        "Jakobi Meyers"
+      ],
+      "rookies": [
+        "Travis Hunter",
+        "Bhayshul Tuten",
+        "LeQuint Allen Jr.",
+        "Seth Henigan"
+      ],
+      "base_auto_signers": [
+        "Brian Thomas Jr.",
+        "Trevor Lawrence"
+      ],
+      "rookie_auto_signers": [
+        "Travis Hunter",
+        "Travis Hunter",
+        "Bhayshul Tuten",
+        "LeQuint Allen Jr.",
+        "Seth Henigan"
+      ],
+      "chase_players": [
+        "Travis Hunter",
+        "Brian Thomas Jr."
+      ],
+      "tiers": {
+        "Tim Patrick": "tier_3_fair",
+        "Brian Thomas Jr.": "tier_1_chase",
+        "Dyami Brown": "tier_3_fair",
+        "Brenton Strange": "tier_3_fair",
+        "Trevor Lawrence": "tier_2_strong",
+        "Travis Etienne Jr.": "tier_3_fair",
+        "Maason Smith": "tier_3_fair",
+        "Travon Walker": "tier_3_fair",
+        "Jakobi Meyers": "tier_3_fair",
+        "Travis Hunter": "tier_1_chase",
+        "Bhayshul Tuten": "tier_2_strong",
+        "LeQuint Allen Jr.": "tier_2_strong",
+        "Seth Henigan": "tier_2_strong"
+      }
+    },
+    "Kansas City Chiefs": {
+      "base_veterans": [
+        "KCC Vet 1",
+        "KCC Vet 2",
+        "KCC Vet 3",
+        "KCC Vet 4",
+        "KCC Vet 5",
+        "KCC Vet 6",
+        "KCC Vet 7",
+        "KCC Vet 8",
+        "KCC Vet 9",
+        "KCC Vet 10"
+      ],
+      "rookies": [
+        "KCC Rookie 1",
+        "KCC Rookie 2",
+        "KCC Rookie 3"
+      ],
+      "base_auto_signers": [
+        "KCC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "KCC Rookie 1",
+        "KCC Rookie 2"
+      ],
+      "chase_players": [
+        "KCC Rookie 1",
+        "KCC Vet 1"
+      ],
+      "tiers": {
+        "KCC Vet 1": "tier_1_chase",
+        "KCC Vet 2": "tier_3_fair",
+        "KCC Vet 3": "tier_3_fair",
+        "KCC Vet 4": "tier_3_fair",
+        "KCC Vet 5": "tier_3_fair",
+        "KCC Vet 6": "tier_3_fair",
+        "KCC Vet 7": "tier_3_fair",
+        "KCC Vet 8": "tier_3_fair",
+        "KCC Vet 9": "tier_3_fair",
+        "KCC Vet 10": "tier_3_fair",
+        "KCC Rookie 1": "tier_1_chase",
+        "KCC Rookie 2": "tier_2_strong",
+        "KCC Rookie 3": "tier_3_fair"
+      }
+    },
+    "Las Vegas Raiders": {
+      "base_veterans": [
+        "Tre Tucker",
+        "Jackson Powers-Johnson",
+        "Brock Bowers",
+        "Geno Smith",
+        "Maxx Crosby",
+        "Raheem Mostert",
+        "Kolton Miller",
+        "Jeremy Chinn"
+      ],
+      "rookies": [
+        "Ashton Jeanty",
+        "Darien Porter",
+        "Dont'e Thornton Jr.",
+        "Jack Bech"
+      ],
+      "base_auto_signers": [
+        "Brock Bowers",
+        "Maxx Crosby",
+        "Geno Smith"
+      ],
+      "rookie_auto_signers": [
+        "Ashton Jeanty",
+        "Darien Porter",
+        "Dont'e Thornton Jr.",
+        "Jack Bech"
+      ],
+      "chase_players": [
+        "Ashton Jeanty",
+        "Brock Bowers"
+      ],
+      "tiers": {
+        "Tre Tucker": "tier_3_fair",
+        "Jackson Powers-Johnson": "tier_3_fair",
+        "Brock Bowers": "tier_1_chase",
+        "Geno Smith": "tier_2_strong",
+        "Maxx Crosby": "tier_2_strong",
+        "Raheem Mostert": "tier_3_fair",
+        "Kolton Miller": "tier_3_fair",
+        "Jeremy Chinn": "tier_3_fair",
+        "Ashton Jeanty": "tier_1_chase",
+        "Darien Porter": "tier_2_strong",
+        "Dont'e Thornton Jr.": "tier_2_strong",
+        "Jack Bech": "tier_2_strong"
+      }
+    },
+    "Los Angeles Chargers": {
+      "base_veterans": [
+        "LAC Vet 1",
+        "LAC Vet 2",
+        "LAC Vet 3",
+        "LAC Vet 4",
+        "LAC Vet 5",
+        "LAC Vet 6",
+        "LAC Vet 7",
+        "LAC Vet 8",
+        "LAC Vet 9",
+        "LAC Vet 10"
+      ],
+      "rookies": [
+        "LAC Rookie 1",
+        "LAC Rookie 2"
+      ],
+      "base_auto_signers": [
+        "LAC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "LAC Rookie 1",
+        "LAC Rookie 2"
+      ],
+      "chase_players": [
+        "LAC Rookie 1",
+        "LAC Vet 1"
+      ],
+      "tiers": {
+        "LAC Vet 1": "tier_1_chase",
+        "LAC Vet 2": "tier_3_fair",
+        "LAC Vet 3": "tier_3_fair",
+        "LAC Vet 4": "tier_3_fair",
+        "LAC Vet 5": "tier_3_fair",
+        "LAC Vet 6": "tier_3_fair",
+        "LAC Vet 7": "tier_3_fair",
+        "LAC Vet 8": "tier_3_fair",
+        "LAC Vet 9": "tier_3_fair",
+        "LAC Vet 10": "tier_3_fair",
+        "LAC Rookie 1": "tier_1_chase",
+        "LAC Rookie 2": "tier_2_strong"
+      }
+    },
+    "Los Angeles Rams": {
+      "base_veterans": [
+        "LAR Vet 1",
+        "LAR Vet 2",
+        "LAR Vet 3",
+        "LAR Vet 4",
+        "LAR Vet 5",
+        "LAR Vet 6",
+        "LAR Vet 7",
+        "LAR Vet 8",
+        "LAR Vet 9",
+        "LAR Vet 10"
+      ],
+      "rookies": [
+        "LAR Rookie 1"
+      ],
+      "base_auto_signers": [
+        "LAR Vet 1",
+        "LAR Vet 2",
+        "LAR Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "LAR Rookie 1"
+      ],
+      "chase_players": [
+        "LAR Rookie 1",
+        "LAR Vet 1"
+      ],
+      "tiers": {
+        "LAR Vet 1": "tier_1_chase",
+        "LAR Vet 2": "tier_2_strong",
+        "LAR Vet 3": "tier_2_strong",
+        "LAR Vet 4": "tier_3_fair",
+        "LAR Vet 5": "tier_3_fair",
+        "LAR Vet 6": "tier_3_fair",
+        "LAR Vet 7": "tier_3_fair",
+        "LAR Vet 8": "tier_3_fair",
+        "LAR Vet 9": "tier_3_fair",
+        "LAR Vet 10": "tier_3_fair",
+        "LAR Rookie 1": "tier_1_chase"
+      }
+    },
+    "Miami Dolphins": {
+      "base_veterans": [
+        "MD Vet 1",
+        "MD Vet 2",
+        "MD Vet 3",
+        "MD Vet 4",
+        "MD Vet 5",
+        "MD Vet 6",
+        "MD Vet 7",
+        "MD Vet 8"
+      ],
+      "rookies": [
+        "MD Rookie 1",
+        "MD Rookie 2",
+        "MD Rookie 3",
+        "MD Rookie 4"
+      ],
+      "base_auto_signers": [
+        "MD Vet 1",
+        "MD Vet 2",
+        "MD Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "MD Rookie 1",
+        "MD Rookie 2"
+      ],
+      "chase_players": [
+        "MD Rookie 1",
+        "MD Vet 1"
+      ],
+      "tiers": {
+        "MD Vet 1": "tier_1_chase",
+        "MD Vet 2": "tier_2_strong",
+        "MD Vet 3": "tier_2_strong",
+        "MD Vet 4": "tier_3_fair",
+        "MD Vet 5": "tier_3_fair",
+        "MD Vet 6": "tier_3_fair",
+        "MD Vet 7": "tier_3_fair",
+        "MD Vet 8": "tier_3_fair",
+        "MD Rookie 1": "tier_1_chase",
+        "MD Rookie 2": "tier_2_strong",
+        "MD Rookie 3": "tier_3_fair",
+        "MD Rookie 4": "tier_3_fair"
+      }
+    },
+    "Minnesota Vikings": {
+      "base_veterans": [
+        "MV Vet 1",
+        "MV Vet 2",
+        "MV Vet 3",
+        "MV Vet 4",
+        "MV Vet 5",
+        "MV Vet 6",
+        "MV Vet 7",
+        "MV Vet 8",
+        "MV Vet 9",
+        "MV Vet 10"
+      ],
+      "rookies": [
+        "MV Rookie 1"
+      ],
+      "base_auto_signers": [
+        "MV Vet 1",
+        "MV Vet 2",
+        "MV Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "MV Rookie 1"
+      ],
+      "chase_players": [
+        "MV Rookie 1",
+        "MV Vet 1"
+      ],
+      "tiers": {
+        "MV Vet 1": "tier_1_chase",
+        "MV Vet 2": "tier_2_strong",
+        "MV Vet 3": "tier_2_strong",
+        "MV Vet 4": "tier_3_fair",
+        "MV Vet 5": "tier_3_fair",
+        "MV Vet 6": "tier_3_fair",
+        "MV Vet 7": "tier_3_fair",
+        "MV Vet 8": "tier_3_fair",
+        "MV Vet 9": "tier_3_fair",
+        "MV Vet 10": "tier_3_fair",
+        "MV Rookie 1": "tier_1_chase"
+      }
+    },
+    "New England Patriots": {
+      "base_veterans": [
+        "Stefon Diggs",
+        "Mack Hollins",
+        "Drake Maye",
+        "Hunter Henry",
+        "Rhamondre Stevenson",
+        "Garrett Bradbury",
+        "Jahlani Tavai",
+        "Khyiris Tonga",
+        "Robert Spillane"
+      ],
+      "rookies": [
+        "TreVeyon Henderson",
+        "Will Campbell"
+      ],
+      "base_auto_signers": [
+        "Drake Maye"
+      ],
+      "rookie_auto_signers": [
+        "TreVeyon Henderson",
+        "Will Campbell"
+      ],
+      "chase_players": [
+        "Drake Maye",
+        "TreVeyon Henderson"
+      ],
+      "tiers": {
+        "Stefon Diggs": "tier_3_fair",
+        "Mack Hollins": "tier_3_fair",
+        "Drake Maye": "tier_1_chase",
+        "Hunter Henry": "tier_3_fair",
+        "Rhamondre Stevenson": "tier_3_fair",
+        "Garrett Bradbury": "tier_3_fair",
+        "Jahlani Tavai": "tier_3_fair",
+        "Khyiris Tonga": "tier_3_fair",
+        "Robert Spillane": "tier_3_fair",
+        "TreVeyon Henderson": "tier_1_chase",
+        "Will Campbell": "tier_2_strong"
+      }
+    },
+    "New Orleans Saints": {
+      "base_veterans": [
+        "NOS Vet 1",
+        "NOS Vet 2",
+        "NOS Vet 3",
+        "NOS Vet 4",
+        "NOS Vet 5",
+        "NOS Vet 6",
+        "NOS Vet 7",
+        "NOS Vet 8"
+      ],
+      "rookies": [
+        "NOS Rookie 1",
+        "NOS Rookie 2",
+        "NOS Rookie 3",
+        "NOS Rookie 4",
+        "NOS Rookie 5"
+      ],
+      "base_auto_signers": [
+        "NOS Vet 1",
+        "NOS Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "NOS Rookie 1",
+        "NOS Rookie 2",
+        "NOS Rookie 3",
+        "NOS Rookie 4",
+        "NOS Rookie 5"
+      ],
+      "chase_players": [
+        "NOS Rookie 1",
+        "NOS Vet 1"
+      ],
+      "tiers": {
+        "NOS Vet 1": "tier_1_chase",
+        "NOS Vet 2": "tier_2_strong",
+        "NOS Vet 3": "tier_3_fair",
+        "NOS Vet 4": "tier_3_fair",
+        "NOS Vet 5": "tier_3_fair",
+        "NOS Vet 6": "tier_3_fair",
+        "NOS Vet 7": "tier_3_fair",
+        "NOS Vet 8": "tier_3_fair",
+        "NOS Rookie 1": "tier_1_chase",
+        "NOS Rookie 2": "tier_2_strong",
+        "NOS Rookie 3": "tier_2_strong",
+        "NOS Rookie 4": "tier_2_strong",
+        "NOS Rookie 5": "tier_2_strong"
+      }
+    },
+    "New York Giants": {
+      "base_veterans": [
+        "Malik Nabers",
+        "Darius Slayton",
+        "Wan'Dale Robinson",
+        "Tyrone Tracy Jr.",
+        "Russell Wilson",
+        "Dexter Lawrence II",
+        "Tyler Nubin",
+        "Micah McFadden",
+        "Theo Johnson",
+        "Brian Burns"
+      ],
+      "rookies": [
+        "Jaxson Dart",
+        "Cam Skattebo",
+        "Abdul Carter"
+      ],
+      "base_auto_signers": [
+        "Malik Nabers",
+        "Russell Wilson"
+      ],
+      "rookie_auto_signers": [
+        "Jaxson Dart",
+        "Cam Skattebo",
+        "Abdul Carter",
+        "Tyler Nubin"
+      ],
+      "chase_players": [
+        "Jaxson Dart",
+        "Malik Nabers"
+      ],
+      "tiers": {
+        "Malik Nabers": "tier_1_chase",
+        "Darius Slayton": "tier_3_fair",
+        "Wan'Dale Robinson": "tier_3_fair",
+        "Tyrone Tracy Jr.": "tier_3_fair",
+        "Russell Wilson": "tier_2_strong",
+        "Dexter Lawrence II": "tier_3_fair",
+        "Tyler Nubin": "tier_3_fair",
+        "Micah McFadden": "tier_3_fair",
+        "Theo Johnson": "tier_3_fair",
+        "Brian Burns": "tier_3_fair",
+        "Jaxson Dart": "tier_1_chase",
+        "Cam Skattebo": "tier_2_strong",
+        "Abdul Carter": "tier_2_strong"
+      }
+    },
+    "New York Jets": {
+      "base_veterans": [
+        "Garrett Wilson",
+        "Allen Lazard",
+        "Justin Fields",
+        "Breece Hall",
+        "Jeremy Ruckert",
+        "Braelon Allen",
+        "Will McDonald IV",
+        "Khalil Herbert"
+      ],
+      "rookies": [
+        "Brady Cook",
+        "Donovan Edwards",
+        "Mason Taylor"
+      ],
+      "base_auto_signers": [
+        "Garrett Wilson",
+        "Breece Hall"
+      ],
+      "rookie_auto_signers": [
+        "Brady Cook",
+        "Donovan Edwards",
+        "Mason Taylor"
+      ],
+      "chase_players": [
+        "Garrett Wilson"
+      ],
+      "tiers": {
+        "Garrett Wilson": "tier_1_chase",
+        "Allen Lazard": "tier_3_fair",
+        "Justin Fields": "tier_3_fair",
+        "Breece Hall": "tier_2_strong",
+        "Jeremy Ruckert": "tier_3_fair",
+        "Braelon Allen": "tier_3_fair",
+        "Will McDonald IV": "tier_3_fair",
+        "Khalil Herbert": "tier_3_fair",
+        "Brady Cook": "tier_2_strong",
+        "Donovan Edwards": "tier_2_strong",
+        "Mason Taylor": "tier_2_strong"
+      }
+    },
+    "Philadelphia Eagles": {
+      "base_veterans": [
+        "PE Vet 1",
+        "PE Vet 2",
+        "PE Vet 3",
+        "PE Vet 4",
+        "PE Vet 5",
+        "PE Vet 6",
+        "PE Vet 7",
+        "PE Vet 8",
+        "PE Vet 9",
+        "PE Vet 10",
+        "PE Vet 11",
+        "PE Vet 12"
+      ],
+      "rookies": [
+        "PE Rookie 1"
+      ],
+      "base_auto_signers": [
+        "PE Vet 1",
+        "PE Vet 2",
+        "PE Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "PE Rookie 1"
+      ],
+      "chase_players": [
+        "PE Rookie 1",
+        "PE Vet 1"
+      ],
+      "tiers": {
+        "PE Vet 1": "tier_1_chase",
+        "PE Vet 2": "tier_2_strong",
+        "PE Vet 3": "tier_2_strong",
+        "PE Vet 4": "tier_3_fair",
+        "PE Vet 5": "tier_3_fair",
+        "PE Vet 6": "tier_3_fair",
+        "PE Vet 7": "tier_3_fair",
+        "PE Vet 8": "tier_3_fair",
+        "PE Vet 9": "tier_3_fair",
+        "PE Vet 10": "tier_3_fair",
+        "PE Vet 11": "tier_3_fair",
+        "PE Vet 12": "tier_3_fair",
+        "PE Rookie 1": "tier_1_chase"
+      }
+    },
+    "Pittsburgh Steelers": {
+      "base_veterans": [
+        "PS Vet 1",
+        "PS Vet 2",
+        "PS Vet 3",
+        "PS Vet 4",
+        "PS Vet 5",
+        "PS Vet 6",
+        "PS Vet 7",
+        "PS Vet 8",
+        "PS Vet 9",
+        "PS Vet 10"
+      ],
+      "rookies": [
+        "PS Rookie 1",
+        "PS Rookie 2",
+        "PS Rookie 3",
+        "PS Rookie 4",
+        "PS Rookie 5"
+      ],
+      "base_auto_signers": [
+        "PS Vet 1",
+        "PS Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "PS Rookie 1",
+        "PS Rookie 2",
+        "PS Rookie 3",
+        "PS Rookie 4",
+        "PS Rookie 5"
+      ],
+      "chase_players": [
+        "PS Rookie 1",
+        "PS Vet 1"
+      ],
+      "tiers": {
+        "PS Vet 1": "tier_1_chase",
+        "PS Vet 2": "tier_2_strong",
+        "PS Vet 3": "tier_3_fair",
+        "PS Vet 4": "tier_3_fair",
+        "PS Vet 5": "tier_3_fair",
+        "PS Vet 6": "tier_3_fair",
+        "PS Vet 7": "tier_3_fair",
+        "PS Vet 8": "tier_3_fair",
+        "PS Vet 9": "tier_3_fair",
+        "PS Vet 10": "tier_3_fair",
+        "PS Rookie 1": "tier_1_chase",
+        "PS Rookie 2": "tier_2_strong",
+        "PS Rookie 3": "tier_2_strong",
+        "PS Rookie 4": "tier_2_strong",
+        "PS Rookie 5": "tier_2_strong"
+      }
+    },
+    "San Francisco 49ers": {
+      "base_veterans": [
+        "SF4 Vet 1",
+        "SF4 Vet 2",
+        "SF4 Vet 3",
+        "SF4 Vet 4",
+        "SF4 Vet 5",
+        "SF4 Vet 6",
+        "SF4 Vet 7",
+        "SF4 Vet 8",
+        "SF4 Vet 9",
+        "SF4 Vet 10",
+        "SF4 Vet 11"
+      ],
+      "rookies": [
+        "SF4 Rookie 1",
+        "SF4 Rookie 2",
+        "SF4 Rookie 3"
+      ],
+      "base_auto_signers": [
+        "SF4 Vet 1",
+        "SF4 Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "SF4 Rookie 1",
+        "SF4 Rookie 2"
+      ],
+      "chase_players": [
+        "SF4 Rookie 1",
+        "SF4 Vet 1"
+      ],
+      "tiers": {
+        "SF4 Vet 1": "tier_1_chase",
+        "SF4 Vet 2": "tier_2_strong",
+        "SF4 Vet 3": "tier_3_fair",
+        "SF4 Vet 4": "tier_3_fair",
+        "SF4 Vet 5": "tier_3_fair",
+        "SF4 Vet 6": "tier_3_fair",
+        "SF4 Vet 7": "tier_3_fair",
+        "SF4 Vet 8": "tier_3_fair",
+        "SF4 Vet 9": "tier_3_fair",
+        "SF4 Vet 10": "tier_3_fair",
+        "SF4 Vet 11": "tier_3_fair",
+        "SF4 Rookie 1": "tier_1_chase",
+        "SF4 Rookie 2": "tier_2_strong",
+        "SF4 Rookie 3": "tier_3_fair"
+      }
+    },
+    "Seattle Seahawks": {
+      "base_veterans": [
+        "SS Vet 1",
+        "SS Vet 2",
+        "SS Vet 3",
+        "SS Vet 4",
+        "SS Vet 5",
+        "SS Vet 6",
+        "SS Vet 7",
+        "SS Vet 8",
+        "SS Vet 9",
+        "SS Vet 10"
+      ],
+      "rookies": [
+        "SS Rookie 1",
+        "SS Rookie 2"
+      ],
+      "base_auto_signers": [
+        "SS Vet 1",
+        "SS Vet 2",
+        "SS Vet 3"
+      ],
+      "rookie_auto_signers": [
+        "SS Rookie 1",
+        "SS Rookie 2"
+      ],
+      "chase_players": [
+        "SS Rookie 1",
+        "SS Vet 1"
+      ],
+      "tiers": {
+        "SS Vet 1": "tier_1_chase",
+        "SS Vet 2": "tier_2_strong",
+        "SS Vet 3": "tier_2_strong",
+        "SS Vet 4": "tier_3_fair",
+        "SS Vet 5": "tier_3_fair",
+        "SS Vet 6": "tier_3_fair",
+        "SS Vet 7": "tier_3_fair",
+        "SS Vet 8": "tier_3_fair",
+        "SS Vet 9": "tier_3_fair",
+        "SS Vet 10": "tier_3_fair",
+        "SS Rookie 1": "tier_1_chase",
+        "SS Rookie 2": "tier_2_strong"
+      }
+    },
+    "Tampa Bay Buccaneers": {
+      "base_veterans": [
+        "TBB Vet 1",
+        "TBB Vet 2",
+        "TBB Vet 3",
+        "TBB Vet 4",
+        "TBB Vet 5",
+        "TBB Vet 6",
+        "TBB Vet 7",
+        "TBB Vet 8"
+      ],
+      "rookies": [
+        "TBB Rookie 1",
+        "TBB Rookie 2",
+        "TBB Rookie 3"
+      ],
+      "base_auto_signers": [
+        "TBB Vet 1",
+        "TBB Vet 2"
+      ],
+      "rookie_auto_signers": [
+        "TBB Rookie 1",
+        "TBB Rookie 2",
+        "TBB Rookie 3"
+      ],
+      "chase_players": [
+        "TBB Rookie 1",
+        "TBB Vet 1"
+      ],
+      "tiers": {
+        "TBB Vet 1": "tier_1_chase",
+        "TBB Vet 2": "tier_2_strong",
+        "TBB Vet 3": "tier_3_fair",
+        "TBB Vet 4": "tier_3_fair",
+        "TBB Vet 5": "tier_3_fair",
+        "TBB Vet 6": "tier_3_fair",
+        "TBB Vet 7": "tier_3_fair",
+        "TBB Vet 8": "tier_3_fair",
+        "TBB Rookie 1": "tier_1_chase",
+        "TBB Rookie 2": "tier_2_strong",
+        "TBB Rookie 3": "tier_2_strong"
+      }
+    },
+    "Tennessee Titans": {
+      "base_veterans": [
+        "Jeffery Simmons",
+        "Tony Pollard",
+        "Calvin Ridley",
+        "T'Vondre Sweat"
+      ],
+      "rookies": [
+        "Cam Ward",
+        "Gunnar Helm",
+        "Kalel Mullings",
+        "Elic Ayomanor",
+        "Kevin Winston Jr."
+      ],
+      "base_auto_signers": [],
+      "rookie_auto_signers": [
+        "Cam Ward",
+        "Gunnar Helm",
+        "Kalel Mullings",
+        "Elic Ayomanor",
+        "Kevin Winston Jr."
+      ],
+      "chase_players": [
+        "Cam Ward"
+      ],
+      "tiers": {
+        "Jeffery Simmons": "tier_3_fair",
+        "Tony Pollard": "tier_3_fair",
+        "Calvin Ridley": "tier_3_fair",
+        "T'Vondre Sweat": "tier_3_fair",
+        "Cam Ward": "tier_1_chase",
+        "Gunnar Helm": "tier_2_strong",
+        "Kalel Mullings": "tier_2_strong",
+        "Elic Ayomanor": "tier_2_strong",
+        "Kevin Winston Jr.": "tier_2_strong"
+      }
+    },
+    "Washington Commanders": {
+      "base_veterans": [
+        "WC Vet 1",
+        "WC Vet 2",
+        "WC Vet 3",
+        "WC Vet 4",
+        "WC Vet 5",
+        "WC Vet 6",
+        "WC Vet 7",
+        "WC Vet 8"
+      ],
+      "rookies": [
+        "WC Rookie 1",
+        "WC Rookie 2"
+      ],
+      "base_auto_signers": [
+        "WC Vet 1"
+      ],
+      "rookie_auto_signers": [
+        "WC Rookie 1",
+        "WC Rookie 2"
+      ],
+      "chase_players": [
+        "WC Rookie 1",
+        "WC Vet 1"
+      ],
+      "tiers": {
+        "WC Vet 1": "tier_1_chase",
+        "WC Vet 2": "tier_3_fair",
+        "WC Vet 3": "tier_3_fair",
+        "WC Vet 4": "tier_3_fair",
+        "WC Vet 5": "tier_3_fair",
+        "WC Vet 6": "tier_3_fair",
+        "WC Vet 7": "tier_3_fair",
+        "WC Vet 8": "tier_3_fair",
+        "WC Rookie 1": "tier_1_chase",
+        "WC Rookie 2": "tier_2_strong"
+      }
+    }
+  },
+  "confidence_inputs": {
+    "Jaxson Dart": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Malik Nabers": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Cam Ward": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Travis Hunter": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Brian Thomas Jr.": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Garrett Wilson": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Ashton Jeanty": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Brock Bowers": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Drake Maye": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "TreVeyon Henderson": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Caleb Williams": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Rome Odunze": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Shedeur Sanders": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Dillon Gabriel": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    },
+    "Myles Garrett": {
+      "rookie_auto": {
+        "comp_count": 8,
+        "comp_window_days": 21,
+        "last_comp_refresh": "2026-04-15T06:07:34.062Z",
+        "value_source": "ebay_sold_synthetic"
+      }
+    }
+  }
+}
