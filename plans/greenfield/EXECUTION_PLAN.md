@@ -198,8 +198,8 @@ Write `src/validate.ts` exporting `validate(rawJson): { mode, data, errors }`. T
   - Verify: `npx vitest run src/validate.test.ts -t "error mode"`
 - [x] (CODE) `validate()` is pure — no `document.*` or `fetch(...)` references
   - Verify: `! grep -qE "document\.|fetch\(" src/validate.ts`
-- [ ] (TEST) **Browser smoke**: when `/data.json` returns a malformed payload, the page renders `[data-testid="full-page-error"]` and NO `[data-testid="team-grid"]` *(scaffolded at `tests/fail-loud.spec.ts`; runs after Task 2.0.A installs Playwright)*
-  - Verify: `npx playwright test tests/fail-loud.spec.ts` (test file created in Task 2.0.A, run after)
+- [x] (TEST) **Browser smoke**: when `/data.json` returns a malformed payload, the page renders `[data-testid="full-page-error"]` and NO `[data-testid="team-grid"]`
+  - Verify: `npx playwright test tests/fail-loud.spec.ts`
 
 **Files to Create:**
 - `src/validate.ts`, `src/validate.test.ts`
@@ -488,7 +488,7 @@ Install `@playwright/test` and `@axe-core/playwright` as dev dependencies. Creat
   - Verify: `grep -q "page.route" tests/helpers/loadFixture.ts && grep -q "export.*loadFixture" tests/helpers/loadFixture.ts`
 - [x] (TEST) A smoke test `tests/smoke.spec.ts` loads `/` with the valid-full fixture and asserts a `data-testid="page-loaded"` marker renders
   - Verify: `npx playwright test tests/smoke.spec.ts`
-- [ ] (TEST) The previously-scaffolded `tests/fail-loud.spec.ts` from Task 1.2.B now runs green (broken fixture → full-page error) *(SKIPPED until Task 2.2.A wires main.ts to fetch /data.json with error rendering)*
+- [x] (TEST) The previously-scaffolded `tests/fail-loud.spec.ts` from Task 1.2.B now runs green (broken fixture → full-page error)
   - Verify: `npx playwright test tests/fail-loud.spec.ts`
 
 **Files to Create:**
