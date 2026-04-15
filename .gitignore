@@ -29,6 +29,11 @@ tool-results/
 .env.verification
 .claude/verification/auth-state.json
 
+# Playwright
+test-results/
+playwright-report/
+playwright/.cache/
+
 # Build/tooling
 tsconfig.tsbuildinfo
 .pnpm-debug.log

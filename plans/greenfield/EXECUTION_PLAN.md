@@ -480,15 +480,15 @@ Install `@playwright/test` and `@axe-core/playwright` as dev dependencies. Creat
 **Requirement:** None (infrastructure for REQ-028, REQ-030, REQ-033, REQ-040, REQ-041)
 
 **Acceptance Criteria:**
-- [ ] (CODE) `@playwright/test` and `@axe-core/playwright` in `devDependencies`
+- [x] (CODE) `@playwright/test` and `@axe-core/playwright` in `devDependencies`
   - Verify: `node -e "const p=require('./package.json'); process.exit((p.devDependencies['@playwright/test'] && p.devDependencies['@axe-core/playwright']) ? 0 : 1)"`
-- [ ] (CODE) `playwright.config.ts` has `webServer` with `command: 'npm run dev'` and a `baseURL`
+- [x] (CODE) `playwright.config.ts` has `webServer` with `command: 'npm run dev'` and a `baseURL`
   - Verify: `grep -q "webServer" playwright.config.ts && grep -q "baseURL" playwright.config.ts`
-- [ ] (CODE) `tests/helpers/loadFixture.ts` exports `loadFixture(page, fixtureName)` that `page.route`s `/data.json` to a file under `src/fixtures/`
+- [x] (CODE) `tests/helpers/loadFixture.ts` exports `loadFixture(page, fixtureName)` that `page.route`s `/data.json` to a file under `src/fixtures/`
   - Verify: `grep -q "page.route" tests/helpers/loadFixture.ts && grep -q "export.*loadFixture" tests/helpers/loadFixture.ts`
-- [ ] (TEST) A smoke test `tests/smoke.spec.ts` loads `/` with the valid-full fixture and asserts a `data-testid="page-loaded"` marker renders
+- [x] (TEST) A smoke test `tests/smoke.spec.ts` loads `/` with the valid-full fixture and asserts a `data-testid="page-loaded"` marker renders
   - Verify: `npx playwright test tests/smoke.spec.ts`
-- [ ] (TEST) The previously-scaffolded `tests/fail-loud.spec.ts` from Task 1.2.B now runs green (broken fixture → full-page error)
+- [ ] (TEST) The previously-scaffolded `tests/fail-loud.spec.ts` from Task 1.2.B now runs green (broken fixture → full-page error) *(SKIPPED until Task 2.2.A wires main.ts to fetch /data.json with error rendering)*
   - Verify: `npx playwright test tests/fail-loud.spec.ts`
 
 **Files to Create:**
