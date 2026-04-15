@@ -5,9 +5,9 @@ import { eligiblePlayers } from '../src/math/eligibility';
 import type { FullData, OddsSource } from '../src/types';
 import { loadFixture } from './helpers/loadFixture';
 
-const TARGET_BASE_URL = process.env.PROD_URL?.trim() || 'http://localhost:5173';
+const TARGET_BASE_URL = process.env.PROD_URL?.trim();
 
-test.use({ baseURL: TARGET_BASE_URL });
+test.use(TARGET_BASE_URL ? { baseURL: TARGET_BASE_URL } : {});
 
 const ODDS_SOURCE_COPY: Record<OddsSource, string> = {
   '2024_placeholder': 'Odds use the 2024 placeholder until the 2025 official pack odds are loaded.',
@@ -64,6 +64,8 @@ async function selectTeam(page: Page, teamName: string): Promise<void> {
 }
 
 test.describe('production launch gate (REQ-040)', () => {
+  test.skip(!TARGET_BASE_URL, 'PROD_URL env var required for production smoke tests');
+
   test('production root and data json return 200', async ({ request, page }) => {
     const root = await request.get('/');
     expect(root.status(), `/ status at ${TARGET_BASE_URL}`).toBe(200);

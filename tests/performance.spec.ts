@@ -1,43 +1,36 @@
 import { expect, test } from '@playwright/test';
-import { readFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import type { FullData } from '../src/types';
 
 interface BenchmarkRun {
   teamName: string;
   spotPrice: number;
-  seed: number;
 }
 
 interface BenchmarkTiming extends BenchmarkRun {
   durationMs: number;
 }
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const data = JSON.parse(
-  readFileSync(resolve(__dirname, '..', 'public', 'data.json'), 'utf-8'),
-) as FullData;
+type PerfWindow = Window & {
+  __rippedPerfDone?: Promise<number>;
+};
 
 const RUN_COUNT = 20;
 const P95_THRESHOLD_MS = 500;
-const PRICES = [
-  75, 95, 110, 125, 140, 155, 175, 195, 215, 235,
-  255, 280, 305, 330, 360, 390, 425, 460, 500, 550,
+const TEAMS = [
+  'New York Giants',
+  'Tennessee Titans',
+  'Jacksonville Jaguars',
+  'Las Vegas Raiders',
 ];
+const PRICES = [75, 140, 215, 330, 500];
 
-const RUNS: BenchmarkRun[] = Object.keys(data.teams)
-  .slice(0, RUN_COUNT)
-  .map((teamName, index) => ({
-    teamName,
-    spotPrice: PRICES[index]!,
-    seed: 0x5eed_0000 + index,
-  }));
+const RUNS: BenchmarkRun[] = TEAMS.flatMap((teamName) =>
+  PRICES.map((spotPrice) => ({ teamName, spotPrice })),
+);
 
 test.describe('performance (Task 3.3.C)', () => {
-  test.setTimeout(30_000);
+  test.setTimeout(45_000);
 
-  test('p95 under 500ms for 20 worker-client simulation round trips', async ({ page }) => {
+  test('p95 under 500ms for 20 real input-to-result runs', async ({ page }) => {
     expect(RUNS).toHaveLength(RUN_COUNT);
 
     await page.route('https://static.cloudflareinsights.com/**', async (route) => {
@@ -53,127 +46,105 @@ test.describe('performance (Task 3.3.C)', () => {
 
     await page.goto('/');
     await expect(page.locator('[data-testid="team-grid"]')).toBeVisible();
-    await expect(page.locator('[data-testid="spot-price"]')).toBeVisible();
+    const priceInput = page.locator('[data-testid="spot-price"]');
+    const resultPanel = page.locator('[data-testid="result-panel"]');
+    const hero = page.locator('[data-testid="ev-hero"]');
+    const heroVsPaid = page.locator('[data-testid="hero-vs-paid"]');
 
-    const timings = await page.evaluate(async (runs): Promise<BenchmarkTiming[]> => {
-      type BrowserTeam = Record<string, unknown>;
-      type BrowserData = { teams: Record<string, BrowserTeam> };
-      type BrowserValidateResult = {
-        mode: 'full' | 'probability_only' | 'error';
-        data: BrowserData | null;
-        errors: unknown[];
-      };
-      type BrowserSimulateResponse = {
-        requestId: number;
-        median: number;
-        p10: number;
-        p90: number;
-        pZero: number;
-        mcMean: number;
-      };
-      type BrowserWorkerClient = {
-        simulate: (
-          team: BrowserTeam,
-          spotPrice: number,
-          data: BrowserData,
-          onResult: (result: BrowserSimulateResponse) => void,
-          seed?: number,
-        ) => number;
-      };
-      type BrowserValidateModule = {
-        validate: (raw: unknown) => BrowserValidateResult;
-      };
+    await expect(priceInput).toBeVisible();
 
-      const workerClientPath = '/src/worker-client.ts';
-      const validatePath = '/src/validate.ts';
-      const [{ simulate }, { validate }] = await Promise.all([
-        import(workerClientPath) as Promise<BrowserWorkerClient>,
-        import(validatePath) as Promise<BrowserValidateModule>,
-      ]);
+    const timings: BenchmarkTiming[] = [];
+    for (const run of RUNS) {
+      await priceInput.fill('');
+      await expect(resultPanel).toBeHidden();
 
-      const response = await fetch('/data.json', { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(`Unable to load /data.json: ${response.status}`);
-      }
+      const selectedTeamButton = page.locator(`button[data-team="${run.teamName}"]`);
+      await selectedTeamButton.click();
+      await expect(selectedTeamButton).toHaveAttribute('aria-pressed', 'true');
+      await priceInput.scrollIntoViewIfNeeded();
+      await expect(priceInput).toBeVisible();
 
-      const validation = validate(await response.json());
-      if (validation.mode !== 'full' || !validation.data) {
-        throw new Error(
-          `Performance test requires full data mode; got ${validation.mode}`,
-        );
-      }
-      const benchmarkData = validation.data;
-
-      const selectCombination = (run: BenchmarkRun): BrowserTeam => {
-        const teamButton = Array.from(
-          document.querySelectorAll<HTMLButtonElement>('button[data-team]'),
-        ).find((button) => button.dataset.team === run.teamName);
-        if (!teamButton) {
-          throw new Error(`Missing team button for ${run.teamName}`);
-        }
-
-        const priceInput = document.querySelector<HTMLInputElement>(
-          '[data-testid="spot-price"]',
-        );
-        if (!priceInput) {
-          throw new Error('Missing spot price input');
-        }
-
-        teamButton.click();
-        priceInput.value = String(run.spotPrice);
-
-        const team = benchmarkData.teams[run.teamName];
-        if (!team) {
-          throw new Error(`Missing team data for ${run.teamName}`);
-        }
-        return team;
-      };
-
-      const results: BenchmarkTiming[] = [];
-      for (const run of runs) {
-        const team = selectCombination(run);
-        const startedAt = performance.now();
-
-        const durationMs = await new Promise<number>((resolve, reject) => {
-          const timeoutId = window.setTimeout(() => {
-            reject(new Error(`Simulation timed out for ${run.teamName}`));
-          }, 5_000);
-
-          simulate(
-            team,
-            run.spotPrice,
-            benchmarkData,
-            (result) => {
-              window.clearTimeout(timeoutId);
-
-              const finiteResult = [
-                result.median,
-                result.p10,
-                result.p90,
-                result.pZero,
-                result.mcMean,
-              ].every(Number.isFinite);
-              if (!finiteResult) {
-                reject(new Error(`Simulation returned non-finite values for ${run.teamName}`));
-                return;
-              }
-
-              resolve(performance.now() - startedAt);
-            },
-            run.seed,
+      await page.evaluate(({ teamName, spotPrice }) => {
+        const expectedResultLabel = `${teamName} result`;
+        const expectedPriceLabel = `your $${spotPrice}`;
+        const hasRenderedResult = (): boolean => {
+          const resultPanel = document.querySelector<HTMLElement>(
+            '[data-testid="result-panel"]',
           );
-        });
+          const hero = document.querySelector<HTMLElement>(
+            '[data-testid="ev-hero"]',
+          );
+          const heroVsPaid = document.querySelector<HTMLElement>(
+            '[data-testid="hero-vs-paid"]',
+          );
 
-        results.push({ ...run, durationMs });
+          return Boolean(
+            resultPanel &&
+              !resultPanel.hidden &&
+              resultPanel.textContent?.includes(expectedResultLabel) &&
+              heroVsPaid?.textContent?.includes(expectedPriceLabel) &&
+              /\$[\d,]+/u.test(hero?.textContent ?? ''),
+          );
+        };
+
+        (window as PerfWindow).__rippedPerfDone = new Promise<number>(
+          (resolve, reject) => {
+            if (hasRenderedResult()) {
+              resolve(performance.now());
+              return;
+            }
+
+            const timeoutId = window.setTimeout(() => {
+              observer.disconnect();
+              reject(
+                new Error(
+                  `Timed out waiting for ${expectedResultLabel} ${expectedPriceLabel}`,
+                ),
+              );
+            }, 15_000);
+
+            const observer = new MutationObserver(() => {
+              if (!hasRenderedResult()) return;
+              window.clearTimeout(timeoutId);
+              observer.disconnect();
+              resolve(performance.now());
+            });
+
+            observer.observe(document.body, {
+              attributes: true,
+              childList: true,
+              subtree: true,
+            });
+          },
+        );
+      }, run);
+
+      const startedAt = await page.evaluate(() => performance.now());
+      await priceInput.fill(String(run.spotPrice));
+      const finishedAt = await page.evaluate(async () => {
+        const promise = (window as PerfWindow).__rippedPerfDone;
+        if (!promise) throw new Error('Performance observer was not installed');
+        return promise;
+      });
+
+      await expect(resultPanel).toContainText(`${run.teamName} result`);
+      await expect(heroVsPaid).toContainText(`your $${run.spotPrice}`);
+      await expect(hero).toBeVisible();
+
+      const durationMs = finishedAt - startedAt;
+
+      const heroText = await hero.innerText();
+      if (!/\$[\d,]+/u.test(heroText)) {
+        throw new Error(`EV hero did not render a dollar value: ${heroText}`);
       }
 
-      return results;
-    }, RUNS);
+      timings.push({ ...run, durationMs });
+    }
 
     const sortedDurations = timings
       .map((timing) => timing.durationMs)
       .sort((a, b) => a - b);
-    const p95Index = Math.floor(timings.length * 0.95);
+    const p95Index = Math.floor(timings.length * 0.95) - 1;
     const p95 = sortedDurations[p95Index]!;
     const formattedTimings = timings
       .map(

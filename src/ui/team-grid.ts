@@ -24,8 +24,9 @@ export function renderTeamGrid(container: HTMLElement, data: FullData | CoreData
     'w-full',
     'grid-cols-1',
     'gap-3',
-    'min-[390px]:grid-cols-2',
+    'min-[480px]:grid-cols-2',
     'md:grid-cols-3',
+    'lg:grid-cols-2',
   ].join(' ');
 
   const buttons: HTMLButtonElement[] = [];
@@ -54,14 +55,14 @@ export function renderTeamGrid(container: HTMLElement, data: FullData | CoreData
       'text-text-hi',
       'break-words',
       'transition-colors',
+      'duration-150',
       'hover:bg-bg-elev',
       'focus-visible:outline-none',
       'focus-visible:ring-2',
       'focus-visible:ring-accent',
-      'aria-pressed:bg-bg-elev',
+      'aria-pressed:bg-accent',
       'aria-pressed:border-b-accent',
-      'aria-pressed:ring-2',
-      'aria-pressed:ring-accent',
+      'aria-pressed:text-bg-base',
     ].join(' ');
 
     button.addEventListener('click', () => {

@@ -144,7 +144,13 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
 
   const rightCol = document.createElement('div');
   rightCol.dataset.testid = 'layout-right';
-  rightCol.className = 'lg:sticky lg:top-6 lg:self-start';
+  rightCol.className = [
+    'lg:sticky',
+    'lg:top-6',
+    'lg:self-start',
+    'lg:max-h-[calc(100vh-3rem)]',
+    'lg:overflow-y-auto',
+  ].join(' ');
 
   const productCardHost = document.createElement('div');
   const gridHost = document.createElement('div');
