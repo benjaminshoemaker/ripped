@@ -736,17 +736,17 @@ Render hero EV number at the largest size on the page (font-size ≥ 1.5× next-
 **Requirement:** REQ-010, REQ-011, REQ-012, REQ-013, REQ-014, REQ-015, REQ-017, REQ-029, REQ-032
 
 **Acceptance Criteria:**
-- [ ] (CODE) `renderResultPanel(container, result)` exported
+- [x] (CODE) `renderResultPanel(container, result)` exported
   - Verify: `grep -q "export function renderResultPanel" src/ui/result-panel.ts`
-- [ ] (BROWSER:DOM) `[data-testid="ev-hero"]` computed font-size ≥ 1.5× `[data-testid="subhero"]`
+- [x] (BROWSER:DOM) `[data-testid="ev-hero"]` computed font-size ≥ 1.5× `[data-testid="subhero"]`
   - Verify: `npx playwright test tests/result-panel.spec.ts -g "ev hero 1.5x subhero"`
-- [ ] (BROWSER:DOM) `[data-testid="p-zero"]` contains "effectively nothing"
+- [x] (BROWSER:DOM) `[data-testid="p-zero"]` contains "effectively nothing"
   - Verify: `npx playwright test tests/result-panel.spec.ts -g "p zero text"`
-- [ ] (BROWSER:DOM) Verdict band `data-verdict` attribute matches one of STEAL/BELOW_MARKET/NEAR_MARKET/ABOVE_MARKET/RIPPED
+- [x] (BROWSER:DOM) Verdict band `data-verdict` attribute matches one of STEAL/BELOW_MARKET/NEAR_MARKET/ABOVE_MARKET/RIPPED
   - Verify: `npx playwright test tests/result-panel.spec.ts -g "verdict enum"`
-- [ ] (BROWSER:DOM) With a low-confidence fixture, result panel has `data-confidence="low"` and `opacity-60` class
+- [x] (BROWSER:DOM) With a low-confidence fixture, result panel has `data-confidence="low"` and `opacity-60` class
   - Verify: `npx playwright test tests/result-panel.spec.ts -g "low confidence muted"`
-- [ ] (BROWSER:VISUAL) EV hero bottom ≤ 780 at 360×780 viewport after submit (above fold, REQ-032)
+- [x] (BROWSER:VISUAL) EV hero bottom ≤ 780 at 360×780 viewport after submit (above fold, REQ-032)
   - Verify: `npx playwright test tests/result-panel.spec.ts -g "ev above fold 360x780"`
 
 **Files to Create:**

@@ -1,11 +1,17 @@
 import './styles.css';
+import { computeConfidence } from './math/confidence';
+import { computeEV } from './math/ev';
+import { computeVerdict } from './math/verdict';
 import { getState, setState, subscribe } from './state';
-import type { CoreData, FullData } from './types';
+import type { ComputedResult, CoreData, FullData } from './types';
 import { renderPriceInput } from './ui/price-input';
 import { renderProductCard } from './ui/product-card';
+import { clearResultPanel, renderResultPanel } from './ui/result-panel';
 import { renderTeamDetail } from './ui/team-detail';
 import { renderTeamGrid } from './ui/team-grid';
 import { validate } from './validate';
+import { simulate } from './worker-client';
+import type { SimulateResponse } from './worker/simulate.worker';
 
 const ERROR_MESSAGE = 'Data unavailable. Try again in a minute, or DM @djhandle.';
 
@@ -46,6 +52,10 @@ function clearTeamDetail(container: HTMLElement): void {
   container.hidden = true;
   delete container.dataset.team;
   container.replaceChildren();
+}
+
+function isFullData(data: CoreData | FullData | null): data is FullData {
+  return data !== null && 'tier_values_usd' in data;
 }
 
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
@@ -89,9 +99,119 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
 
   const updateResultPanelVisibility = (state: ReturnType<typeof getState>): void => {
     const shouldShow = Boolean(
-      state.selectedTeam && state.spotPrice && state.spotPrice > 0,
+      state.selectedTeam && state.spotPrice && state.spotPrice > 0 && state.result,
     );
     resultPanel.hidden = !shouldShow;
+  };
+
+  let lastSimulationKey: string | null = null;
+  let queuedSimulationKey: string | null = null;
+
+  const clearResults = (state: ReturnType<typeof getState>): void => {
+    lastSimulationKey = null;
+    queuedSimulationKey = null;
+    clearResultPanel(resultPanel);
+    resultPanel.hidden = true;
+
+    if (state.result !== null) {
+      setState({ result: null });
+    }
+  };
+
+  const renderSimulationResult = (
+    teamName: string,
+    spotPrice: number,
+    fullData: FullData,
+    response: SimulateResponse,
+  ): void => {
+    const latest = getState();
+    if (
+      latest.selectedTeam !== teamName ||
+      latest.spotPrice !== spotPrice ||
+      latest.data !== fullData
+    ) {
+      return;
+    }
+
+    const team = fullData.teams[teamName];
+    if (!team) return;
+
+    const { ev, contributors } = computeEV(team, fullData);
+    const confidence = computeConfidence(fullData, teamName);
+    const verdictResult = computeVerdict(ev, spotPrice, confidence);
+    const gap = ev - spotPrice;
+
+    const computedResult: ComputedResult = {
+      team: teamName,
+      spotPrice,
+      mode: latest.mode,
+      ev,
+      median: response.median,
+      p10: response.p10,
+      p90: response.p90,
+      pZero: response.pZero,
+      gap,
+      gapPct: gap / spotPrice,
+      verdict: verdictResult.verdict,
+      verdictIsHard: verdictResult.isHard,
+      confidence,
+      contributors,
+      probabilityTable: {},
+    };
+
+    renderResultPanel(resultPanel, computedResult);
+    resultPanel.hidden = false;
+    resultPanel.scrollIntoView({ block: 'start' });
+    setState({ result: computedResult });
+  };
+
+  const requestResultComputation = (state: ReturnType<typeof getState>): void => {
+    const { selectedTeam, spotPrice } = state;
+    if (!selectedTeam || spotPrice === null || spotPrice <= 0) {
+      clearResults(state);
+      return;
+    }
+
+    if (!isFullData(state.data)) {
+      clearResults(state);
+      return;
+    }
+
+    const fullData = state.data;
+    const team = fullData.teams[selectedTeam];
+    if (!team) {
+      clearResults(state);
+      return;
+    }
+
+    const simulationKey = `${selectedTeam}:${spotPrice}`;
+    if (
+      simulationKey === lastSimulationKey ||
+      simulationKey === queuedSimulationKey
+    ) {
+      return;
+    }
+
+    queuedSimulationKey = simulationKey;
+    queueMicrotask(() => {
+      if (queuedSimulationKey !== simulationKey) return;
+
+      const latest = getState();
+      if (
+        latest.selectedTeam !== selectedTeam ||
+        latest.spotPrice !== spotPrice ||
+        latest.data !== fullData ||
+        !isFullData(latest.data)
+      ) {
+        return;
+      }
+
+      queuedSimulationKey = null;
+      lastSimulationKey = simulationKey;
+      simulate(team, spotPrice, fullData, (response) => {
+        renderSimulationResult(selectedTeam, spotPrice, fullData, response);
+      });
+    });
   };
 
   renderSelectedTeam(getState().selectedTeam);
@@ -102,6 +222,7 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
     renderSelectedTeam(state.selectedTeam);
   });
 
+  subscribe(requestResultComputation);
   subscribe(updateResultPanelVisibility);
 }
 
