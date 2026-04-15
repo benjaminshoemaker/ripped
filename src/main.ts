@@ -78,6 +78,24 @@ function buildProbabilityTable(team: Team, data: FullData | CoreData): Record<st
 }
 
 function mountApp(container: HTMLElement, data: FullData | CoreData): void {
+  const layout = document.createElement('div');
+  layout.className = [
+    'lg:mx-auto',
+    'lg:grid',
+    'lg:max-w-6xl',
+    'lg:grid-cols-[minmax(0,1fr)_minmax(360px,420px)]',
+    'lg:gap-8',
+    'lg:px-6',
+  ].join(' ');
+
+  const leftCol = document.createElement('div');
+  leftCol.dataset.testid = 'layout-left';
+  leftCol.className = 'lg:min-w-0';
+
+  const rightCol = document.createElement('div');
+  rightCol.dataset.testid = 'layout-right';
+  rightCol.className = 'lg:sticky lg:top-6 lg:self-start';
+
   const productCardHost = document.createElement('div');
   const gridHost = document.createElement('div');
   const detailContainer = createTeamDetailContainer();
@@ -91,14 +109,18 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
   renderTeamGrid(gridHost, data);
   renderPriceInput(priceInputContainer);
   renderDisclaimer(disclaimerHost, data);
-  container.replaceChildren(
+  leftCol.replaceChildren(
     ...Array.from(productCardHost.childNodes),
     ...Array.from(gridHost.childNodes),
     detailContainer,
+  );
+  rightCol.replaceChildren(
     priceInputContainer,
     resultPanel,
     disclaimerHost,
   );
+  layout.replaceChildren(leftCol, rightCol);
+  container.replaceChildren(layout);
 
   let lastSelectedTeam: string | null = null;
 
@@ -183,7 +205,9 @@ function mountApp(container: HTMLElement, data: FullData | CoreData): void {
 
     renderResultPanel(resultPanel, computedResult);
     resultPanel.hidden = false;
-    resultPanel.scrollIntoView({ block: 'start' });
+    if (window.innerWidth < 1024) {
+      resultPanel.scrollIntoView({ block: 'start' });
+    }
     setState({ result: computedResult });
   };
 
